@@ -1,0 +1,601 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  5 MAR 2014 12:30
+entering extended mode
+ %&-line parsing enabled.
+**eccv2014submission.tex
+(./eccv2014submission.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(./llncs.cls
+Document Class: llncs 2013/09/27 v2.18 
+ LaTeX document class for Lecture Notes in Computer Science
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/latex/tools/multicol.sty
+Package: multicol 2008/12/05 v1.6h multicolumn formatting (FMi)
+\c@tracingmulticols=\count87
+\mult@box=\box26
+\multicol@leftmargin=\dimen103
+\c@unbalance=\count88
+\c@collectmore=\count89
+\doublecol@number=\count90
+\multicoltolerance=\count91
+\multicolpretolerance=\count92
+\full@width=\dimen104
+\page@free=\dimen105
+\premulticols=\dimen106
+\postmulticols=\dimen107
+\multicolsep=\skip43
+\multicolbaselineskip=\skip44
+\partial@page=\box27
+\last@line=\box28
+\mult@rightbox=\box29
+\mult@grightbox=\box30
+\mult@gfirstbox=\box31
+\mult@firstbox=\box32
+\@tempa=\box33
+\@tempa=\box34
+\@tempa=\box35
+\@tempa=\box36
+\@tempa=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\c@columnbadness=\count93
+\c@finalcolumnbadness=\count94
+\last@try=\dimen108
+\multicolovershoot=\dimen109
+\multicolundershoot=\dimen110
+\mult@nat@firstbox=\box50
+\colbreak@box=\box51
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/aliascnt.sty
+Package: aliascnt 2009/09/08 v1.3 Alias counter (HO)
+
+(/usr/share/texmf-texlive/tex/latex/carlisle/remreset.sty))
+\c@chapter=\count95
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 362.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 363.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 364.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 365.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 366.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 367.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 368.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 369.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 370.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 371.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 372.
+\tocchpnum=\dimen111
+\tocsecnum=\dimen112
+\tocsectotal=\dimen113
+\tocsubsecnum=\dimen114
+\tocsubsectotal=\dimen115
+\tocsubsubsecnum=\dimen116
+\tocsubsubsectotal=\dimen117
+\tocparanum=\dimen118
+\tocparatotal=\dimen119
+\tocsubparanum=\dimen120
+\@tempcntc=\count96
+\fnindent=\dimen121
+\c@@inst=\count97
+\c@@auth=\count98
+\c@auco=\count99
+\instindent=\dimen122
+\authrun=\box52
+\authorrunning=\toks14
+\tocauthor=\toks15
+\titrun=\box53
+\titlerunning=\toks16
+\toctitle=\toks17
+\c@theorem=\count100
+\c@case=\count101
+\c@conjecture=\count102
+\c@corollary=\count103
+\c@definition=\count104
+\c@example=\count105
+\c@exercise=\count106
+\c@lemma=\count107
+\c@note=\count108
+\c@problem=\count109
+\c@property=\count110
+\c@proposition=\count111
+\c@question=\count112
+\c@solution=\count113
+\c@remark=\count114
+\headlineindent=\dimen123
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+\Gread@gobject=\count115
+))
+\Gin@req@height=\dimen124
+\Gin@req@width=\dimen125
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip45
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks19
+\ex@=\dimen126
+))
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen127
+)
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count116
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count117
+\leftroot@=\count118
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count119
+\DOTSCASE@=\count120
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box54
+\strutbox@=\box55
+\big@size=\dimen128
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+
+
+Package amsmath Warning: Unable to redefine math accent \vec.
+
+\macc@depth=\count121
+\c@MaxMatrixCols=\count122
+\dotsspace@=\muskip10
+\c@parentequation=\count123
+\dspbrk@lvl=\count124
+\tag@help=\toks20
+\row@=\count125
+\column@=\count126
+\maxfields@=\count127
+\andhelp@=\toks21
+\eqnshift@=\dimen129
+\alignsep@=\dimen130
+\tagshift@=\dimen131
+\tagwidth@=\dimen132
+\totwidth@=\dimen133
+\lineht@=\dimen134
+\@envbody=\toks22
+\multlinegap=\skip46
+\multlinetaggap=\skip47
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+) (/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+)) (./ruler.sty
+Package: ruler 
+
+(./eso-pic.sty
+Package: eso-pic 2002/11/16 v1.1b eso-pic (RN)
+ (./cvpr_eso.sty
+
+LaTeX Warning: You have requested package `eso-pic',
+               but the package provides `cvpr_eso'.
+
+Package: cvpr_eso 2011/12/13 v1.00 CVPR ESO based on everyshi
+))
+\cvprrulerbox=\box56
+\cvprrulercount=\count128
+\cvprrulercounttmp=\count129
+\cvprruleroffset=\dimen135
+\cv@lineheight=\dimen136
+\cv@boxheight=\dimen137
+\cv@tmpbox=\box57
+\cv@refno=\count130
+\cv@tot=\count131
+\cv@tmpc@=\count132
+\cv@tmpc=\count133
+) (/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(/usr/share/texmf-texlive/tex/latex/tools/array.sty
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen138
+\extrarowheight=\dimen139
+\NC@list=\toks24
+\extratabsurround=\skip48
+\backup@length=\skip49
+)
+(/usr/share/texmf-texlive/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count134
+\float@exts=\toks25
+\float@box=\box58
+\@float@everytoks=\toks26
+\@floatcapt=\box59
+)
+(/usr/share/texmf-texlive/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+
+(/usr/share/texmf-texlive/tex/latex/caption/caption.sty
+Package: caption 2009/10/09 v3.1k Customizing captions (AR)
+
+(/usr/share/texmf-texlive/tex/latex/caption/caption3.sty
+Package: caption3 2009/10/09 v3.1k caption3 kernel (AR)
+\captionmargin=\dimen140
+\captionmargin@=\dimen141
+\captionwidth=\dimen142
+\caption@indent=\dimen143
+\caption@parindent=\dimen144
+\caption@hangindent=\dimen145
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used on input line 1068.
+)
+
+Package caption Warning: Unsupported document class (or package) detected,
+(caption)                usage of the caption package is not recommended.
+See the caption package documentation for explanation.
+
+Package caption Info: \@makecaption = \long macro:#1#2->\small \vskip \abovecap
+tionskip \sbox \@tempboxa {{\bfseries #1.} #2}\ifdim \wd \@tempboxa >\hsize {\b
+fseries #1.} #2\par \else \global \@minipagefalse \hb@xt@ \hsize {\hfil \box \@
+tempboxa \hfil }\fi \vskip \belowcaptionskip .
+\c@ContinuedFloat=\count135
+Package caption Info: float package is loaded.
+)
+\c@KVtest=\count136
+\sf@farskip=\skip50
+\sf@captopadj=\dimen146
+\sf@capskip=\skip51
+\sf@nearskip=\skip52
+\c@subfigure=\count137
+\c@subfigure@save=\count138
+\c@lofdepth=\count139
+\c@subtable=\count140
+\c@subtable@save=\count141
+\c@lotdepth=\count142
+\sf@top=\skip53
+\sf@bottom=\skip54
+) (/usr/share/texmf-texlive/tex/latex/comment/comment.sty
+\CommentStream=\write3
+
+Excluding comment 'comment')
+(/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
+Package: geometry 2008/12/21 v4.2 Page Geometry
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+\Gm@cnth=\count143
+\Gm@cntv=\count144
+\c@Gm@tempcnt=\count145
+\Gm@bindingoffset=\dimen147
+\Gm@wd@mp=\dimen148
+\Gm@odd@mp=\dimen149
+\Gm@even@mp=\dimen150
+\Gm@dimlist=\toks27
+)
+(./eccv2014submission.aux
+
+LaTeX Warning: Label `table:headings' multiply defined.
+
+
+LaTeX Warning: Label `table:headings' multiply defined.
+
+
+LaTeX Warning: Label `table:headings' multiply defined.
+
+
+LaTeX Warning: Label `table:headings' multiply defined.
+
+
+LaTeX Warning: Label `table:headings' multiply defined.
+
+
+LaTeX Warning: Label `fig:example' multiply defined.
+
+
+LaTeX Warning: Label `fig:example' multiply defined.
+
+)
+\openout1 = `eccv2014submission.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
+LaTeX Font Info:    ... okay on input line 15.
+ (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count146
+\scratchdimen=\dimen151
+\scratchbox=\box60
+\nofMPsegments=\count147
+\nofMParguments=\count148
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count149
+\MPscratchDim=\dimen152
+\MPnumerator=\count150
+\everyMPtoPDFconversion=\toks29
+) ABD: EveryShipout initializing macros
+Package caption Info: Begin \AtBeginDocument code.
+Package caption3 Info: subfig package 1.2 or 1.3 is loaded.
+LaTeX Info: Redefining \subref on input line 15.
+Package caption Info: End \AtBeginDocument code.
+
+*geometry auto-detecting driver*
+*geometry detected driver: pdftex*
+-------------------- Geometry parameters
+paper: user defined
+landscape: --
+twocolumn: --
+twoside: true
+asymmetric: --
+h-parts: 34.1433pt, 347.12361pt, 34.14333pt
+v-parts: 34.1433pt, 549.13818pt, 34.14331pt
+hmarginratio: --
+vmarginratio: --
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  415.41023pt
+\paperheight 617.42479pt
+\textwidth  347.12361pt
+\textheight 549.13818pt
+\oddsidemargin  -38.1267pt
+\evensidemargin -38.12666pt
+\topmargin  -66.1267pt
+\headheight 12.0pt
+\headsep    16.0pt
+\footskip   30.0pt
+\marginparwidth 90.0pt
+\marginparsep   11.0pt
+\columnsep  10.0pt
+\skip\footins  9.0pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+\@twosidetrue \@mparswitchtrue 
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+LaTeX Font Info:    Try loading font information for U+msa on input line 33.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 33.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+
+LaTeX Warning: Citation `R' on page 1 undefined on input line 41.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+
+LaTeX Warning: Citation `alex' on page 2 undefined on input line 62.
+
+
+LaTeX Warning: Citation `caffe' on page 2 undefined on input line 65.
+
+
+LaTeX Warning: Citation `rcnn' on page 2 undefined on input line 70.
+
+[2]
+Overfull \hbox (8.50203pt too wide) in paragraph at lines 107--117
+ [] 
+ []
+
+[3]
+
+LaTeX Warning: Citation `rcnn' on page 4 undefined on input line 128.
+
+
+Overfull \hbox (20.12952pt too wide) in paragraph at lines 138--155
+ [] 
+ []
+
+
+LaTeX Warning: Citation `rcnn' on page 4 undefined on input line 169.
+
+[4] <images/l1_filters_iter5000.png, id=26, 954.56625pt x 676.5275pt>
+File: images/l1_filters_iter5000.png Graphic file (type png)
+
+<use images/l1_filters_iter5000.png>
+<images/l1_filters_iter15000.png, id=27, 954.56625pt x 675.52374pt>
+File: images/l1_filters_iter15000.png Graphic file (type png)
+
+<use images/l1_filters_iter15000.png>
+<images/l1_filters_iter225000.png, id=28, 953.5625pt x 674.52pt>
+File: images/l1_filters_iter225000.png Graphic file (type png)
+
+<use images/l1_filters_iter225000.png>
+<images/training_loss.png, id=29, 1601.985pt x 599.23875pt>
+File: images/training_loss.png Graphic file (type png)
+
+<use images/training_loss.png>
+Overfull \hbox (24.44907pt too wide) in paragraph at lines 224--236
+ [] 
+ []
+
+[5 <./images/l1_filters_iter5000.png (PNG copy)> <./images/l1_filters_iter15000
+.png (PNG copy)> <./images/l1_filters_iter225000.png (PNG copy)> <./images/trai
+ning_loss.png (PNG copy)>] <images/features.png, id=33, 963.6pt x 722.7pt>
+File: images/features.png Graphic file (type png)
+
+<use images/features.png>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6]
+[7 <./images/features.png>]
+Overfull \hbox (23.16434pt too wide) in paragraph at lines 275--288
+ [] 
+ []
+
+[8] [9] <images/pool1_th100_plot.jpg, id=49, 1204.5pt x 903.375pt>
+File: images/pool1_th100_plot.jpg Graphic file (type jpg)
+
+<use images/pool1_th100_plot.jpg>
+<images/pool5_th100_plot.jpg, id=50, 1204.5pt x 903.375pt>
+File: images/pool5_th100_plot.jpg Graphic file (type jpg)
+
+<use images/pool5_th100_plot.jpg>
+Overfull \hbox (14.2108pt too wide) in paragraph at lines 413--414
+ [][][] 
+ []
+
+<images/relu6_th100_plot.jpg, id=51, 1204.5pt x 903.375pt>
+File: images/relu6_th100_plot.jpg Graphic file (type jpg)
+
+<use images/relu6_th100_plot.jpg>
+<images/relu7_th100_plot.jpg, id=52, 1204.5pt x 903.375pt>
+File: images/relu7_th100_plot.jpg Graphic file (type jpg)
+
+<use images/relu7_th100_plot.jpg>
+Overfull \hbox (14.2108pt too wide) in paragraph at lines 415--417
+ [][][] 
+ []
+
+<images/entropy_layers.jpg, id=53, 1927.2pt x 1004.75375pt>
+File: images/entropy_layers.jpg Graphic file (type jpg)
+
+<use images/entropy_layers.jpg>
+Overfull \hbox (7.60901pt too wide) in paragraph at lines 424--425
+ [][] 
+ []
+
+<images//pool5_bbox_seldims.jpeg, id=54, 1606.0pt x 824.07875pt>
+File: images//pool5_bbox_seldims.jpeg Graphic file (type jpg)
+
+<use images//pool5_bbox_seldims.jpeg>
+Overfull \hbox (13.3041pt too wide) in paragraph at lines 431--432
+ [][] 
+ []
+
+
+Underfull \vbox (badness 1383) has occurred while \output is active []
+
+ [10 <./images/entropy_layers.jpg>] [11 <./images/pool1_th100_plot.jpg> <./imag
+es/pool5_th100_plot.jpg> <./images/relu6_th100_plot.jpg> <./images/relu7_th100_
+plot.jpg> <./images//pool5_bbox_seldims.jpeg>] [12] [13
+
+] [14
+
+] [15
+
+] [16
+
+] [17
+
+] [18
+
+] [19
+
+]
+No file eccv2014submission.bbl.
+(./eccv2014submission.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4016 strings out of 495061
+ 56286 string characters out of 1182620
+ 139080 words of memory out of 3000000
+ 7127 multiletter control sequences out of 15000+50000
+ 11178 words of font info for 43 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 44i,10n,42p,1283b,352s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
+sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmsy10.pfb>
+Output written on eccv2014submission.pdf (19 pages, 1137441 bytes).
+PDF statistics:
+ 125 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+
