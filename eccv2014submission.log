@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  5 MAR 2014 12:30
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  5 MAR 2014 23:28
 entering extended mode
  %&-line parsing enabled.
 **eccv2014submission.tex
@@ -338,25 +338,16 @@ Package ifvtex Info: VTeX not detected.
 )
 (./eccv2014submission.aux
 
-LaTeX Warning: Label `table:headings' multiply defined.
-
-
-LaTeX Warning: Label `table:headings' multiply defined.
-
-
-LaTeX Warning: Label `table:headings' multiply defined.
-
-
-LaTeX Warning: Label `table:headings' multiply defined.
-
-
-LaTeX Warning: Label `table:headings' multiply defined.
-
-
 LaTeX Warning: Label `fig:example' multiply defined.
 
 
-LaTeX Warning: Label `fig:example' multiply defined.
+LaTeX Warning: Label `table:headings' multiply defined.
+
+
+LaTeX Warning: Label `table:headings' multiply defined.
+
+
+LaTeX Warning: Label `table:headings' multiply defined.
 
 )
 \openout1 = `eccv2014submission.aux'.
@@ -449,123 +440,121 @@ LaTeX Warning: Citation `R' on page 1 undefined on input line 41.
 
 ]
 
-LaTeX Warning: Citation `alex' on page 2 undefined on input line 62.
+LaTeX Warning: Citation `alex' on page 2 undefined on input line 60.
 
 
-LaTeX Warning: Citation `caffe' on page 2 undefined on input line 65.
+LaTeX Warning: Citation `caffe' on page 2 undefined on input line 63.
 
 
-LaTeX Warning: Citation `rcnn' on page 2 undefined on input line 70.
+LaTeX Warning: Citation `rcnn' on page 2 undefined on input line 68.
 
-[2]
-Overfull \hbox (8.50203pt too wide) in paragraph at lines 107--117
- [] 
- []
-
-[3]
-
-LaTeX Warning: Citation `rcnn' on page 4 undefined on input line 128.
-
-
-Overfull \hbox (20.12952pt too wide) in paragraph at lines 138--155
- [] 
- []
-
-
-LaTeX Warning: Citation `rcnn' on page 4 undefined on input line 169.
-
-[4] <images/l1_filters_iter5000.png, id=26, 954.56625pt x 676.5275pt>
-File: images/l1_filters_iter5000.png Graphic file (type png)
-
-<use images/l1_filters_iter5000.png>
-<images/l1_filters_iter15000.png, id=27, 954.56625pt x 675.52374pt>
-File: images/l1_filters_iter15000.png Graphic file (type png)
-
-<use images/l1_filters_iter15000.png>
-<images/l1_filters_iter225000.png, id=28, 953.5625pt x 674.52pt>
-File: images/l1_filters_iter225000.png Graphic file (type png)
-
-<use images/l1_filters_iter225000.png>
-<images/training_loss.png, id=29, 1601.985pt x 599.23875pt>
-File: images/training_loss.png Graphic file (type png)
-
-<use images/training_loss.png>
-Overfull \hbox (24.44907pt too wide) in paragraph at lines 224--236
- [] 
- []
-
-[5 <./images/l1_filters_iter5000.png (PNG copy)> <./images/l1_filters_iter15000
-.png (PNG copy)> <./images/l1_filters_iter225000.png (PNG copy)> <./images/trai
-ning_loss.png (PNG copy)>] <images/features.png, id=33, 963.6pt x 722.7pt>
-File: images/features.png Graphic file (type png)
-
-<use images/features.png>
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6]
-[7 <./images/features.png>]
-Overfull \hbox (23.16434pt too wide) in paragraph at lines 275--288
- [] 
- []
-
-[8] [9] <images/pool1_th100_plot.jpg, id=49, 1204.5pt x 903.375pt>
+[2] <images/pool1_th100_plot.jpg, id=18, 1204.5pt x 903.375pt>
 File: images/pool1_th100_plot.jpg Graphic file (type jpg)
 
 <use images/pool1_th100_plot.jpg>
-<images/pool5_th100_plot.jpg, id=50, 1204.5pt x 903.375pt>
+<images/pool5_th100_plot.jpg, id=19, 1204.5pt x 903.375pt>
 File: images/pool5_th100_plot.jpg Graphic file (type jpg)
 
 <use images/pool5_th100_plot.jpg>
-Overfull \hbox (14.2108pt too wide) in paragraph at lines 413--414
+Overfull \hbox (14.2108pt too wide) in paragraph at lines 91--92
  [][][] 
  []
 
-<images/relu6_th100_plot.jpg, id=51, 1204.5pt x 903.375pt>
+<images/relu6_th100_plot.jpg, id=20, 1204.5pt x 903.375pt>
 File: images/relu6_th100_plot.jpg Graphic file (type jpg)
 
 <use images/relu6_th100_plot.jpg>
-<images/relu7_th100_plot.jpg, id=52, 1204.5pt x 903.375pt>
+<images/relu7_th100_plot.jpg, id=21, 1204.5pt x 903.375pt>
 File: images/relu7_th100_plot.jpg Graphic file (type jpg)
 
 <use images/relu7_th100_plot.jpg>
-Overfull \hbox (14.2108pt too wide) in paragraph at lines 415--417
+Overfull \hbox (14.2108pt too wide) in paragraph at lines 93--95
  [][][] 
  []
 
-<images/entropy_layers.jpg, id=53, 1927.2pt x 1004.75375pt>
+<images/entropy_layers.jpg, id=22, 1927.2pt x 1004.75375pt>
 File: images/entropy_layers.jpg Graphic file (type jpg)
 
 <use images/entropy_layers.jpg>
-Overfull \hbox (7.60901pt too wide) in paragraph at lines 424--425
- [][] 
- []
-
-<images//pool5_bbox_seldims.jpeg, id=54, 1606.0pt x 824.07875pt>
-File: images//pool5_bbox_seldims.jpeg Graphic file (type jpg)
-
-<use images//pool5_bbox_seldims.jpeg>
-Overfull \hbox (13.3041pt too wide) in paragraph at lines 431--432
+Overfull \hbox (7.60901pt too wide) in paragraph at lines 102--103
  [][] 
  []
 
 
-Underfull \vbox (badness 1383) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10 <./images/entropy_layers.jpg>] [11 <./images/pool1_th100_plot.jpg> <./imag
-es/pool5_th100_plot.jpg> <./images/relu6_th100_plot.jpg> <./images/relu7_th100_
-plot.jpg> <./images//pool5_bbox_seldims.jpeg>] [12] [13
+ [3]
+[4 <./images/pool1_th100_plot.jpg> <./images/pool5_th100_plot.jpg> <./images/re
+lu6_th100_plot.jpg> <./images/relu7_th100_plot.jpg>]
+Overfull \hbox (8.50203pt too wide) in paragraph at lines 137--147
+ [] 
+ []
 
-] [14
+[5 <./images/entropy_layers.jpg>]
 
-] [15
+LaTeX Warning: Citation `rcnn' on page 6 undefined on input line 158.
 
-] [16
 
-] [17
+Overfull \hbox (20.12952pt too wide) in paragraph at lines 168--185
+ [] 
+ []
 
-] [18
+<images/features.png, id=33, 963.6pt x 722.7pt>
+File: images/features.png Graphic file (type png)
+ <use images/features.png>
+[6]
+Overfull \hbox (23.16434pt too wide) in paragraph at lines 219--232
+ [] 
+ []
 
-] [19
+[7 <./images/features.png>]
+
+LaTeX Warning: Citation `zeiler' on page 8 undefined on input line 275.
+
+
+LaTeX Warning: Citation `simoyan' on page 8 undefined on input line 275.
+
+
+LaTeX Warning: Citation `google' on page 8 undefined on input line 275.
+
+[8] <images/how-many.png, id=48, 963.6pt x 257.96375pt>
+File: images/how-many.png Graphic file (type png)
+
+<use images/how-many.png> [9 <./images/how-many.png>]
+<images/svm_seldims.png, id=53, 1328.965pt x 761.84625pt>
+File: images/svm_seldims.png Graphic file (type png)
+
+<use images/svm_seldims.png>
+
+LaTeX Warning: Citation `rcnn' on page 10 undefined on input line 348.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10 <./images/svm_seldims.png (PNG copy)>]
+<images/l1_filters_iter5000.png, id=57, 954.56625pt x 676.5275pt>
+File: images/l1_filters_iter5000.png Graphic file (type png)
+
+<use images/l1_filters_iter5000.png>
+<images/l1_filters_iter15000.png, id=58, 954.56625pt x 675.52374pt>
+File: images/l1_filters_iter15000.png Graphic file (type png)
+
+<use images/l1_filters_iter15000.png>
+<images/l1_filters_iter225000.png, id=59, 953.5625pt x 674.52pt>
+File: images/l1_filters_iter225000.png Graphic file (type png)
+
+<use images/l1_filters_iter225000.png>
+<images/training_loss.png, id=60, 1601.985pt x 599.23875pt>
+File: images/training_loss.png Graphic file (type png)
+
+<use images/training_loss.png> [11 <./images/l1_filters_iter5000.png (PNG copy)
+> <./images/l1_filters_iter15000.png (PNG copy)> <./images/l1_filters_iter22500
+0.png (PNG copy)> <./images/training_loss.png (PNG copy)>]
+Overfull \hbox (24.44907pt too wide) in paragraph at lines 401--413
+ [] 
+ []
+
+[12] [13
 
 ]
 No file eccv2014submission.bbl.
@@ -575,27 +564,28 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4016 strings out of 495061
- 56286 string characters out of 1182620
- 139080 words of memory out of 3000000
- 7127 multiletter control sequences out of 15000+50000
+ 4029 strings out of 495061
+ 56478 string characters out of 1182620
+ 137080 words of memory out of 3000000
+ 7141 multiletter control sequences out of 15000+50000
  11178 words of font info for 43 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,10n,42p,1283b,352s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,10n,42p,1283b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
 xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
-/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmsy10.pfb>
-Output written on eccv2014submission.pdf (19 pages, 1137441 bytes).
+type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy1
+0.pfb>
+Output written on eccv2014submission.pdf (13 pages, 1029032 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
+ 112 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
