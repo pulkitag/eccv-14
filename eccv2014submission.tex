@@ -42,77 +42,86 @@ The break-through work of \cite{Kriz} created a big splash in the computer visio
 
 In a more recent big development (R-CNN)\cite{Rcnn}, features extracted using convolutional networks were succesfully used to achieve results on object detection which dwarf the existing state of art by a big margin. They achieved a mAP of 54.1 (as compared to 41.7 in  \cite{regionlets}) on PASCAL VOC 2007 detection challenge and showed impressive results on the task of semantic segmentation. The significance of these results can be well appreciated in light of the fact that negligible progress was made over the last few iterations of the PASCAL-VOC challenge. These observations strongly suggest that we might be on the brink of a feature revolution akin to the one ushered by introduction of HOG \cite{Hog} and SIFT \cite{Sift} in the mid 2000's.  
 
-It is not the first time that convolutional neural networks have generated a great interest in the computer vision community. In late 80s and early nineties Le-nets \cite{Lecun89} achieved state of art performance on the task of MNIST digit classification. By the end of nineties and throughout the last decade interest in neural networks waned and they were attributed as dark art. One of the main reasons behind this was the fact that a large number of parameters such as the number of layers, number of units in each layer, the learning rate needed to be manually set in order to succesfully train these networks. Support Vector machines on the other hand provided an easy alternative for achieving the same performance levels with only one parameter (C) to tune. However, given impressive performance of conv-nets - they are now a force to be reckoned with! 
+It is not the first time that convolutional neural networks have generated a great interest in the computer vision community. In late 80s and early nineties LeNets \cite{Lecun89} achieved state of art performance on the task of MNIST digit classification. By the end of nineties and throughout the last decade interest in neural networks waned and they were attributed as dark art. One of the main reasons behind this was the fact that a large number of parameters such as the number of layers, number of units in each layer, the learning rate needed to be manually set in order to succesfully train these networks. Support Vector machines on the other hand provided an easy alternative for achieving the same performance levels with only one parameter (C) to tune. However, given the impressive performance of CNN's - the stage is all set for their second renaissance in mainstream computer vision. 
 
-In this work we take the view that rich feature heirarchies provided by convolutional nets are an interesting object which are very likely to emerge as the prominent feature extractor for computer vision models over the next few years. Feature extractors such as SIFT and HOG afford an intuitive interpretation of templates composed of oriented edge filters. However, currently we have little understanding of what different layers of a deep convolutional network encode and what is the most efficient way of using this information. We believe that developing such an understanding is not only an interesting scientific pursuit but is also the stepping stone towards designing methods which can optimally use these features.  In this work we try to develop such insights by asking 4 specific questions described below.
+In this work we take the view that rich feature heirarchies provided by convolutional nets are an interesting object which are very likely to emerge as the prominent feature extractor for computer vision models over the next few years. Feature extractors such as SIFT and HOG afford an intuitive interpretation of templates composed of oriented edge filters. However, currently we have little understanding of what different layers of a deep convolutional network encode and what is the most efficient way of using this information. We believe that developing such an understanding is not only an interesting scientific pursuit but is also the stepping stone towards designing methods which can optimally use these features.  
 
-For a long time proponets of multilayer networks have argued that unsupervised pre-training followed by fine-tuning is helpful for improving performance on discriminative tasks such as image classification \cite{GoogleCat} \cite{DeepPre} \cite{HintonPre}. However recent work of \cite{Decaf} and \cite{Rcnn} have made a strong case for the utility of learning features using discriminative pretraining and finetuning them for a specific task at hand. This leads us to our first question,
+This paper is focussed on a scientific investigation of multilayer convolutional neural networks and presents insights which would be useful towards developing an object recognition system. We carry out this investigation by asking four questions detailed below.
+
+For a long time proponets of multilayer networks have argued that unsupervised pre-training followed by finetuning is helpful for improving performance on discriminative tasks such as image classification \cite{GoogleCat}, \cite{DeepPre}, \cite{HintonPre}. However recent work of \cite{Decaf} and \cite{Rcnn} have made a strong case for the utility of learning features using discriminative pretraining and finetuning them for a specific task at hand. This leads us to our first question,
 \begin{center}
-``What happens during finetuning of a discriminatively pretrained network ?"
+``What happens during finetuning of a discriminatively pretrained network?"
 \end{center}
 Most of the popular computer vision models can be categorized either as a Bag of Words model or as a template based model. We would like to understand if the features from the conv-net could be interpreted in any of these ways. More concretely we wish to understand, 
 \begin{center}
 ``Is there information in the location of where filter activate or is it the magnitude of their activation?" 
 \end{center}
 
-Existence of grandmother cells (units tuned to a very specific visual entity)  has been a hotly debated topic in neuroscience \cite{Grandmother} and has been fairly discussed in papers such as \cite{GoogleCat} proposing multilayer architectures for object recognition. We explore this question in the form of: 
+Existence of Grand-Mother cells (units tuned to a very specific visual entity)  has been a hotly debated topic in neuroscience \cite{Grandmother} and has been fairly discussed in papers such as \cite{GoogleCat} proposing multilayer architectures for object recognition. We explore this question in the form of: 
 \begin{center}
-``Does a multilayer conv-net learn Grand-Mother Cells ? Or in other words, how distributed is the representation ?" 
+``Does a multilayer conv-net learn Grand-Mother Cells ? Or in other words, how distributed is the representation?" 
 \end{center}
 The last and the final question we address is,
 \begin{center}
-``How do different layers train in a conv-net? Do we really need 7 days for training ? "
+``How do different layers train in a conv-net? Do we really need 7 days for training? "
 \end{center}
 
-  
-We are not the first to ask this question. \cite{Deconv} \cite{Simonyan} (Talk about Zeiler, Simoyan)
+The rest of the paper describes the answer to these four questions and is organized as following: section \ref{sec:train} details the procedure used to train conv-nets.  Sections \ref{sec:fine} \ref{sec-where-info} \ref{sec:grand-mother}\ref{sec:speed} are devoted to the four questions and our analysis is concluded in \ref{sec:concl}.
+\section{Training Procedure}
+\label{sec:train}
+\subsection{Network-Architecture and Nomenclature}
+\label{sub:net-arch}
+For all our experiments we closely follow the architecture proposed in \cite{Kriz}. The first 2 layers consist of 4 sublayers each - convolution (conv), followed by rectified linear units (relu), pooling (pool) and contrast normalization (norm). Layers 3, 4 are composed of convolutional units followed by relu units. Layer 5 consists of convolutional units, followed by relu and pooling. The last two layers are fully connected (fc). In this work when we refer to a layer without referring to a particular sub-layer - then for layer 1,2,5 we mean the output of the pooling stage and for layers 3,4,6,7 we mean the output of relu units. We trained all our models using the publically available code \cite{caffe} and Nvidia K40 GPUs. Our imagenet network was trained for 310000 iterations and achieves an error rate only about 2\% higher on the ILSVRC validation set 2012. \newline
+We use the term Alex-Net to refer to a CNN trained using the architecture described above. FT (ft) or FT-Net refers to a finetuned network whereas as FC-FT(fc-ft) or FC-FT-Net refers to a network finetuned by setting the learning rate of convolutional layers to zero. We use the terms CNNs and conv-nets synonymously to refer to Alex-Net kind of multilayer network architectures. The term filter and unit are used interchangeably to refer to filters of the CNN.
 
-Fine-tuning a network essentially involves starting from a set of pre-learned parameters and slowly updating them to minimize a target loss function. Till date, there has been little work looking at the effect of fine-tuning on various layers of a discriminatively trained convolutional neural network. In this work, we address this question. Our findings indicate that during finetuning most of the learning takes place in the top 2 fully connected layers whereas the convolutional layers are largely un-changed. We quantify this claim by first comparing entropy of filters before and after fine-tuning. Secondly, we demonstrate that keeping layers 1-5 fixed while fine-tuning leads to negligible decrease in performance. Next, we show pool-5 features can be treated as generic feature extractor on top of which non-linear classifiers can be used to achieve good results. For developing a scientific understanding of how the network trains, we analyse conv-nets trained for different number of iterations. We find that most of the learning happens quite early on and that the network naturally learns in a layer-wise fashion. Finally, we conclude by providing some insights into how important is the magnitude of feature activation, the location and so on. 
-
-\section{Method}
-\subsection{Network-Architecture}
-For all our experiments we closely follow the architecture proposed in \cite{alex}. The first 2 layers consist of 4 sublayers each - convolution (conv), followed by rectified linear units (relu), pooling (pool) and contrast normalization (norm). Layers 3, 4 are composed of convolutional units followed by relu units. Layer 5 consists of convolutional units, followed by relu and pooling. The last two layers are fully connected (fc). In this work when we refer to a layer without referring to a particular sub-layer - then for layer 1,2,5 we mean the output of the pooling stage and for layers 3,4,6,7 we mean the output of relu units.
-
-\subsection{Training Conv-Nets}
-\label{sub:train}
-We have trained all our models using the publically available code \cite{caffe} and Nvidia K40 GPUs. Our imagenet network was trained for 310000 iterations and achieves an error rate only about 2\% higher on the ILSVRC validation set 2012. We refer to this network as the Alex-net .
-
-\subsection{Fine-Tuning}
+\subsection{Training Setup} 
+  Unless otherwise specified all our results for detection and image classification are obtained by training on train and val sets of PASCAL-VOC-2007 \cite{Pascal} challenge and testing on test. For our experiments with the SUN-397 \cite{sun} dataset we use a non-standard train-test split since it is infeasible to finetune conv-nets for 10 different subsets as proposed in \cite{sun}. In particular we randomly split the dataset into 3 parts namely train-val-test using 50\%,10\% and 40\%. The distribution of classes is uniform across all the 3 sets. We only use these results to support our investigations and not to compare with other scene-classification methods. 
+ 
+\subsubsection{Fine-Tuning}
 \label{sub:fine-train}
-For a particular task, we fine-tune conv-nets by running SGD (Stochastic Gradient) with a starting learning rate set to $\frac{1}{10}^{th}$ of the intial learning rate of the imagenet model. This choice has been made because we donot want to drastically change the parameters of the network and overfit to the training set. At every 20,000 iterations we reduce the learning rate by a factor of 10 and use a mini-batch size of 128.
+For a particular task, we fine-tune conv-nets by running SGD (Stochastic Gradient) with a starting learning rate set to $\frac{1}{10}^{th}$ of the intial learning rate of the imagenet model. This choice has been made because we donot want to drastically change the parameters of the network and overfit to the training set. At every 20,000 iterations we reduce the learning rate by a factor of 10 and use a mini-batch size of 128. In order to finetune our networks for PASCAL-VOC-2007 detection setting we use region proposals for training closely following the procedure described in \cite{Rcnn}. Unless otherwise stated, the finetuned network for PASCAL experiments is finetuned for 70K iterations whereas that for SUN is finetuned for 40K iterations.
 
-\subsubsection{Fine-Tuning for PASCAL}: Closely following the work of \cite{rcnn} we use region proposals generated by selective search algorithm for fine-tuning. Each region is warped to a size of 227*227*3. Regions with IOU (intersection over union) $\geq$ 0.5 with ground truth bounding boxes are treated as positives and rest as negatives. This  results into a 21-way classification problem (20 PASCAL classes + background). We tuned this network for 70000 iterations and refer to it as the FT network in the sections below.
+\section{What happens when a discriminatively pretrained network is finetuned?}
+\label{sec:fine}
+Finetuning a network is the process of slowly updating pre-learned parameters to minimize a target loss function for a new task at hand. Since, convolutional networks have a large number of parameters they are prone to overfitting when trained on small datasets. Finetuning can be considered as a method of transfer learning and recent results from \cite{Rcnn}\cite{Decaf} present a strong case that this methodology boosts performance. Although, unsupervised pretraining has widely studied in the multilayer network literatue \cite{HintonPre}\cite{DeepPre}, till date, there has been almost no work analysing the effect of fine-tuning on different layers of a discriminatively trained multilayer convolutional networks such as the Alex-Net.
 
-**To-DO ? Specify the procees of fc-only fine-tuning.  ***
+We start our analysis by investigating how the entropy of filters across different layers changes as a result of discriminative fine-tuning (see sec \ref{sub:fine-entropy}). Since, entropy of a filter can be evaluated at different threshold level of activations we propose the metric of Area under the Entropy curve (AuE) to judge changes in filter selectivity. Our main finding is that most of the learning during finetuning happens only in the top two fully connected layers. Motivated by this observation, we finetune networks for PASCAL detection and SUN-397 scene classification task by setting non-zero learning rates only in the top 2 layers (see sec\ref{sub:fine-fc-only}). We find this results in a negligible drop in performance and allows for moderate speedups in finetuning time. Other conclusions are presented in the sec \ref{sub:fine-discussion}.
 
+\subsection{Entropy Analysis}
+\label{sub:fine-entropy}
+We compute entropy of each filter for all layers of Alex-Net and FT-Net using the ground-truth bounding boxes from the VOC-2007 test-set as input to these networks. For each filter, we collect all activations in response to ground truth bounding boxes. Next, we sort the scores in decreasing order and compute entropy of the distribution of 20 PASCAL classes at 100 equally spaced thresholds.
 
+\begin{figure}
+\centering
+\includegraphics[scale=0.15]{images/vectorize.png}
+\caption{Illustration of the procedure for computing filter entropy.}
+\label{fig:vectorize}
+\end{figure}
 
-\section{How does fine-tuning effect the network ?}
-Discriminative fine-tuning has proven useful both for detection as shown in (\cite{Rcnn}). Currently we donot have a scientific understanding of what effect fine-tuning has on different layers of the network.
+We use Area under this entropy curve (AuE) to quantify selectivity of each filter. The distribution of AuE for all filters across the seven layers of the CNN is illustrated in fig \ref{fig:fine-hist}. Next, in order to determine the overall change in a layer's tuning we use the Mean Cumulative AuE (MC-AuE) of filters sorted in decreasing order of their individual AuE's. Fig \ref{fig:fine-entropy} plots MC-AuE as a function of fraction of filters in each layer. 
 
+\begin{figure}[H]
+\centering
+\subfloat{\includegraphics[height=6.5cm]{images/ent_hist.png}}
+\caption{The first plot shows the distribution of AuE for different layers in Alex-Net and a network fine-tuned on PASCAL. X-axis is the entropy and the Y-axis is the number of filters.}
+\label{fig:fine-hist}
+\end{figure}
 
-\subsection{Discriminative Fine Tuning Helps}
-**To-Do** Results on SUN
+\begin{figure}
+\centering
+\subfloat{\includegraphics[scale=0.15]{images/entropy_variation.png}}
+\caption{Mean Cumulative AuE plotted as fraction of filters (see sec \ref{sub:fine-entropy}). (Dash-Dot Line :Alex-Net, Solid Line: Fine-Tuned Network).}
+\label{fig:fine-entropy}
+\end{figure}
 
-
-
-\subsection{What can entropy of filters tell us?}
-\begin{enumerate}
-\item For each filter in the layer, we collect all activations in response to ground truth bounding boxes of 20 categories from the PASCAL VOC 2007 test. 
-\item Scores are sorted in decreasing order and we compute entropy over the set of 20 PASCAL classes at 100 equally spaced thresholds.
-\item We use Area under the entropy curve (AuE) to quantify selectivity of each filter. 
-\item Next, for each layer we sort all filters by their AuE. Finally, we compute the mean AuE for each layer at 30 equally spaced thresholds (where a threshold corresponds to number of filters chosen from the sorted list).  
-\end{enumerate}
-
-
-(Contrast to mid-level patches idea - where greedily select filters based on entropy). 
+From this analysis we draw 2 conclusions. The first that although the entropy of filters decreases, the change in entropy between layer 1 and layer 5 is small as compared to the change which happens while going from layer 5 to layer 6. Second, finetuning mostly reduces the entropy of filters in the fully connected layers, there are small changes in layer 5 and negligible changes in other layers. 
 
 
 \setlength{\tabcolsep}{4pt}
 \begin{table}
 \begin{center}
 \caption{Layerwise effect of fine-tuning, GT-bbox classification, FT: Fine-Tuned, A-Net: Alex-Net}
-\label{table:headings}
+\label{table:gt-bbox-fine}
 \begin{tabular}{ccc|ccc|ccc|ccc}
 \hline\noalign{\smallskip}
 Layer & A-Net & FT & Layer & A-Net & FT & Layer & A-Net & FT & Layer & A-Net & FT \\
@@ -128,14 +137,10 @@ pool-2  & 67.1 & 67.7 & relu-4 & 75.5 & 77.8 & relu-6 & 83.4 & 85.4 \\
 \setlength{\tabcolsep}{1.4pt}
 
 
-\begin{figure}[H]
-\centering
-\subfloat{\includegraphics[height=6.5cm]{images/ent_hist.png}}\\
-\subfloat{\includegraphics[height=6.5cm]{images/entropy_variation.png}}
-\caption{The first plot shows the distribution of AuE for different layers in Alex-Net and a network fine-tuned on PASCAL. X-axis is the entropy and the Y-axis is the number of filters. The second plot shows the mean area of top k percentile filters for various layers. (Dash-Dot Line :Alex-Net, Solid Line: Fine-Tuned Network). Notice, that finetuning has the maximum effect in the last 2 layers.}
-\label{fig:example}
-\end{figure}
 
+\subsection{Is Fine-Tuning only the fully-connected layers sufficient ?}
+\label{sub:fine-fc-only}
+We evaluated 3 convolutional neural networks (namely caffe-net, FT and FC-FT) on the tasks of image classification, ground truth bounding box classification and detection. The results can be seen in table \ref{table:fine-effect}. The mean-AP on the tasks of ground truth bounding box classification and detection increases, whereas performance is uneffected for the task of classification. The performance of the network with tuning the fully connected layers is comparable to the performance of
 
 \setlength{\tabcolsep}{2pt}
 \begin{table}
@@ -156,16 +161,6 @@ relu-7   & 73.6 & 73.2 & - & 84.0 & 87.1 & 83.4  & 45.5 & 54.1 & 53.3  \\
 \end{center}
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
-
-
-
-
-
-**To-Do**: Difference in Entropy
-
-
-\subsection{Is Fine-Tuning only the fully-connected layers sufficient ?}
-We evaluated 3 convolutional neural networks (namely caffe-net, FT and FC-FT) on the tasks of image classification, ground truth bounding box classification and detection. The results can be seen in table \ref{table:fine-effect}. The mean-AP on the tasks of ground truth bounding box classification and detection increases, whereas performance is uneffected for the task of classification. The performance of the network with tuning the fully connected layers is comparable to the performance of
 
 
 In order to test our hypothesis that bulk of the learning required for good performance on a new task happens in the fully connected (FC) layers - we finetune caffe-net in two ways. In the first method, we set the learning rate for all the convolutional layers to be zero and randomly intialize the fully connected layers. The second network has non-zero learning rates for all the layers and the FC-layer parameters are initialized to their values in a conv-net trained on imagenet. Fine-tuning is performed  using the selective search bounding box proposals (\cite{rcnn}). The ground truth bounding boxes are assigned their respective class labels whereas any region with less than 0.3 IOU with a ground truth bounding box is assigned to background class. We fine-tune both the networks for 70,000 iterations.
@@ -204,7 +199,13 @@ The performance of the FC-FT network at layer 5 is slighly worse by 2.6 points, 
 
 Next, we compare the performance of both the networks for the task of classifying ground-truth bounding boxes from PASCAL-VOC-2007 challenge.  
 
+\subsection{Discussion}
+\label{sub:fine-discussion}
+(Contrast to mid-level patches idea - where greedily select filters based on entropy). 
+
+
 \section{Where is the information - location or magnitude?}
+\label{sec-where-info}
 The success of convolutional networks on a variety of vision tasks indicate that they are here to stay. In the computer vision literature the dominant models can be broadly grouped into 2 classes - namely BOW style approaches or template based scanning window search. Currently, it is unclear if we could use conv-nets features as building blocks for such systems or if completeley new ways of thinking about them is necessary. 
 Instead of trying to provide a pre-mature answer to this question, we analyse how information is encoded across different layers of such  networks. We hope this analysis will serve as a starting point
 
@@ -285,6 +286,7 @@ For answering this question, we binarize the feature vectors. Surprisingly this 
 ** To Come ** 
 
 \section{How common are Grand-Mother like Units ?}
+\label{sec:grand-mother}
 How information is represented in deep architectures such as convolutional neural networks is an open question. We know that the first layer ends up learning gabor like edge detectors and that units in the final layers are very class specific. However, we are far from understanding the representations learned in the middle layers. Developing this understanding is crucial in order to effectively devise methods capable of fully exploiting the rich feature hierarchy provided by convolutional networks.
 Some recent work addressing this question has focussed on developing visualization techniques (zeiler, simoyan, google paper) to understand feature tuning of different filters. \cite{zeiler} presented a deconvolution strategy which effectively uses backprojection to find image regions which cause a particular filter to activate.  \cite{simoyan} on the other hand pose tuning as an optimization problem and try to estimate optimal stimuli for a given unit in the higher layers. \cite{google} train a massive non-convolutional network and show the presence of cat and people specific units learnt by their network. We feel that although visualizations are helpful they donot convey the full story. More-over they are subjective and it is unclear what conclusions one might draw. In particular, finding a few units tuned to people or cats tells us very little about what other units might be doing. To best of our knowledge there is no work which tries to objectively answer this question.
 
@@ -361,6 +363,7 @@ FT & 90 & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 30 & 40 & 
 
 
 \section{Can we speed things up?}
+\label{sec:speed}
 Convolutional neural networks take a long time to train. For achieving state of art accuracy on the imagenet challenge these networks are often trained on high-end GPUs for more than 7 days. Even our implementation of fine-tuning following the approach proposed in \cite{rcnn} takes more than 12 hours on a Nvidia Tesla-K40. A way to speed up training will allow for a rich exploration of network architectures and parameters which is currently not possible.    
 
 As a first step towards addressing this problem, we looked at the evolution of training loss and validation accuracy as the training progresses (fig \ref{fig:conv1}.) The top-1 accuracy on the imagenet validation set at 15K iterations is at 29.5 \% and 38.13\% at 50K iterations (compared to 57.4 \% at 310K iterations). The training loss rapidly increases initially and then there is a slow sluggish decay except for the point where learning rate is decimated by a factor of 10 at 100K iterations.
@@ -433,7 +436,7 @@ l7(full) & 64.3 & 69.6 & 50.1 & 41.8 & 32.0 & 62.6 & 71.0 & 60.6 & 32.8 & 58.5 &
 
 The take home message from this analysis is that a majority of training happens very early on in the training and a lot of time is spent to achieve the final few points. 
 \section{Conclusions}
-
+\label{sec:concl}
 The paper ends with a conclusion. 
 
 \clearpage\mbox{}Page \thepage\ of the manuscript.

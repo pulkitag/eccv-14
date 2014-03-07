@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  6 MAR 2014 20:17
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  6 MAR 2014 23:36
 entering extended mode
  %&-line parsing enabled.
 **eccv2014submission.tex
@@ -336,11 +336,7 @@ Package ifvtex Info: VTeX not detected.
 \Gm@even@mp=\dimen150
 \Gm@dimlist=\toks27
 )
-(./eccv2014submission.aux
-
-LaTeX Warning: Label `table:headings' multiply defined.
-
-)
+(./eccv2014submission.aux)
 \openout1 = `eccv2014submission.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
@@ -355,7 +351,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
 LaTeX Font Info:    ... okay on input line 15.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
 LaTeX Font Info:    ... okay on input line 15.
- (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count146
 \scratchdimen=\dimen151
@@ -429,126 +426,118 @@ LaTeX Warning: Citation `regionlets' on page 1 undefined on input line 43.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-] [2]
+] [2] [3]
+<images/vectorize.png, id=21, 886.31125pt x 519.9425pt>
+File: images/vectorize.png Graphic file (type png)
 
-LaTeX Warning: Citation `alex' on page 3 undefined on input line 74.
-
-
-LaTeX Warning: Citation `rcnn' on page 3 undefined on input line 84.
-
-[3]
-Overfull \hbox (11.18141pt too wide) in paragraph at lines 116--126
- [] 
- []
-
-<images/ent_hist.png, id=22, 1629.08624pt x 1016.79875pt>
+<use images/vectorize.png> [4 <./images/vectorize.png>]
+<images/ent_hist.png, id=27, 1629.08624pt x 1016.79875pt>
 File: images/ent_hist.png Graphic file (type png)
 
 <use images/ent_hist.png>
-<images/entropy_variation.png, id=23, 1601.985pt x 1008.76875pt>
+<images/entropy_variation.png, id=28, 1596.96625pt x 888.31876pt>
 File: images/entropy_variation.png Graphic file (type png)
 
 <use images/entropy_variation.png>
-Underfull \vbox (badness 8189) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [4]
-[5 <./images/ent_hist.png (PNG copy)> <./images/entropy_variation.png (PNG copy
-)>]
-
-LaTeX Warning: Citation `rcnn' on page 6 undefined on input line 171.
-
-
-Overfull \hbox (20.12952pt too wide) in paragraph at lines 181--198
+ [5 <./images/ent_hist.png (PNG copy)> <./images/entropy_variation.png (PNG cop
+y)>]
+Overfull \hbox (11.18141pt too wide) in paragraph at lines 125--135
  [] 
  []
 
-[6] <images/features.png, id=34, 963.6pt x 722.7pt>
+
+LaTeX Warning: Citation `rcnn' on page 6 undefined on input line 166.
+
+[6]
+Overfull \hbox (20.12952pt too wide) in paragraph at lines 176--193
+ [] 
+ []
+
+[7] <images/features.png, id=40, 963.6pt x 722.7pt>
 File: images/features.png Graphic file (type png)
  <use images/features.png>
-[7 <./images/features.png>]
-Overfull \hbox (23.16434pt too wide) in paragraph at lines 263--276
+[8 <./images/features.png>]
+Overfull \hbox (23.16434pt too wide) in paragraph at lines 264--277
  [] 
  []
 
-[8]
 
-LaTeX Warning: Citation `zeiler' on page 9 undefined on input line 289.
-
-
-LaTeX Warning: Citation `simoyan' on page 9 undefined on input line 289.
+LaTeX Warning: Citation `zeiler' on page 9 undefined on input line 291.
 
 
-LaTeX Warning: Citation `google' on page 9 undefined on input line 289.
+LaTeX Warning: Citation `simoyan' on page 9 undefined on input line 291.
 
-[9] [10] <images/how-many.png, id=52, 963.6pt x 257.96375pt>
+
+LaTeX Warning: Citation `google' on page 9 undefined on input line 291.
+
+[9] [10] <images/how-many.png, id=54, 963.6pt x 257.96375pt>
 File: images/how-many.png Graphic file (type png)
 
-<use images/how-many.png>
-<images/svm_seldims.png, id=53, 1328.965pt x 761.84625pt>
+<use images/how-many.png> [11]
+<images/svm_seldims.png, id=58, 1328.965pt x 761.84625pt>
 File: images/svm_seldims.png Graphic file (type png)
 
 <use images/svm_seldims.png>
-Underfull \vbox (badness 3872) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [11 <./images/how-many.png>]
+ [12 <./images/how-many.png>]
 
-LaTeX Warning: Citation `rcnn' on page 12 undefined on input line 364.
+LaTeX Warning: Citation `rcnn' on page 13 undefined on input line 367.
 
-<images/l1_filters_iter5000.png, id=58, 954.56625pt x 676.5275pt>
+<images/l1_filters_iter5000.png, id=63, 954.56625pt x 676.5275pt>
 File: images/l1_filters_iter5000.png Graphic file (type png)
 
 <use images/l1_filters_iter5000.png>
-<images/l1_filters_iter15000.png, id=59, 954.56625pt x 675.52374pt>
+<images/l1_filters_iter15000.png, id=64, 954.56625pt x 675.52374pt>
 File: images/l1_filters_iter15000.png Graphic file (type png)
 
 <use images/l1_filters_iter15000.png>
-<images/l1_filters_iter225000.png, id=60, 953.5625pt x 674.52pt>
+<images/l1_filters_iter225000.png, id=65, 953.5625pt x 674.52pt>
 File: images/l1_filters_iter225000.png Graphic file (type png)
 
 <use images/l1_filters_iter225000.png>
-<images/training_loss.png, id=61, 1601.985pt x 599.23875pt>
+<images/training_loss.png, id=66, 1601.985pt x 599.23875pt>
 File: images/training_loss.png Graphic file (type png)
 
-<use images/training_loss.png> [12 <./images/svm_seldims.png (PNG copy)>]
-Overfull \hbox (24.44907pt too wide) in paragraph at lines 418--430
+<use images/training_loss.png> [13 <./images/svm_seldims.png (PNG copy)>]
+Overfull \hbox (24.44907pt too wide) in paragraph at lines 421--433
  [] 
  []
 
-[13 <./images/l1_filters_iter5000.png (PNG copy)> <./images/l1_filters_iter1500
+[14 <./images/l1_filters_iter5000.png (PNG copy)> <./images/l1_filters_iter1500
 0.png (PNG copy)> <./images/l1_filters_iter225000.png (PNG copy)> <./images/tra
-ining_loss.png (PNG copy)>] [14] [15
+ining_loss.png (PNG copy)>] [15] [16
 
-] (./eccv2014submission.bbl) [16
+] (./eccv2014submission.bbl) [17
 
 ]
-(./eccv2014submission.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+(./eccv2014submission.aux) ) 
 Here is how much of TeX's memory you used:
- 4032 strings out of 495061
- 56250 string characters out of 1182620
- 139080 words of memory out of 3000000
- 7145 multiletter control sequences out of 15000+50000
+ 4048 strings out of 495061
+ 56543 string characters out of 1182620
+ 138092 words of memory out of 3000000
+ 7160 multiletter control sequences out of 15000+50000
  11524 words of font info for 44 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,10n,42p,1283b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.pfb><
-/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/te
-xmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on eccv2014submission.pdf (16 pages, 484676 bytes).
+ 44i,9n,42p,1029b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx1
+2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/
+texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmti10.pfb>
+Output written on eccv2014submission.pdf (17 pages, 498261 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 127 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

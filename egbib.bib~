@@ -129,7 +129,7 @@ booktitle = {International Conference in Machine Learning}
   ee        = {http://arxiv.org/abs/1311.2901},
   bibsource = {DBLP, http://dblp.uni-trier.de}
 }
-@Article{15973409,
+@Article{Grandmother,
 AUTHOR = {Quiroga, R Quian and Reddy, L and Kreiman, G and Koch, C and Fried, I}
 TITLE = {Invariant visual representation by single neurons in the human brain.},
 JOURNAL = {Nature},

@@ -53,20 +53,20 @@ Hinton, G.E., Osindero, S., Teh, Y.W.:
 \bibitem{Grandmother}
 Quiroga, R.Q., Reddy, L., Kreiman, G., Koch, C., Fried, I.
 
-\bibitem{Deconv}
-Zeiler, M.D., Fergus, R.:
-\newblock Visualizing and understanding convolutional networks.
-\newblock CoRR \textbf{abs/1311.2901} (2013)
-
-\bibitem{Simonyan}
-Simonyan, K., Vedaldi, A., Zisserman, A.:
-\newblock Learning local feature descriptors using convex optimisation.
-\newblock IEEE Transactions on Pattern Analysis and Machine Intelligence (2014)
-
 \bibitem{caffe}
 Jia, Y.:
 \newblock {Caffe}: An open source convolutional architecture for fast feature
   embedding.
 \newblock \url{http://caffe.berkeleyvision.org/} (2013)
+
+\bibitem{Pascal}
+Everingham, M., Van~Gool, L., Williams, C.K.I., Winn, J., Zisserman, A.:
+\newblock The pascal visual object classes (voc) challenge.
+\newblock IJCV \textbf{88}(2) (2010)
+
+\bibitem{sun}
+Xiao, J., Hays, J., Ehinger, K.A., Oliva, A., Torralba, A.:
+\newblock Sun database: Large-scale scene recognition from abbey to zoo.
+\newblock In: CVPR, IEEE (2010)  3485--3492
 
 \end{thebibliography}

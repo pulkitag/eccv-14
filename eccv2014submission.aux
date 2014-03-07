@@ -17,68 +17,84 @@
 \citation{Rcnn}
 \citation{Grandmother}
 \citation{GoogleCat}
-\citation{Deconv}
-\citation{Simonyan}
-\citation{alex}
+\citation{Kriz}
 \citation{caffe}
-\citation{rcnn}
+\citation{Pascal}
+\citation{sun}
+\citation{sun}
 \citation{Rcnn}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Method}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Network-Architecture}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Training Conv-Nets}{3}}
-\newlabel{sub:train}{{2.2}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Fine-Tuning}{3}}
-\newlabel{sub:fine-train}{{2.3}{3}}
-\@writefile{toc}{\contentsline {subsubsection}{Fine-Tuning for PASCAL}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}How does fine-tuning effect the network ?}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Discriminative Fine Tuning Helps}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}What can entropy of filters tell us?}{4}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Layerwise effect of fine-tuning, GT-bbox classification, FT: Fine-Tuned, A-Net: Alex-Net\relax }}{4}}
+\citation{Rcnn}
+\citation{Decaf}
+\citation{HintonPre}
+\citation{DeepPre}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Training Procedure}{3}}
+\newlabel{sec:train}{{2}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Network-Architecture and Nomenclature}{3}}
+\newlabel{sub:net-arch}{{2.1}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Training Setup}{3}}
+\newlabel{sub:fine-train}{{2.2}{3}}
+\@writefile{toc}{\contentsline {subsubsection}{Fine-Tuning}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}What happens when a discriminatively pretrained network is finetuned?}{4}}
+\newlabel{sec:fine}{{3}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Entropy Analysis}{4}}
+\newlabel{sub:fine-entropy}{{3.1}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Illustration of the procedure for computing filter entropy.\relax }}{4}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{table:headings}{{1}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The first plot shows the distribution of AuE for different layers in Alex-Net and a network fine-tuned on PASCAL. X-axis is the entropy and the Y-axis is the number of filters. The second plot shows the mean area of top k percentile filters for various layers. (Dash-Dot Line :Alex-Net, Solid Line: Fine-Tuned Network). Notice, that finetuning has the maximum effect in the last 2 layers.\relax }}{5}}
-\newlabel{fig:example}{{1}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Is Fine-Tuning only the fully-connected layers sufficient ?}{5}}
+\newlabel{fig:vectorize}{{1}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The first plot shows the distribution of AuE for different layers in Alex-Net and a network fine-tuned on PASCAL. X-axis is the entropy and the Y-axis is the number of filters.\relax }}{5}}
+\newlabel{fig:fine-hist}{{2}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Mean Cumulative AuE plotted as fraction of filters (see sec 3.1\hbox {}). (Dash-Dot Line :Alex-Net, Solid Line: Fine-Tuned Network).\relax }}{5}}
+\newlabel{fig:fine-entropy}{{3}{5}}
 \citation{rcnn}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Layerwise effect of fine-tuning, GT-bbox classification, FT: Fine-Tuned, A-Net: Alex-Net\relax }}{6}}
+\newlabel{table:gt-bbox-fine}{{1}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Is Fine-Tuning only the fully-connected layers sufficient ?}{6}}
+\newlabel{sub:fine-fc-only}{{3.2}{6}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Effect of fine-tuning a network for 3 different tasks derived from the PASCAL VOC-2007 challenge. all-tune is finetuning all layers whereas as fc-tune is fine-tuning with layer 1-5 fixed.\relax }}{6}}
 \newlabel{table:fine-effect}{{2}{6}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Detection: Fine-Tuning Effects.\relax }}{6}}
-\newlabel{table:det-fine}{{3}{6}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Detection: Fine-Tuning Effects.\relax }}{7}}
+\newlabel{table:det-fine}{{3}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Discussion}{7}}
+\newlabel{sub:fine-discussion}{{3.3}{7}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Where is the information - location or magnitude?}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Different feature ablations used in analysis described in sec. 4.1\hbox {}, 4.2\hbox {}. For the purpose of illustration, consider each 3*3 block in first column as a feature map. The second column shows \textit  {spatial-shuffle}, i.e. the result of applying an independent spatial random permutation to each feature map. Third column depicts \textit  {spatial max}, i.e. selecting the max activation in each featue map. Fourth column illustrates \textit  {binarization} whereas the last column selects the maximum value in each feature map, binarizes it but also retains the location where the filter fired.\relax }}{7}}
-\newlabel{fig:features}{{2}{7}}
+\newlabel{sec-where-info}{{4}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Different feature ablations used in analysis described in sec. 4.1\hbox {}, 4.2\hbox {}. For the purpose of illustration, consider each 3*3 block in first column as a feature map. The second column shows \textit  {spatial-shuffle}, i.e. the result of applying an independent spatial random permutation to each feature map. Third column depicts \textit  {spatial max}, i.e. selecting the max activation in each featue map. Fourth column illustrates \textit  {binarization} whereas the last column selects the maximum value in each feature map, binarizes it but also retains the location where the filter fired.\relax }}{8}}
+\newlabel{fig:features}{{4}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}How important is where a filter activates?}{8}}
 \newlabel{sub:imp-loc}{{4.1}{8}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Mean AP on PASCAL-VOC 2007 Classification using various ablations as described in 4.1\hbox {} -4.2\hbox {}.\relax }}{8}}
-\newlabel{table:class-loc-mag}{{4}{8}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Detection: Effect of various feature ablations using the R-CNN setup as described in ...\relax }}{8}}
-\newlabel{table:headings}{{5}{8}}
 \citation{zeiler}
 \citation{simoyan}
 \citation{google}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Mean AP on PASCAL-VOC 2007 Classification using various ablations as described in 4.1\hbox {} -4.2\hbox {}.\relax }}{9}}
+\newlabel{table:class-loc-mag}{{4}{9}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Detection: Effect of various feature ablations using the R-CNN setup as described in ...\relax }}{9}}
+\newlabel{table:headings}{{5}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}How important is the magnitude of activation ?}{9}}
 \newlabel{sub:imp-mag}{{4.2}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Discussion}{9}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}How common are Grand-Mother like Units ?}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Finding class specific units}{10}}
-\newlabel{sub:class-specific-unit}{{5.1}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}How common are Grand-Mother like Units ?}{10}}
+\newlabel{sec:grand-mother}{{5}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Finding class specific units}{11}}
+\newlabel{sub:class-specific-unit}{{5.1}{11}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}How many units do we need?}{11}}
 \newlabel{sub:how-many}{{5.2}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section 4.1\hbox {}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.\relax }}{11}}
-\newlabel{fig:sel-strategy}{{3}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section 4.1\hbox {}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.\relax }}{12}}
+\newlabel{fig:sel-strategy}{{5}{12}}
 \citation{rcnn}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Analysis of how many filters are required to classify ground truth bounding boxes for 20 categories taken from PASCAL-2007 detection challenge. The y-axis in each of plot represents classification accuracy measured as mean-ap where as x-axis stand for the number of filters.)\relax }}{12}}
-\newlabel{fig:svm-sel-dims}{{4}{12}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Number of filters required to achieve 50\% ,90\% of the full performance for PASCAL classes using Alex-Net(AN) and the Fine-Tuned network(FT)\relax }}{12}}
-\newlabel{table:num-fil}{{6}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Can we speed things up?}{12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The first row shows conv-1 filters at 5K, 15K and 225K training iteration. The second row shows the evolution of training loss and top-1 accuracy on imagenet ilsvrc-2012 validation set as a function of number of iterations.\relax }}{13}}
-\newlabel{fig:conv1}{{5}{13}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Variation in classification accuracy (mean-AP) on PASCAL VOC 2007 challenge using features extracted from different layers of Alex-Net as a function of number of iterations.\relax }}{14}}
-\newlabel{table:det-traj-classify}{{7}{14}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Performance of 50-50 network for detection on pascal-voc-2007 challenge. (l5 is pool-5 and l7 is relu-7)\relax }}{14}}
-\newlabel{table:det-trajectory}{{8}{14}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Analysis of how many filters are required to classify ground truth bounding boxes for 20 categories taken from PASCAL-2007 detection challenge. The y-axis in each of plot represents classification accuracy measured as mean-ap where as x-axis stand for the number of filters.)\relax }}{13}}
+\newlabel{fig:svm-sel-dims}{{6}{13}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Number of filters required to achieve 50\% ,90\% of the full performance for PASCAL classes using Alex-Net(AN) and the Fine-Tuned network(FT)\relax }}{13}}
+\newlabel{table:num-fil}{{6}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Can we speed things up?}{13}}
+\newlabel{sec:speed}{{6}{13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The first row shows conv-1 filters at 5K, 15K and 225K training iteration. The second row shows the evolution of training loss and top-1 accuracy on imagenet ilsvrc-2012 validation set as a function of number of iterations.\relax }}{14}}
+\newlabel{fig:conv1}{{7}{14}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Variation in classification accuracy (mean-AP) on PASCAL VOC 2007 challenge using features extracted from different layers of Alex-Net as a function of number of iterations.\relax }}{15}}
+\newlabel{table:det-traj-classify}{{7}{15}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Performance of 50-50 network for detection on pascal-voc-2007 challenge. (l5 is pool-5 and l7 is relu-7)\relax }}{15}}
+\newlabel{table:det-trajectory}{{8}{15}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{15}}
+\newlabel{sec:concl}{{7}{15}}
 \bibstyle{splncs}
 \bibdata{egbib}
 \bibcite{Kriz}{1}
@@ -91,6 +107,6 @@
 \bibcite{DeepPre}{8}
 \bibcite{HintonPre}{9}
 \bibcite{Grandmother}{10}
-\bibcite{Deconv}{11}
-\bibcite{Simonyan}{12}
-\bibcite{caffe}{13}
+\bibcite{caffe}{11}
+\bibcite{Pascal}{12}
+\bibcite{sun}{13}
