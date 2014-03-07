@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  7 MAR 2014 06:28
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  7 MAR 2014 06:33
 entering extended mode
  %&-line parsing enabled.
 **eccv2014submission.tex
@@ -455,7 +455,10 @@ Overfull \hbox (12.15904pt too wide) in paragraph at lines 190--191
 [7] <images/features1.png, id=40, 903.375pt x 633.36626pt>
 File: images/features1.png Graphic file (type png)
 
-<use images/features1.png> [8 <./images/features1.png>]
+<use images/features1.png>
+Underfull \vbox (badness 4096) has occurred while \output is active []
+
+ [8 <./images/features1.png>]
 Overfull \hbox (2.95386pt too wide) in paragraph at lines 269--270
  [] 
  []
@@ -474,7 +477,7 @@ File: images/how-many.png Graphic file (type png)
 File: images/svm_seldims.png Graphic file (type png)
 
 <use images/svm_seldims.png>
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1215) has occurred while \output is active []
 
  [11 <./images/how-many.png>] [12 <./images/svm_seldims.png (PNG copy)>]
 <images/l1_filters_iter5000.png, id=62, 954.56625pt x 676.5275pt>
@@ -500,32 +503,32 @@ Underfull \vbox (badness 2469) has occurred while \output is active []
  [14]
 [15] [16
 
-] (./eccv2014submission.bbl) [17
+] (./eccv2014submission.bbl [17
 
-] (./eccv2014submission.aux) ) 
+]) [18] (./eccv2014submission.aux) ) 
 Here is how much of TeX's memory you used:
- 4054 strings out of 495061
- 56628 string characters out of 1182620
- 137128 words of memory out of 3000000
- 7165 multiletter control sequences out of 15000+50000
+ 4056 strings out of 495061
+ 56642 string characters out of 1182620
+ 137136 words of memory out of 3000000
+ 7167 multiletter control sequences out of 15000+50000
  12222 words of font info for 46 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,10n,42p,986b,366s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fo
-nts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmti10.pfb>
-Output written on eccv2014submission.pdf (17 pages, 494004 bytes).
+ 44i,10n,42p,986b,370s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pf
+b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/shar
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
+fonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss
+10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on eccv2014submission.pdf (18 pages, 495797 bytes).
 PDF statistics:
- 123 PDF objects out of 1000 (max. 8388607)
+ 126 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

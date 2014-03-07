@@ -69,6 +69,17 @@ Xiao, J., Hays, J., Ehinger, K.A., Oliva, A., Torralba, A.:
 \newblock Sun database: Large-scale scene recognition from abbey to zoo.
 \newblock In: CVPR, IEEE (2010)  3485--3492
 
+\bibitem{Blocks}
+Juneja, M., Vedaldi, A., Jawahar, C.V., Zisserman, A.:
+\newblock Blocks that shout: Distinctive parts for scene classification.
+\newblock In: Proceedings of the {IEEE} Conf. on Computer Vision and Pattern
+  Recognition ({CVPR}). (2013)
+
+\bibitem{Mid1}
+Singh, S., Gupta, A., Efros, A.A.:
+\newblock Unsupervised discovery of mid-level discriminative patches.
+\newblock In: European Conference on Computer Vision. (2012)
+
 \bibitem{overfeat}
 Sermanet, P., Eigen, D., Zhang, X., Mathieu, M., Fergus, R., LeCun, Y.:
 \newblock Overfeat: Integrated recognition, localization and detection using

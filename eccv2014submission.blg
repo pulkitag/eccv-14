@@ -18,45 +18,45 @@ Warning--I didn't find a database entry for "regionlets"
 Warning--I didn't find a database entry for "conf/cvpr/2010"
 Warning--empty title in Grandmother
 Warning--empty journal in Grandmother
-You've used 19 entries,
+You've used 21 entries,
             2087 wiz_defined-function locations,
-            611 strings with 7116 characters,
-and the built_in function-call counts, 5048 in all, are:
-= -- 449
-> -- 270
+            621 strings with 7486 characters,
+and the built_in function-call counts, 5503 in all, are:
+= -- 487
+> -- 295
 < -- 6
-+ -- 97
-- -- 78
-* -- 369
-:= -- 734
-add.period$ -- 23
-call.type$ -- 19
-change.case$ -- 18
++ -- 106
+- -- 85
+* -- 395
+:= -- 797
+add.period$ -- 27
+call.type$ -- 21
+change.case$ -- 20
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 262
-empty$ -- 480
-format.name$ -- 78
-if$ -- 1187
+cite$ -- 23
+duplicate$ -- 288
+empty$ -- 538
+format.name$ -- 85
+if$ -- 1301
 int.to.chr$ -- 0
-int.to.str$ -- 19
-missing$ -- 18
-newline$ -- 96
-num.names$ -- 19
-pop$ -- 74
+int.to.str$ -- 21
+missing$ -- 20
+newline$ -- 106
+num.names$ -- 21
+pop$ -- 88
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 143
+skip$ -- 155
 stack$ -- 0
 substring$ -- 207
-swap$ -- 110
+swap$ -- 116
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 36
-width$ -- 21
-write$ -- 205
+while$ -- 38
+width$ -- 23
+write$ -- 225
 (There were 3 error messages)
