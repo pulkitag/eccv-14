@@ -20,6 +20,8 @@
 \citation{Kriz}
 \citation{caffe}
 \citation{Pascal}
+\citation{Pascal}
+\citation{Rcnn}
 \citation{sun}
 \citation{sun}
 \citation{Rcnn}
@@ -32,6 +34,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Network-Architecture and Nomenclature}{3}}
 \newlabel{sub:net-arch}{{2.1}{3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Training Setup}{3}}
+\newlabel{sub:train-setup}{{2.2}{3}}
 \newlabel{sub:fine-train}{{2.2}{3}}
 \@writefile{toc}{\contentsline {subsubsection}{Fine-Tuning}{3}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}What happens when a discriminatively pretrained network is finetuned?}{4}}
@@ -41,18 +44,17 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Illustration of the procedure for computing filter entropy.\relax }}{4}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:vectorize}{{1}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The first plot shows the distribution of AuE for different layers in Alex-Net and a network fine-tuned on PASCAL. X-axis is the entropy and the Y-axis is the number of filters.\relax }}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Distribution of AuE for different layers in Alex-Net and FT-Net. X-axis is the entropy and the Y-axis is the number of filters. Notice that the left tail for relu 6 and 7 becomes heavier after finetuning.\relax }}{5}}
 \newlabel{fig:fine-hist}{{2}{5}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Mean Cumulative AuE plotted as fraction of filters (see sec 3.1\hbox {}). (Dash-Dot Line :Alex-Net, Solid Line: Fine-Tuned Network).\relax }}{5}}
 \newlabel{fig:fine-entropy}{{3}{5}}
-\citation{rcnn}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Layerwise effect of fine-tuning, GT-bbox classification, FT: Fine-Tuned, A-Net: Alex-Net\relax }}{6}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces mAP for gt-bbox classification(FT: Fine-Tuned,A-Net: Alex-Net).\relax }}{6}}
 \newlabel{table:gt-bbox-fine}{{1}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Is Fine-Tuning only the fully-connected layers sufficient ?}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Is finetuning only the fully-connected layers sufficient?}{6}}
 \newlabel{sub:fine-fc-only}{{3.2}{6}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Effect of fine-tuning a network for 3 different tasks derived from the PASCAL VOC-2007 challenge. all-tune is finetuning all layers whereas as fc-tune is fine-tuning with layer 1-5 fixed.\relax }}{6}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Comparison in performance on 4 tasks for 3 network models. (ft-net: finetuned, fc-ft: finetuning fc layers only). For PASCAL tasks we report the mAP and classification accuracy for SUN.\relax }}{6}}
 \newlabel{table:fine-effect}{{2}{6}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Detection: Fine-Tuning Effects.\relax }}{7}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Evaluation of effect finetuning towards the task of object detection. (l5, l6, l7: layers 5, 6 and 7 of Alex Net)\relax }}{7}}
 \newlabel{table:det-fine}{{3}{7}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Discussion}{7}}
 \newlabel{sub:fine-discussion}{{3.3}{7}}

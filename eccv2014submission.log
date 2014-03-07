@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  6 MAR 2014 23:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  7 MAR 2014 01:11
 entering extended mode
  %&-line parsing enabled.
 **eccv2014submission.tex
@@ -339,18 +339,18 @@ Package ifvtex Info: VTeX not detected.
 (./eccv2014submission.aux)
 \openout1 = `eccv2014submission.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
+LaTeX Font Info:    ... okay on input line 16.
 
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -367,7 +367,7 @@ LaTeX Font Info:    ... okay on input line 15.
 ) ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption3 Info: subfig package 1.2 or 1.3 is loaded.
-LaTeX Info: Redefining \subref on input line 15.
+LaTeX Info: Redefining \subref on input line 16.
 Package caption Info: End \AtBeginDocument code.
 
 *geometry auto-detecting driver*
@@ -411,31 +411,31 @@ driver: pdftex
 \@twosidetrue \@mparswitchtrue 
 (1in=72.27pt, 1cm=28.45pt)
 -----------------------
-LaTeX Font Info:    Try loading font information for U+msa on input line 33.
+LaTeX Font Info:    Try loading font information for U+msa on input line 34.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 33.
+LaTeX Font Info:    Try loading font information for U+msb on input line 34.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
 
-LaTeX Warning: Citation `regionlets' on page 1 undefined on input line 43.
+LaTeX Warning: Citation `regionlets' on page 1 undefined on input line 44.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ] [2] [3]
-<images/vectorize.png, id=21, 886.31125pt x 519.9425pt>
+<images/vectorize.png, id=22, 886.31125pt x 519.9425pt>
 File: images/vectorize.png Graphic file (type png)
 
 <use images/vectorize.png> [4 <./images/vectorize.png>]
-<images/ent_hist.png, id=27, 1629.08624pt x 1016.79875pt>
+<images/ent_hist.png, id=28, 1629.08624pt x 1016.79875pt>
 File: images/ent_hist.png Graphic file (type png)
 
 <use images/ent_hist.png>
-<images/entropy_variation.png, id=28, 1596.96625pt x 888.31876pt>
+<images/entropy_variation.png, id=29, 1596.96625pt x 888.31876pt>
 File: images/entropy_variation.png Graphic file (type png)
 
 <use images/entropy_variation.png>
@@ -443,15 +443,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5 <./images/ent_hist.png (PNG copy)> <./images/entropy_variation.png (PNG cop
 y)>]
-Overfull \hbox (11.18141pt too wide) in paragraph at lines 125--135
+Overfull \hbox (11.18141pt too wide) in paragraph at lines 127--137
  [] 
  []
 
-
-LaTeX Warning: Citation `rcnn' on page 6 undefined on input line 166.
-
 [6]
-Overfull \hbox (20.12952pt too wide) in paragraph at lines 176--193
+Overfull \hbox (12.15904pt too wide) in paragraph at lines 190--191
  [] 
  []
 
@@ -459,18 +456,18 @@ Overfull \hbox (20.12952pt too wide) in paragraph at lines 176--193
 File: images/features.png Graphic file (type png)
  <use images/features.png>
 [8 <./images/features.png>]
-Overfull \hbox (23.16434pt too wide) in paragraph at lines 264--277
+Overfull \hbox (23.16434pt too wide) in paragraph at lines 260--273
  [] 
  []
 
 
-LaTeX Warning: Citation `zeiler' on page 9 undefined on input line 291.
+LaTeX Warning: Citation `zeiler' on page 9 undefined on input line 287.
 
 
-LaTeX Warning: Citation `simoyan' on page 9 undefined on input line 291.
+LaTeX Warning: Citation `simoyan' on page 9 undefined on input line 287.
 
 
-LaTeX Warning: Citation `google' on page 9 undefined on input line 291.
+LaTeX Warning: Citation `google' on page 9 undefined on input line 287.
 
 [9] [10] <images/how-many.png, id=54, 963.6pt x 257.96375pt>
 File: images/how-many.png Graphic file (type png)
@@ -484,7 +481,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12 <./images/how-many.png>]
 
-LaTeX Warning: Citation `rcnn' on page 13 undefined on input line 367.
+LaTeX Warning: Citation `rcnn' on page 13 undefined on input line 363.
 
 <images/l1_filters_iter5000.png, id=63, 954.56625pt x 676.5275pt>
 File: images/l1_filters_iter5000.png Graphic file (type png)
@@ -502,7 +499,7 @@ File: images/l1_filters_iter225000.png Graphic file (type png)
 File: images/training_loss.png Graphic file (type png)
 
 <use images/training_loss.png> [13 <./images/svm_seldims.png (PNG copy)>]
-Overfull \hbox (24.44907pt too wide) in paragraph at lines 421--433
+Overfull \hbox (24.44907pt too wide) in paragraph at lines 417--429
  [] 
  []
 
@@ -515,13 +512,13 @@ ining_loss.png (PNG copy)>] [15] [16
 ]
 (./eccv2014submission.aux) ) 
 Here is how much of TeX's memory you used:
- 4048 strings out of 495061
- 56543 string characters out of 1182620
- 138092 words of memory out of 3000000
- 7160 multiletter control sequences out of 15000+50000
+ 4049 strings out of 495061
+ 56560 string characters out of 1182620
+ 138104 words of memory out of 3000000
+ 7161 multiletter control sequences out of 15000+50000
  11524 words of font info for 44 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,9n,42p,1029b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,10n,42p,1029b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx1
 2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/
@@ -535,7 +532,7 @@ texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texliv
 e/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/cm/cmti10.pfb>
-Output written on eccv2014submission.pdf (17 pages, 498261 bytes).
+Output written on eccv2014submission.pdf (17 pages, 504273 bytes).
 PDF statistics:
  127 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
