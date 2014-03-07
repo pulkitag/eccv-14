@@ -66,15 +66,12 @@
 \newlabel{sub:fine-discussion}{{3.3}{7}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Is the information in the location or in the magnitude of filter activation?}{7}}
 \newlabel{sec-where-info}{{4}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Description of feature ablations: For the purpose of illustration, consider each 3*3 block in (a) as the spatial activation of individual filters. Each block in (a) is a seperate filter from the same layer. Ablation 1: \textit  {spatial-shuffle-(b)} (sp-shuffle), involves applying an independent spatial random permutation to each feature map (different images see different permuations). Ablation 2: \textit  {spatial max}-(c) (sp-max), select the max activation value in each featue map. Ablation 3: \textit  {binarization}-(d) (bin). Ablation 4: \textit  {max-loc-bin}-(e) Find the location with the maximum value in each feature map and binarize it. Ablation 5: \textit  {max-loc} similar to ablation 4, but retain the maximum value instead of binarizing.\relax }}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Description of feature ablations: For the purpose of illustration, consider each 3*3 block in (a) as the spatial activation of individual filters. Each block in (a) is a seperate filter from the same layer. Ablation 1: \textit  {spatial-shuffle-(b)} (sp-shuffle), involves applying an independent spatial random permutation to each feature map (different images see different permuations). Ablation 2: \textit  {spatial max}-(c) (sp-max), select the max activation value in each featue map. Ablation 3: \textit  {binarization}-(d) (bin). Ablation 4: \textit  {max-loc-bin}-(e) Find the location with the maximum value in each feature map and binarize it. Ablation 5: \textit  {max-loc} similar to ablation 4, but retain the maximum value instead of binarizing. Ablation 6: \textit  {sp-max-bin} - binarized sp-max.\relax }}{8}}
 \newlabel{fig:features}{{4}{8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}How important is where a filter activates?}{8}}
 \newlabel{sub:imp-loc}{{4.1}{8}}
 \citation{Rcnn}
 \citation{Rcnn}
-\citation{zeiler}
-\citation{simoyan}
-\citation{google}
 \@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Feature ablation analysis on PASCAL Image Classification (see fig 4\hbox {})\relax }}{9}}
 \newlabel{table:class-ablation}{{4}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}How important is the magnitude of activation ?}{9}}
@@ -82,27 +79,33 @@
 \@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Effect of various feature ablations on object detection using R-CNN\cite  {Rcnn}.\relax }}{9}}
 \newlabel{table:det-ablation}{{5}{9}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Discussion}{9}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}How common are Grand-Mother like Units ?}{10}}
+\citation{DeConv}
+\citation{Simonyan}
+\citation{DeConv}
+\citation{Simonyan}
+\citation{GoogleCat}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Are there Grand-Mother Cells in CNN's? How distributed is the code?}{10}}
 \newlabel{sec:grand-mother}{{5}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Finding class specific units}{11}}
-\newlabel{sub:class-specific-unit}{{5.1}{11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}How many units do we need?}{11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Are there high precision filters?}{10}}
+\newlabel{sub:class-specific-unit}{{5.1}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}How many filters are required for discrimination?}{11}}
 \newlabel{sub:how-many}{{5.2}{11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section 4.1\hbox {}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.\relax }}{12}}
-\newlabel{fig:sel-strategy}{{5}{12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section 4.1\hbox {}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.\relax }}{11}}
+\newlabel{fig:sel-strategy}{{5}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Analysis of how many filters are required to classify ground truth bounding boxes for 20 categories taken from PASCAL-2007 detection challenge. The y-axis in each of plot represents classification accuracy measured as mean-ap where as x-axis stand for the number of filters.)\relax }}{12}}
+\newlabel{fig:svm-sel-dims}{{6}{12}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Number of filters required to achieve 50\% ,90\% of the full performance for PASCAL classes using Alex-Net(AN) and the Fine-Tuned network(FT)\relax }}{12}}
+\newlabel{table:num-fil}{{6}{12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Discussion}{12}}
 \citation{Rcnn}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Analysis of how many filters are required to classify ground truth bounding boxes for 20 categories taken from PASCAL-2007 detection challenge. The y-axis in each of plot represents classification accuracy measured as mean-ap where as x-axis stand for the number of filters.)\relax }}{13}}
-\newlabel{fig:svm-sel-dims}{{6}{13}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Number of filters required to achieve 50\% ,90\% of the full performance for PASCAL classes using Alex-Net(AN) and the Fine-Tuned network(FT)\relax }}{13}}
-\newlabel{table:num-fil}{{6}{13}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}How do the different layers of a CNN train over time?}{13}}
 \newlabel{sec:speed}{{6}{13}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The first row shows conv-1 filters at 5K, 15K and 225K training iteration. The second row shows the evolution of training loss and top-1 accuracy on imagenet ilsvrc-2012 validation set as a function of number of iterations.\relax }}{14}}
-\newlabel{fig:conv1}{{7}{14}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Variation in classification accuracy (mean-AP) on PASCAL VOC 2007 challenge using features extracted from different layers of Alex-Net as a function of number of iterations.\relax }}{15}}
-\newlabel{table:det-traj-classify}{{7}{15}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Performance of 50-50 network for detection on pascal-voc-2007 challenge. (l5 is pool-5 and l7 is relu-7)\relax }}{15}}
-\newlabel{table:det-trajectory}{{8}{15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The first row shows conv-1 filters at 5K, 15K and 225K training iteration. The second row shows the evolution of training loss and top-1 accuracy on imagenet ilsvrc-2012 validation set as a function of number of iterations.\relax }}{13}}
+\newlabel{fig:conv1}{{7}{13}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Variation in classification accuracy (mean-AP) on PASCAL VOC 2007 challenge using features extracted from different layers of Alex-Net as a function of number of iterations.\relax }}{14}}
+\newlabel{table:det-traj-classify}{{7}{14}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Performance of 50-50 network for detection on pascal-voc-2007 challenge. (l5 is pool-5 and l7 is relu-7)\relax }}{14}}
+\newlabel{table:det-trajectory}{{8}{14}}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{15}}
 \newlabel{sec:concl}{{7}{15}}
 \bibstyle{splncs}
@@ -124,3 +127,5 @@
 \bibcite{DPM}{15}
 \bibcite{YangRamanan}{16}
 \bibcite{Poselets}{17}
+\bibcite{DeConv}{18}
+\bibcite{Simonyan}{19}

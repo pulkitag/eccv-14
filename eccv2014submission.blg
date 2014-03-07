@@ -15,51 +15,48 @@ I'm skipping whatever remains of this entry
 A bad cross reference---entry "sun"
 refers to entry "conf/cvpr/2010", which doesn't exist
 Warning--I didn't find a database entry for "regionlets"
-Warning--I didn't find a database entry for "zeiler"
-Warning--I didn't find a database entry for "simoyan"
-Warning--I didn't find a database entry for "google"
 Warning--I didn't find a database entry for "conf/cvpr/2010"
 Warning--empty title in Grandmother
 Warning--empty journal in Grandmother
-You've used 17 entries,
+You've used 19 entries,
             2087 wiz_defined-function locations,
-            603 strings with 6838 characters,
-and the built_in function-call counts, 4715 in all, are:
-= -- 422
-> -- 251
+            611 strings with 7116 characters,
+and the built_in function-call counts, 5048 in all, are:
+= -- 449
+> -- 270
 < -- 6
-+ -- 90
-- -- 73
-* -- 346
-:= -- 680
-add.period$ -- 21
-call.type$ -- 17
-change.case$ -- 16
++ -- 97
+- -- 78
+* -- 369
+:= -- 734
+add.period$ -- 23
+call.type$ -- 19
+change.case$ -- 18
 chr.to.int$ -- 0
-cite$ -- 19
-duplicate$ -- 242
-empty$ -- 446
-format.name$ -- 73
-if$ -- 1112
+cite$ -- 21
+duplicate$ -- 262
+empty$ -- 480
+format.name$ -- 78
+if$ -- 1187
 int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 16
-newline$ -- 86
-num.names$ -- 17
-pop$ -- 68
+int.to.str$ -- 19
+missing$ -- 18
+newline$ -- 96
+num.names$ -- 19
+pop$ -- 74
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 139
+skip$ -- 143
 stack$ -- 0
 substring$ -- 207
-swap$ -- 105
+swap$ -- 110
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 34
-width$ -- 19
-write$ -- 184
+while$ -- 36
+width$ -- 21
+write$ -- 205
 (There were 3 error messages)

@@ -92,4 +92,14 @@ Bourdev, L., Maji, S., Brox, T., Malik, J.:
 \newblock Detecting people using mutually consistent poselet activations.
 \newblock In: European Conference on Computer Vision (ECCV). (2010)
 
+\bibitem{DeConv}
+Zeiler, M.D., Fergus, R.:
+\newblock Visualizing and understanding convolutional networks.
+\newblock CoRR \textbf{abs/1311.2901} (2013)
+
+\bibitem{Simonyan}
+Simonyan, K., Vedaldi, A., Zisserman, A.:
+\newblock Learning local feature descriptors using convex optimisation.
+\newblock IEEE Transactions on Pattern Analysis and Machine Intelligence (2014)
+
 \end{thebibliography}

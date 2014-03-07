@@ -67,7 +67,7 @@ The last and the final question we address is,
 \textit{``How does the training of CNN progress over time? Do we really need 7 days?"}
 \end{center}
 
-The rest of the paper describes the answer to these four questions and is organized as following: section \ref{sec:train} details the procedure used to train conv-nets.  Sections \ref{sec:fine} \ref{sec-where-info} \ref{sec:grand-mother}\ref{sec:speed} are devoted to the four questions and our analysis is concluded in \ref{sec:concl}.
+The rest of the paper describes the answer to these four questions and is organized as following: section \ref{sec:train} details the procedure used to train conv-nets.  Sections \ref{sec:fine}, \ref{sec-where-info}, \ref{sec:grand-mother} and \ref{sec:speed} are devoted to the four questions and our analysis is concluded in section \ref{sec:concl}.
 \section{Training Procedure}
 \label{sec:train}
 \subsection{Network-Architecture and Nomenclature}
@@ -192,12 +192,11 @@ l7-fc-ft & 62.9 & 65.2 & 47.5 & 39.0 & 30.3 & 63.1 & 68.4 & 59.7 & 34.2 & 58.5 &
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-Detection performance obtained after using features from layers 5,6,7 for all pascal categories and the 3 network configurations is presented in table \ref{table:det-fine}. Notice that for both the finetuned networks there is big jump in the performance while going from layer 5 to 6 and a rather small jump from layer 6 to 7. For Alex-Net, the performance is virtually the same for layers 5 and 7. It is also notable, that although the performance for FT-net is better by 2.6 points at layer 5 - the performance is virtually the same at layer 7. (This indicates generic nature of pool-5 ? - **To-Do**)
-
+Detection performance obtained after using features from layers 5,6,7 for all pascal categories and the 3 network configurations is presented in table \ref{table:det-fine}. Notice that for both the finetuned networks there is big jump in the performance while going from layer 5 to 6 and a rather small jump from layer 6 to 7. For Alex-Net, the performance is virtually the same for layers 5 and 7. It is also notable, that although the performance for FT-net is better by 2.6 points at layer 5 - the performance is virtually the same at layer 7. 
 \subsection{Discussion}
 \label{sub:fine-discussion}
-**To Do: Contrast to mid-level patches idea - where greedily select filters based on entropy
-**To Do: Talk about Features being generic in layers 1-4 somewhat in 5 and that tuning of fc layers is most critical **
+Since layers 1-5 change a little over the course finetuning, this suggests that these are generic features. Although, one could always improve performance by a few points by finetuning the full network - for a lot of applications this may not be practical. 
+It is also notable to point out that the more or less generic representations learnt in layer 4 and 5 are in contrast with some of the mid-level feature learning work such as wherein the problem of finding good mid-level parts is often posed as a greedy search for high recall discriminative templates.
 
 
 \section{Is the information in the location or in the magnitude of filter activation?}
@@ -210,36 +209,36 @@ In this work we focus on 2 particular questions:
 \item How much information is contained in the magnitude of filter activations?
 \end{itemize}
 
-In order to answer these questions we constructed a series of ablation experiments (see fig \ref{fig:features}) and we use the difference in performance from the un-ablated feature representation (vectorized layer features) as a measure of how important each of these aspects is. We study these questions under the  settings of image classification (see table \ref{table:class-ablation}) and object detection using pool-5 features (see table\ref{table:det-ablation}).
+In order to answer these questions we constructed a series of ablation experiments (see fig \ref{fig:features}) and we use the difference in performance from the un-ablated feature representation (vectorized layer features) as a measure of how important each of these aspects is. We study these questions under the  settings of image classification (see table \ref{table:class-ablation}) and object detection using pool-5 features (see table\ref{table:det-ablation}). 
 
 \begin{figure}[H]
 \centering
 \includegraphics[height=6.5cm]{images/features1.png}
-\caption{Description of feature ablations: For the purpose of illustration, consider each 3*3 block in (a) as the spatial activation of individual filters. Each block in (a) is a seperate filter from the same layer. Ablation 1: \textit{spatial-shuffle-(b)} (sp-shuffle), involves applying an independent spatial random permutation to each feature map (different images see different permuations). Ablation 2: \textit{spatial max}-(c) (sp-max), select the max activation value in each featue map. Ablation 3: \textit{binarization}-(d) (bin). Ablation 4: \textit{max-loc-bin}-(e) Find the location with the maximum value in each feature map and binarize it. Ablation 5: \textit{max-loc} similar to ablation 4, but retain the maximum value instead of binarizing.}
+\caption{Description of feature ablations: For the purpose of illustration, consider each 3*3 block in (a) as the spatial activation of individual filters. Each block in (a) is a seperate filter from the same layer. Ablation 1: \textit{spatial-shuffle-(b)} (sp-shuffle), involves applying an independent spatial random permutation to each feature map (different images see different permuations). Ablation 2: \textit{spatial max}-(c) (sp-max), select the max activation value in each featue map. Ablation 3: \textit{binarization}-(d) (bin). Ablation 4: \textit{max-loc-bin}-(e) Find the location with the maximum value in each feature map and binarize it. Ablation 5: \textit{max-loc} similar to ablation 4, but retain the maximum value instead of binarizing. Ablation 6: \textit{sp-max-bin} - binarized sp-max.}
 \label{fig:features}
 \end{figure}
 
 \subsection{How important is where a filter activates?}
 \label{sub:imp-loc}
-The two transformations which devoid the feature vector of any information about the location of where the filter activates (namely sp-max and sp-shuffle) seem to have a little effect on classification performance using pool-5 features. In contrast, for detection taking a spatial max (table \ref{table:det-ablation}) is disastrous and the performance drops by around 50\%.
+The two transformations which devoid the feature vector of any information about the location of where the filter activates (namely sp-max and sp-shuffle) seem to have a little effect on classification performance using pool-5 features. In contrast, for detection taking a spatial max (table \ref{table:det-ablation}) is disastrous and the performance drops by around 50\%. 
 \setlength{\tabcolsep}{4pt}
 \begin{table}
 \begin{center}
 \caption{Feature ablation analysis on PASCAL Image Classification (see fig \ref{fig:features})}
 \label{table:class-ablation}
-\begin{tabular}{lcccccc}
+\begin{tabular}{lccccccc}
 \hline\noalign{\smallskip}
-layer & unroll & sp-shuffle & sp-max & bin & max-bin-loc & max-loc\\
+layer & unroll & sp-shuffle & sp-max & sp-max-bin & bin & max-bin-loc & max-loc\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
-pool-1 & 25.1 & 15.0 & 19.5 & 25.4 & 10.0 & 9.0\\
-pool-2 & 44.9 & 33.5 & 40.2 & 43.0 & 24.2 & -\\
-conv-3 & 50.1 & 40.4 & 54.2 & 47.0 & 28.5 & -\\
-conv-4 & 54.2 & 45.3 & 57.0 & 51.3 & 33.5 & -\\
-pool-5 & 65.6 & 59.6 & 62.6 & 60.5 & 40.6 & 45.0\\
-relu-6 & 70.6 &  -   &  -   & 71.4 &  -   & - \\
-relu-7 & 73.6 &  -   &  -   & 74.1 &  -   & - \\
+pool-1 & 25.1 & 15.0 & 19.5 & 9.0 & 25.4 & 10.0 & 9.0\\
+pool-2 & 44.9 & 33.5 & 40.2 & - &43.0 & 24.2 & -\\
+conv-3 & 50.1 & 40.4 & 54.2 & - &47.0 & 28.5 & -\\
+conv-4 & 54.2 & 45.3 & 57.0 & - &51.3 & 33.5 & -\\
+pool-5 & 65.6 & 59.6 & 62.6 & 27.2 &60.5 & 40.6 & 45.0\\
+relu-6 & 70.6 &  -   &  -   & -& 71.4 &  -   & - \\
+relu-7 & 73.6 &  -   &  -   & - &74.1 &  -   & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -250,8 +249,6 @@ relu-7 & 73.6 &  -   &  -   & 74.1 &  -   & - \\
 \label{sub:imp-mag}
 Binarization is the ablation which berefts the features about the magnitude of activation. For classification, this results in a drop in performance greater than that due to sp-max. This suggests that it is more important to retain the magnitude than the location for classification. Rather, surprisingly binarization has little effect on detection performance.
 
-It is also notable that these different ablations have different effects on different layers. For example, where as spatial-max is brutal for layer-1 it doesnot really effect classification is layer 5 features are used. On the other hand while binarization has little effect on layer-1 features it results into a drop of performance for layer-5. 
- 
 \setlength{\tabcolsep}{1pt}
 \begin{table}
 \begin{center}
@@ -265,7 +262,6 @@ Feature & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & t
 \hline
 sp-max & 35.0 & 38.7 & 17.3 & 16.9 & 13.9 & 38.4 & 45.6 & 29.2 & 11.0 & 20.2 & 21.0 & 23.5 & 27.2 & 37.0 & 20.5 & 7.0 & 30.3 & 13.4 & 28.3 & 32.9 & 25.4 \\
 max-bin-loc & 49.1 & 48.0 & 19.0 & 15.2 & 12.9 & 44.7 & 57.0 & 32.8 & 11.9 & 32.5 & 19.0 & 25.0 & 37.5 & 41.6 & 34.8 & 15.6 & 34.1 & 13.0 & 35.7 & 44.9 & 31.2 \\
-crop-1 & 48.2 & 59.8 & 32.2 & 20.0 & 24.6 & 46.2 & 61.2 & 41.6 & 20.6 & 46.3 & 32.9 & 38.6 & 49.9 & 53.1 & 41.8 & 25.1 & 45.0 & 23.8 & 46.2 & 51.7 & 40.4 \\
 bin & 57.9 & 61.3 & 32.6 & 24.7 & 27.5 & 55.0 & 64.7 & 49.8 & 25.3 & 47.4 & 44.5 & 40.3 & 54.6 & 56.4 & 43.6 & 27.1 & 48.4 & 41.6 & 54.3 & 57.6 & 45.7 \\
 pool-5  & 57.8 & 63.9 & 38.8 & 28.0 & 29.0 & 54.8 & 66.9 & 51.3 & 30.5 & 52.1 & 45.2 & 43.2 & 57.3 & 58.8 & 46.0 & 27.2 & 51.2 & 39.3 & 53.3 & 56.6 & 47.6 \\
 \noalign{\smallskip}
@@ -275,47 +271,34 @@ pool-5  & 57.8 & 63.9 & 38.8 & 28.0 & 29.0 & 54.8 & 66.9 & 51.3 & 30.5 & 52.1 & 
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-**To-Do: maxLocBIn ? **
+**To-Do: maxLocBin ? - frame it properly - want to mention we tried it but training data/svm restricts our interpretations. **
 
 \subsection{Discussion}
-Our experiments indicate that if the goal is classification layer 5 features can be simply treated as bag of filters without much loss in performance. On the other hand, binarizing layer 5 features doesnot hurt detection performance. We also find that different ablations have affect different layers in different ways. This is a good thing to know when designing systems which use features from multiple layers.
+Our experiments indicate that if the goal is classification layer 5 features can be treated as bag of filters without much loss in performance. We also find that different ablations effect different layers in different ways. For example, where as spatial-max is brutal for layer-1 it doesnot really effect classification is layer 5 features are used. On the other hand while binarization has little effect on layer-1 features it results into a drop of performance for layer-5. This is a good thing to know when designing systems which use features from multiple layers.
 
-\section{How common are Grand-Mother like Units ?}
+For classification although sp-max and binarization by themselves are not detrimental - their combination (sp-max-bin) is catastrophic to performance.
+
+\section{Are there Grand-Mother Cells in CNN's? How distributed is the code?}
 \label{sec:grand-mother}
-How information is represented in deep architectures such as convolutional neural networks is an open question. We know that the first layer ends up learning gabor like edge detectors and that units in the final layers are very class specific. However, we are far from understanding the representations learned in the middle layers. Developing this understanding is crucial in order to effectively devise methods capable of fully exploiting the rich feature hierarchy provided by convolutional networks.
-Some recent work addressing this question has focussed on developing visualization techniques (zeiler, simoyan, google paper) to understand feature tuning of different filters. \cite{zeiler} presented a deconvolution strategy which effectively uses backprojection to find image regions which cause a particular filter to activate.  \cite{simoyan} on the other hand pose tuning as an optimization problem and try to estimate optimal stimuli for a given unit in the higher layers. \cite{google} train a massive non-convolutional network and show the presence of cat and people specific units learnt by their network. We feel that although visualizations are helpful they donot convey the full story. More-over they are subjective and it is unclear what conclusions one might draw. In particular, finding a few units tuned to people or cats tells us very little about what other units might be doing. To best of our knowledge there is no work which tries to objectively answer this question.
+How information is represented in deep architectures such as convolutional neural networks is an open question. We know that the first layer ends up learning gabor like edge detectors and that units in the final layers are very class specific. However, we are far from understanding the representations learned in the middle layers. Aprioiri it is unclear whether discriminative information about a certain class is encoded in distribution of a group of filter activations or whether there are specific units tuned to specific classes.
 
-Also, most of such work can be treated as different interpretations of estimating/understanding P(Activation of a single unit | Class). Although this is linked to P(Class | Activation) via Bayes theorem it is hard to emperically estimate P(Class). More often than not our goal is to use to features for task of prediction. With this motivation we believe that P(Class | Activation) is also an important metric to study. One more way of looking at these metrics is the whether we are more interested to probe invariance of a particular filter or we are interested in understanding the discriminative power which it provides. A filter can be both highly invariant and very discrminative or higly invariant and very generic.  
+Some recent work such as \cite{DeConv}, \cite{Simonyan} have addressed this question by coming up with visualization techniques to understand tuning of various units. \cite{DeConv} present a deconvolution strategy for backprojecting into the image the regions which maximally activate a certain filter.  \cite{Simonyan}, on the other hand pose tuning as an optimization problem and try to estimate optimal stimuli for a given filter. \cite{GoogleCat} train a massive non-convolutional network and argue about the presence of cat and people specific filters in their network. Although visualizations are helpful, we feel they donot convey the full story. They are subjective and it is unclear what conclusions one might draw. In particular, visualizing the tuning of a few filters tells us very little about what the other filters might be doing. To best of our knowledge there is little work which tries to find an objective answer to this question.
 
-**Information theoretic arguments ?? ** 
-
-Aprioiri it is unclear whether discriminative information about a certain class is encoded in distribution of a group of filter activations or whether there are specific units tuned to specific classes. From the principles of efficient coding (such as Hoffman encoding) - an optimal code (Redundancy vs ...)
-
-The question we pose is whether the representation learned by a deep conv-net consist of many "grand-mother cells" (specifically tuned units for various classes) or whether it is necessary to consider the distribution of activations across many filters to infer any semantics about the image. We develop two methods presented in the following subsections in an attempt to objectively answer this question.
+Most of the above mentioned work can be looked upon as estimating P(Activity of a Filter $\geq$ thresh/Class). Arguably, if one is interested in discrimination, then a more natural metric to consider is $\textit{P(Class } | \textit{Activity of filter} \geq \textit{thresh})$. This is also the definition of precision. Grandmother cells have been described as   
 
 
-A lot of recent (...) has focussed on understanding the invariance properties of each filter. In particular, in one form or the other they have focussed on estimating $P(Activation | Class)$. [simoyan and google] explicitly maximize this metric to find the optimal input for a unit. zeiler et al on the other hand start off with a specific image and use it for deconvolution. If a prioiri, we knew that information representation is not distributed and a very few neurons are necessary to represent a certain class - studying the invariance is the correct thing to do. However, if we believe that information is distributed - then we can have a group of filters wherein each filter by itself may not be tuned for a particular class but the activation of group of filters 
-
-\subsection{Finding class specific units}
+\subsection{Are there high precision filters?}
 \label{sub:class-specific-unit}
-In order to study the tuning properties of various units, for each PASCAL class we emperically estimate P(Class | Activation of unit > threshold) for all 256 filters in layer 5. For this purpose, we restrict ourselves to ground truth bounding boxes in contrast to full images as a single image may contain multiple objects and thereby confound any interpretations drawn from our analysis. 
+In order to study the tuning properties of various units, for each PASCAL class we emperically estimate $\textit{P(Class } | \textit{Activity of filter} \geq \textit{thresh})$ for all 256 filters in layer 5. For this purpose, we restrict ourselves to ground truth bounding boxes in contrast to full images as a single image may contain multiple objects and thereby confound any interpretations drawn from our analysis. 
 
 Each filter in Pool-5 layer appears as $6 \times 6$ spatial map. Thus for each ground truth bounding box we get 36 activation samples for a particular unit. Given, N boxes we end up with 36N samples for each filter. For each filter, we sort the activations values and use this to compute the probability of a unit representing a class given its value is more than some threshold. We compute this probability for 1000 thr
 
-From our analysis, we find that in order to predict the category of a given image, neither the magnitude nor the location of where filters activate is critical. On the other hand, 
 
-
-As described in section .. we compute the entropy of each filter in the fifth layer of the network. Next, we rank all the filters by their entropy. At pool-5, each image produces a $6 \times 6 \times 256 $ feature vector (256 filter maps of size $6 \times 6$). For each filter map - we select the maximum activation which results into a 256-dimensional vector. Now, we train SVM 
- 
-For tasks of image classification, bounding box classification - position doesnot really matter. 
-
-\subsection{How many units do we need?}
+\subsection{How many filters are required for discrimination?}
 \label{sub:how-many}
-The tuning analysis presented in section \ref{sub:class-specific-unit} is not sufficient by itself to answer how many units are needed in order to classify a given image. This is because, there might be important information in simultaneous firing of a group of filters which is ignored while looking only at individual filters. 
-
-Consequently, in order to answer the above posed question we train linear a svm for each class using only a subset of 256 pool-5 filters. In particular we construct subsets of size k, where k takes the values - [1,2,3,5,10,15,20,25,30,35,40,45, \newline 50,80, 100,128,256]. A subset of size k is constucted independently for each class using a greedy selection strategy described in figure \ref{fig:sel-strategy}. We use the variation in performance with the number of filters needed as a metric to evaluate how many filters are needed for each class. 
+In order to answer this question we train linear a svm for each class using only a subset of 256 pool-5 filters. In particular we construct subsets of size k, where k takes the values - [1,2,3,5,10,15,20,25,30,35,40,45, \newline 50,80, 100,128,256]. A subset of size k is constucted independently for each class using a greedy selection strategy described in figure \ref{fig:sel-strategy}. We use the variation in performance with the number of filters needed as a metric to evaluate how many filters are needed for each class. 
   
-\begin{figure}[H]
+\begin{figure}
 \centering
 \includegraphics[scale=0.30]{images/how-many.png}
 \caption{Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section \ref{sub:imp-loc}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.}
@@ -356,6 +339,9 @@ FT & 90 & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 30 & 40 & 
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
+
+\subsection{Discussion}
+Although in our analysis we find that for discriminating some classes only a few units suffice whereas for others quite a lot of them are required. The ''extent" to which the code is distributed is likely to be a function of number of filters. If there are a few filters we will expect the code to be more distributed whereas if there are a large number of filters we expect to find more Grandmother kind of cells. The other important tradeoffs to consider are accuracy and training time as a function of number of filters in each layer. We as a community have only had a chance to experiment with a few network architectures out of the exponentially large number of possibilities. Although, it is beyond the scope of the current work determining the optimal number of filters in each layer is an open important question which needs to be addressed! 
 
 \section{How do the different layers of a CNN train over time?}
 \label{sec:speed}
