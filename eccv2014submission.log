@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  6 MAR 2014 05:18
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  6 MAR 2014 18:26
 entering extended mode
  %&-line parsing enabled.
 **eccv2014submission.tex
@@ -338,12 +338,6 @@ Package ifvtex Info: VTeX not detected.
 )
 (./eccv2014submission.aux
 
-LaTeX Warning: Label `fig:example' multiply defined.
-
-
-LaTeX Warning: Label `table:headings' multiply defined.
-
-
 LaTeX Warning: Label `table:headings' multiply defined.
 
 )
@@ -430,137 +424,116 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 33.
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
 
-LaTeX Warning: Citation `R' on page 1 undefined on input line 41.
+LaTeX Warning: Citation `regionlets' on page 1 undefined on input line 43.
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-
-LaTeX Warning: Citation `alex' on page 2 undefined on input line 60.
-
-
-LaTeX Warning: Citation `caffe' on page 2 undefined on input line 64.
-
-
-LaTeX Warning: Citation `rcnn' on page 2 undefined on input line 70.
-
-[2] <images/pool1_th100_plot.jpg, id=18, 1204.5pt x 903.375pt>
-File: images/pool1_th100_plot.jpg Graphic file (type jpg)
-
-<use images/pool1_th100_plot.jpg>
-<images/pool5_th100_plot.jpg, id=19, 1204.5pt x 903.375pt>
-File: images/pool5_th100_plot.jpg Graphic file (type jpg)
-
-<use images/pool5_th100_plot.jpg>
-Overfull \hbox (14.2108pt too wide) in paragraph at lines 93--94
- [][][] 
- []
-
-<images/relu6_th100_plot.jpg, id=20, 1204.5pt x 903.375pt>
-File: images/relu6_th100_plot.jpg Graphic file (type jpg)
-
-<use images/relu6_th100_plot.jpg>
-<images/relu7_th100_plot.jpg, id=21, 1204.5pt x 903.375pt>
-File: images/relu7_th100_plot.jpg Graphic file (type jpg)
-
-<use images/relu7_th100_plot.jpg>
-Overfull \hbox (14.2108pt too wide) in paragraph at lines 95--97
- [][][] 
- []
-
-<images/entropy_layers.jpg, id=22, 1927.2pt x 1004.75375pt>
-File: images/entropy_layers.jpg Graphic file (type jpg)
-
-<use images/entropy_layers.jpg>
-Overfull \hbox (7.60901pt too wide) in paragraph at lines 104--105
- [][] 
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [3]
-[4 <./images/pool1_th100_plot.jpg> <./images/pool5_th100_plot.jpg> <./images/re
-lu6_th100_plot.jpg> <./images/relu7_th100_plot.jpg>]
-Overfull \hbox (8.50203pt too wide) in paragraph at lines 139--149
+ [2]
+
+LaTeX Warning: Citation `alex' on page 3 undefined on input line 68.
+
+
+LaTeX Warning: Citation `rcnn' on page 3 undefined on input line 78.
+
+[3]
+Overfull \hbox (11.18141pt too wide) in paragraph at lines 110--120
  [] 
  []
 
-[5 <./images/entropy_layers.jpg>]
+<images/ent_hist.png, id=22, 1629.08624pt x 1016.79875pt>
+File: images/ent_hist.png Graphic file (type png)
 
-LaTeX Warning: Citation `rcnn' on page 6 undefined on input line 160.
+<use images/ent_hist.png>
+<images/entropy_variation.png, id=23, 1601.985pt x 1008.76875pt>
+File: images/entropy_variation.png Graphic file (type png)
+
+<use images/entropy_variation.png>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
+[5 <./images/ent_hist.png (PNG copy)> <./images/entropy_variation.png (PNG copy
+)>]
+
+LaTeX Warning: Citation `rcnn' on page 6 undefined on input line 165.
 
 
-Overfull \hbox (20.12952pt too wide) in paragraph at lines 170--187
+Overfull \hbox (20.12952pt too wide) in paragraph at lines 175--192
  [] 
  []
 
-[6] <images/features.png, id=37, 963.6pt x 722.7pt>
+[6] <images/features.png, id=34, 963.6pt x 722.7pt>
 File: images/features.png Graphic file (type png)
  <use images/features.png>
-Overfull \hbox (23.16434pt too wide) in paragraph at lines 229--242
+[7 <./images/features.png>]
+Overfull \hbox (23.16434pt too wide) in paragraph at lines 257--270
  [] 
  []
 
-[7 <./images/features.png>]
+[8]
 
-LaTeX Warning: Citation `zeiler' on page 8 undefined on input line 284.
-
-
-LaTeX Warning: Citation `simoyan' on page 8 undefined on input line 284.
+LaTeX Warning: Citation `zeiler' on page 9 undefined on input line 283.
 
 
-LaTeX Warning: Citation `google' on page 8 undefined on input line 284.
+LaTeX Warning: Citation `simoyan' on page 9 undefined on input line 283.
 
-[8] [9] <images/how-many.png, id=52, 963.6pt x 257.96375pt>
+
+LaTeX Warning: Citation `google' on page 9 undefined on input line 283.
+
+[9] [10] <images/how-many.png, id=52, 963.6pt x 257.96375pt>
 File: images/how-many.png Graphic file (type png)
 
-<use images/how-many.png> [10 <./images/how-many.png>]
-<images/svm_seldims.png, id=57, 1328.965pt x 761.84625pt>
+<use images/how-many.png>
+<images/svm_seldims.png, id=53, 1328.965pt x 761.84625pt>
 File: images/svm_seldims.png Graphic file (type png)
 
 <use images/svm_seldims.png>
+Underfull \vbox (badness 3872) has occurred while \output is active []
 
-LaTeX Warning: Citation `rcnn' on page 11 undefined on input line 359.
+ [11 <./images/how-many.png>]
 
-[11 <./images/svm_seldims.png (PNG copy)>]
-<images/l1_filters_iter5000.png, id=61, 954.56625pt x 676.5275pt>
+LaTeX Warning: Citation `rcnn' on page 12 undefined on input line 358.
+
+<images/l1_filters_iter5000.png, id=58, 954.56625pt x 676.5275pt>
 File: images/l1_filters_iter5000.png Graphic file (type png)
 
 <use images/l1_filters_iter5000.png>
-<images/l1_filters_iter15000.png, id=62, 954.56625pt x 675.52374pt>
+<images/l1_filters_iter15000.png, id=59, 954.56625pt x 675.52374pt>
 File: images/l1_filters_iter15000.png Graphic file (type png)
 
 <use images/l1_filters_iter15000.png>
-<images/l1_filters_iter225000.png, id=63, 953.5625pt x 674.52pt>
+<images/l1_filters_iter225000.png, id=60, 953.5625pt x 674.52pt>
 File: images/l1_filters_iter225000.png Graphic file (type png)
 
 <use images/l1_filters_iter225000.png>
-<images/training_loss.png, id=64, 1601.985pt x 599.23875pt>
+<images/training_loss.png, id=61, 1601.985pt x 599.23875pt>
 File: images/training_loss.png Graphic file (type png)
 
-<use images/training_loss.png> [12 <./images/l1_filters_iter5000.png (PNG copy)
-> <./images/l1_filters_iter15000.png (PNG copy)> <./images/l1_filters_iter22500
-0.png (PNG copy)> <./images/training_loss.png (PNG copy)>]
-Overfull \hbox (24.44907pt too wide) in paragraph at lines 413--425
+<use images/training_loss.png> [12 <./images/svm_seldims.png (PNG copy)>]
+Overfull \hbox (24.44907pt too wide) in paragraph at lines 412--424
  [] 
  []
 
-[13] [14] [15
+[13 <./images/l1_filters_iter5000.png (PNG copy)> <./images/l1_filters_iter1500
+0.png (PNG copy)> <./images/l1_filters_iter225000.png (PNG copy)> <./images/tra
+ining_loss.png (PNG copy)>] [14] [15
+
+] (./eccv2014submission.bbl) [16
 
 ]
-No file eccv2014submission.bbl.
 (./eccv2014submission.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4033 strings out of 495061
- 56543 string characters out of 1182620
- 138080 words of memory out of 3000000
- 7144 multiletter control sequences out of 15000+50000
+ 4026 strings out of 495061
+ 56188 string characters out of 1182620
+ 139080 words of memory out of 3000000
+ 7139 multiletter control sequences out of 15000+50000
  11524 words of font info for 44 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  44i,10n,42p,1283b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -576,9 +549,9 @@ onts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/fonts/type1/
 public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
 nts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on eccv2014submission.pdf (15 pages, 1046034 bytes).
+Output written on eccv2014submission.pdf (16 pages, 482145 bytes).
 PDF statistics:
  122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

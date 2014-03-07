@@ -1,0 +1,43 @@
+\begin{thebibliography}{1}
+
+\bibitem{Kriz}
+Krizhevsky, A., Sutskever, I., Hinton, G.E.:
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In: NIPS. (2012)
+
+\bibitem{Decaf}
+Donahue, J., Jia, Y., Vinyals, O., Hoffman, J., Zhang, N., Tzeng, E., Darrell,
+  T.:
+\newblock Decaf: A deep convolutional activation feature for generic visual
+  recognition.
+\newblock arXiv preprint arXiv:1310.1531 (2013)
+
+\bibitem{Rcnn}
+Girshick, R., Donahue, J., Darrell, T., Malik, J.:
+\newblock Rich feature hierarchies for accurate object detection and semantic
+  segmentation.
+\newblock arXiv preprint arXiv:1311.2524 (2013)
+
+\bibitem{Hog}
+Dalal, N., Triggs, B.:
+\newblock Histograms of oriented gradients for human detection.
+\newblock In: In CVPR. (2005)  886--893
+
+\bibitem{Sift}
+Lowe, D.G.:
+\newblock Distinctive image features from scale-invariant keypoints.
+\newblock International Journal of Computer Vision \textbf{60} (2004)  91--110
+
+\bibitem{Lecun89}
+LeCun, Y., Boser, B., Denker, J.S., Henderson, D., Howard, R.E., Hubbard, W.,
+  Jackel, L.D.:
+\newblock Backpropagation applied to handwritten zip code recognition.
+\newblock Neural computation \textbf{1}(4) (1989)
+
+\bibitem{caffe}
+Jia, Y.:
+\newblock {Caffe}: An open source convolutional architecture for fast feature
+  embedding.
+\newblock \url{http://caffe.berkeleyvision.org/} (2013)
+
+\end{thebibliography}
