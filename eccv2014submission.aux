@@ -82,12 +82,12 @@
 \newlabel{sub:how-many}{{5.2}{11}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section 4.1\hbox {}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.\relax }}{12}}
 \newlabel{fig:sel-strategy}{{5}{12}}
-\citation{rcnn}
+\citation{Rcnn}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Analysis of how many filters are required to classify ground truth bounding boxes for 20 categories taken from PASCAL-2007 detection challenge. The y-axis in each of plot represents classification accuracy measured as mean-ap where as x-axis stand for the number of filters.)\relax }}{13}}
 \newlabel{fig:svm-sel-dims}{{6}{13}}
 \@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Number of filters required to achieve 50\% ,90\% of the full performance for PASCAL classes using Alex-Net(AN) and the Fine-Tuned network(FT)\relax }}{13}}
 \newlabel{table:num-fil}{{6}{13}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Can we speed things up?}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}How do the different layers of a CNN train over time?}{13}}
 \newlabel{sec:speed}{{6}{13}}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The first row shows conv-1 filters at 5K, 15K and 225K training iteration. The second row shows the evolution of training loss and top-1 accuracy on imagenet ilsvrc-2012 validation set as a function of number of iterations.\relax }}{14}}
 \newlabel{fig:conv1}{{7}{14}}

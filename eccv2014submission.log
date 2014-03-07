@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  7 MAR 2014 01:11
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.12.30)  7 MAR 2014 01:20
 entering extended mode
  %&-line parsing enabled.
 **eccv2014submission.tex
@@ -480,9 +480,6 @@ File: images/svm_seldims.png Graphic file (type png)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12 <./images/how-many.png>]
-
-LaTeX Warning: Citation `rcnn' on page 13 undefined on input line 363.
-
 <images/l1_filters_iter5000.png, id=63, 954.56625pt x 676.5275pt>
 File: images/l1_filters_iter5000.png Graphic file (type png)
 
@@ -499,10 +496,6 @@ File: images/l1_filters_iter225000.png Graphic file (type png)
 File: images/training_loss.png Graphic file (type png)
 
 <use images/training_loss.png> [13 <./images/svm_seldims.png (PNG copy)>]
-Overfull \hbox (24.44907pt too wide) in paragraph at lines 417--429
- [] 
- []
-
 [14 <./images/l1_filters_iter5000.png (PNG copy)> <./images/l1_filters_iter1500
 0.png (PNG copy)> <./images/l1_filters_iter225000.png (PNG copy)> <./images/tra
 ining_loss.png (PNG copy)>] [15] [16
@@ -512,10 +505,10 @@ ining_loss.png (PNG copy)>] [15] [16
 ]
 (./eccv2014submission.aux) ) 
 Here is how much of TeX's memory you used:
- 4049 strings out of 495061
- 56560 string characters out of 1182620
- 138104 words of memory out of 3000000
- 7161 multiletter control sequences out of 15000+50000
+ 4048 strings out of 495061
+ 56554 string characters out of 1182620
+ 139104 words of memory out of 3000000
+ 7160 multiletter control sequences out of 15000+50000
  11524 words of font info for 44 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  44i,10n,42p,1029b,350s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -532,7 +525,7 @@ texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texliv
 e/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/cm/cmti10.pfb>
-Output written on eccv2014submission.pdf (17 pages, 504273 bytes).
+Output written on eccv2014submission.pdf (17 pages, 504308 bytes).
 PDF statistics:
  127 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
