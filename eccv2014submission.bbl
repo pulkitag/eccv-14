@@ -69,4 +69,27 @@ Xiao, J., Hays, J., Ehinger, K.A., Oliva, A., Torralba, A.:
 \newblock Sun database: Large-scale scene recognition from abbey to zoo.
 \newblock In: CVPR, IEEE (2010)  3485--3492
 
+\bibitem{overfeat}
+Sermanet, P., Eigen, D., Zhang, X., Mathieu, M., Fergus, R., LeCun, Y.:
+\newblock Overfeat: Integrated recognition, localization and detection using
+  convolutional networks.
+\newblock CoRR \textbf{abs/1312.6229} (2013)
+
+\bibitem{DPM}
+Felzenszwalb, P.F., Girshick, R.B., McAllester, D., Ramanan, D.:
+\newblock Object detection with discriminatively trained part-based models.
+\newblock TPAMI \textbf{32}(9) (2010)
+
+\bibitem{YangRamanan}
+Yang, Y., Ramanan, D.:
+\newblock Articulated pose estimation with flexible mixtures-of-parts.
+\newblock In: Proceedings of the 2011 IEEE Conference on Computer Vision and
+  Pattern Recognition. CVPR '11, Washington, DC, USA, IEEE Computer Society
+  (2011)  1385--1392
+
+\bibitem{Poselets}
+Bourdev, L., Maji, S., Brox, T., Malik, J.:
+\newblock Detecting people using mutually consistent poselet activations.
+\newblock In: European Conference on Computer Vision (ECCV). (2010)
+
 \end{thebibliography}

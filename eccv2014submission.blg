@@ -1,15 +1,5 @@
 This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: eccv2014submission.aux
-Case mismatch error between cite keys rcnn and Rcnn
----line 46 of file eccv2014submission.aux
- : \citation{rcnn
- :               }
-I'm skipping whatever remains of this command
-Case mismatch error between cite keys rcnn and Rcnn
----line 75 of file eccv2014submission.aux
- : \citation{rcnn
- :               }
-I'm skipping whatever remains of this command
 The style file: splncs.bst
 Database file #1: egbib.bib
 I was expecting a `,' or a `}'---line 65 of file egbib.bib
@@ -31,45 +21,45 @@ Warning--I didn't find a database entry for "google"
 Warning--I didn't find a database entry for "conf/cvpr/2010"
 Warning--empty title in Grandmother
 Warning--empty journal in Grandmother
-You've used 13 entries,
+You've used 17 entries,
             2087 wiz_defined-function locations,
-            576 strings with 6023 characters,
-and the built_in function-call counts, 3623 in all, are:
-= -- 316
-> -- 195
-< -- 5
-+ -- 70
-- -- 57
-* -- 267
-:= -- 524
-add.period$ -- 15
-call.type$ -- 13
-change.case$ -- 12
+            603 strings with 6838 characters,
+and the built_in function-call counts, 4715 in all, are:
+= -- 422
+> -- 251
+< -- 6
++ -- 90
+- -- 73
+* -- 346
+:= -- 680
+add.period$ -- 21
+call.type$ -- 17
+change.case$ -- 16
 chr.to.int$ -- 0
-cite$ -- 15
-duplicate$ -- 185
-empty$ -- 340
-format.name$ -- 57
-if$ -- 848
+cite$ -- 19
+duplicate$ -- 242
+empty$ -- 446
+format.name$ -- 73
+if$ -- 1112
 int.to.chr$ -- 0
-int.to.str$ -- 13
-missing$ -- 12
-newline$ -- 66
-num.names$ -- 13
-pop$ -- 54
+int.to.str$ -- 17
+missing$ -- 16
+newline$ -- 86
+num.names$ -- 17
+pop$ -- 68
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 109
+skip$ -- 139
 stack$ -- 0
-substring$ -- 167
-swap$ -- 82
-text.length$ -- 5
+substring$ -- 207
+swap$ -- 105
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 27
-width$ -- 15
-write$ -- 138
-(There were 5 error messages)
+while$ -- 34
+width$ -- 19
+write$ -- 184
+(There were 3 error messages)

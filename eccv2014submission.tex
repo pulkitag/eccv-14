@@ -55,7 +55,7 @@ For a long time proponets of multilayer networks have argued that unsupervised p
 \end{center}
 Most of the popular computer vision models can be categorized either as a Bag of Words model or as a template based model. We would like to understand if the features from the conv-net could be interpreted in any of these ways. More concretely we wish to understand, 
 \begin{center}
-\textit{``Is there information in the location of where filter activate or is it the magnitude of their activation?"}
+\textit{``How much information is in the location and how much of it is in the magnitude of filter activation?"}
 \end{center}
 
 Existence of Grand-Mother cells (units tuned to a very specific visual entity)  has been a hotly debated topic in neuroscience \cite{Grandmother} and has been fairly discussed in papers such as \cite{GoogleCat} proposing multilayer architectures for object recognition. We explore this question in the form of: 
@@ -200,74 +200,46 @@ Detection performance obtained after using features from layers 5,6,7 for all pa
 **To Do: Talk about Features being generic in layers 1-4 somewhat in 5 and that tuning of fc layers is most critical **
 
 
-\section{Where is the information - location or magnitude?}
+\section{Is the information in the location or in the magnitude of filter activation?}
 \label{sec-where-info}
-The success of convolutional networks on a variety of vision tasks indicate that they are here to stay. In the computer vision literature the dominant models can be broadly grouped into 2 classes - namely BOW style approaches or template based scanning window search. Currently, it is unclear if we could use conv-nets features as building blocks for such systems or if completeley new ways of thinking about them is necessary. 
-Instead of trying to provide a pre-mature answer to this question, we analyse how information is encoded across different layers of such  networks. We hope this analysis will serve as a starting point
+Recent CNN based solutions for  classification, detection and localization ( \cite{overfeat}, \cite{Decaf},\cite{Rcnn}) have more or less treated CNN's as a black-box feature extractor. Such work has been limited to using either linear svm's, regression or a soft-max on top of vectorzed layer features in contrast to the rich history of using structured multiscale models in computer vision (\cite{DPM}, \cite{YangRamanan},\cite{Poselets}). In order to move away from black-box style of using CNN's and fully exploiting the potential which this feature hierarchy provides us with - it is instructive to tease apart what aspects of filter activation are important and what aspects can be ignored. 
 
-. In this section we focus on answering the following two questions:
+In this work we focus on 2 particular questions:
 \begin{itemize}
 \item How important is the location where a filter fires?
 \item How much information is contained in the magnitude of filter activations?
 \end{itemize}
 
-We answer these questions using a set of carefully designed ablation studies. The difference between the baseline performance obtained by using vectorized  layer (i.e. i.e. "unrolling" a 3-dimensional layer of size $sz \times sz \times nf$ into a 1 dimensional vector) and an ablated feature vector is used as a measure of importance for factors under study. In all our experiments in this section, we train linear svms for evaluation.
+In order to answer these questions we constructed a series of ablation experiments (see fig \ref{fig:features}) and we use the difference in performance from the un-ablated feature representation (vectorized layer features) as a measure of how important each of these aspects is. We study these questions under the  settings of image classification (see table \ref{table:class-ablation}) and object detection using pool-5 features (see table\ref{table:det-ablation}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[height=6.5cm]{images/features.png}
-\caption{Different feature ablations used in analysis described in sec. \ref{sub:imp-loc}, \ref{sub:imp-mag}. For the purpose of illustration, consider each 3*3 block in first column as a feature map. The second column shows \textit{spatial-shuffle}, i.e. the  result of applying an independent spatial random permutation to each feature map. Third column depicts \textit{spatial max}, i.e. selecting the max activation in each featue map. Fourth column illustrates \textit{binarization} whereas the last column selects the maximum value in each feature map, binarizes it but also retains the location where the filter fired.}
+\includegraphics[height=6.5cm]{images/features1.png}
+\caption{Description of feature ablations: For the purpose of illustration, consider each 3*3 block in (a) as the spatial activation of individual filters. Each block in (a) is a seperate filter from the same layer. Ablation 1: \textit{spatial-shuffle-(b)} (sp-shuffle), involves applying an independent spatial random permutation to each feature map (different images see different permuations). Ablation 2: \textit{spatial max}-(c) (sp-max), select the max activation value in each featue map. Ablation 3: \textit{binarization}-(d) (bin). Ablation 4: \textit{max-loc-bin}-(e) Find the location with the maximum value in each feature map and binarize it. Ablation 5: \textit{max-loc} similar to ablation 4, but retain the maximum value instead of binarizing.}
 \label{fig:features}
 \end{figure}
 
 \subsection{How important is where a filter activates?}
 \label{sub:imp-loc}
-In order to understand the importance of location of firing of filter, we first use the spatial-shuffle feature transformation (see \ref{fig:features}) in which for each image and each feature map we use an independent random permutation to swap spatial locations. Note, we donot permute the filter activations across different filters - but for each filter we independently permute the spatial location. Such a feature transformation makes it almost impossible to learn anything about the spatial pattern of filter activations. Surprisingly, the performance only drops to 59.6 \% from 65.6 \% for Pool-5 on the task of image classification (see \ref{table:class-loc-mag}). 
-
+The two transformations which devoid the feature vector of any information about the location of where the filter activates (namely sp-max and sp-shuffle) seem to have a little effect on classification performance using pool-5 features. In contrast, for detection taking a spatial max (table \ref{table:det-ablation}) is disastrous and the performance drops by around 50\%.
 \setlength{\tabcolsep}{4pt}
 \begin{table}
 \begin{center}
-\caption{Mean AP on PASCAL-VOC 2007 Classification using various ablations as described in \ref{sub:imp-loc} -\ref{sub:imp-mag}.}
-\label{table:class-loc-mag}
-\begin{tabular}{lccccc}
+\caption{Feature ablation analysis on PASCAL Image Classification (see fig \ref{fig:features})}
+\label{table:class-ablation}
+\begin{tabular}{lcccccc}
 \hline\noalign{\smallskip}
-Layer Name & Unroll & Spatial-Shuffle & Spatial-Max & Binarize & Binarize+Loc\\
+layer & unroll & sp-shuffle & sp-max & bin & max-bin-loc & max-loc\\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
-pool-1 & 25.1 & 15.0 & 19.5 & 25.4 \\
-pool-2 & 44.9 & 33.5 & 40.2 & 43.0\\
-conv-3 & 50.1 & 40.4 & 54.2 & 47.0\\
-conv-4 & 54.2 & 45.3 & 57.0 & 51.3\\
-pool-5 & 65.6 & 59.6 & 62.6 & 60.5\\
-relu-6 & 70.6 &  -   &  -   & 71.4 \\
-relu-7 & 73.6 &  -   &  -   & 74.1 \\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-\setlength{\tabcolsep}{1.4pt}
-
-
-To further probe this in our next experiment, we collapse the features of each layer by preserving only the maximum value for each filter. On classification this transformation does almost as good as the unrolled feature vector. But, for the task of detection this is brutal and the performance drops to 25.4 \% from 47.5 \% at the pool-5 level. Aprioiri this indicates it is important to consider where the filter fires for localization but for classification this is doesnot seems to be important. 
-
-\setlength{\tabcolsep}{1pt}
-\begin{table}
-\begin{center}
-\caption{Detection: Effect of various feature ablations using the R-CNN setup as described in ...}
-\label{table:headings}
-\tiny
-\begin{tabular}{l|cccccccccccccccccccc||c}
-\hline\noalign{\smallskip}
-Feature & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & table & dog & horse & mbike & person & plant & sheep & sofa & train & tv & mAP \\
-\noalign{\smallskip}
-\hline
-spMax & 35.0 & 38.7 & 17.3 & 16.9 & 13.9 & 38.4 & 45.6 & 29.2 & 11.0 & 20.2 & 21.0 & 23.5 & 27.2 & 37.0 & 20.5 & 7.0 & 30.3 & 13.4 & 28.3 & 32.9 & 25.4 \\
-sm-bn-lc & 49.1 & 48.0 & 19.0 & 15.2 & 12.9 & 44.7 & 57.0 & 32.8 & 11.9 & 32.5 & 19.0 & 25.0 & 37.5 & 41.6 & 34.8 & 15.6 & 34.1 & 13.0 & 35.7 & 44.9 & 31.2 \\
-crop-1 & 48.2 & 59.8 & 32.2 & 20.0 & 24.6 & 46.2 & 61.2 & 41.6 & 20.6 & 46.3 & 32.9 & 38.6 & 49.9 & 53.1 & 41.8 & 25.1 & 45.0 & 23.8 & 46.2 & 51.7 & 40.4 \\
-binary & 57.9 & 61.3 & 32.6 & 24.7 & 27.5 & 55.0 & 64.7 & 49.8 & 25.3 & 47.4 & 44.5 & 40.3 & 54.6 & 56.4 & 43.6 & 27.1 & 48.4 & 41.6 & 54.3 & 57.6 & 45.7 \\
-pool-5  & 57.8 & 63.9 & 38.8 & 28.0 & 29.0 & 54.8 & 66.9 & 51.3 & 30.5 & 52.1 & 45.2 & 43.2 & 57.3 & 58.8 & 46.0 & 27.2 & 51.2 & 39.3 & 53.3 & 56.6 & 47.6 \\
-\noalign{\smallskip}
+pool-1 & 25.1 & 15.0 & 19.5 & 25.4 & 10.0 & 9.0\\
+pool-2 & 44.9 & 33.5 & 40.2 & 43.0 & 24.2 & -\\
+conv-3 & 50.1 & 40.4 & 54.2 & 47.0 & 28.5 & -\\
+conv-4 & 54.2 & 45.3 & 57.0 & 51.3 & 33.5 & -\\
+pool-5 & 65.6 & 59.6 & 62.6 & 60.5 & 40.6 & 45.0\\
+relu-6 & 70.6 &  -   &  -   & 71.4 &  -   & - \\
+relu-7 & 73.6 &  -   &  -   & 74.1 &  -   & - \\
 \hline
 \end{tabular}
 \end{center}
@@ -276,10 +248,37 @@ pool-5  & 57.8 & 63.9 & 38.8 & 28.0 & 29.0 & 54.8 & 66.9 & 51.3 & 30.5 & 52.1 & 
 
 \subsection{How important is the magnitude of activation ?}
 \label{sub:imp-mag}
-For answering this question, we binarize the feature vectors. Surprisingly this has little effect on detection. Also, the performance of fully-connected layers on the task of image classification is virtually un-affected. For other layers, the drop in performance is slightly larger as compared to taking the \textit{spatial max}. It is interesting to note that magnitude of the activations are more important for classification than for detection while the reverse seems to be true for detection. 
+Binarization is the ablation which berefts the features about the magnitude of activation. For classification, this results in a drop in performance greater than that due to sp-max. This suggests that it is more important to retain the magnitude than the location for classification. Rather, surprisingly binarization has little effect on detection performance.
+
+It is also notable that these different ablations have different effects on different layers. For example, where as spatial-max is brutal for layer-1 it doesnot really effect classification is layer 5 features are used. On the other hand while binarization has little effect on layer-1 features it results into a drop of performance for layer-5. 
+ 
+\setlength{\tabcolsep}{1pt}
+\begin{table}
+\begin{center}
+\caption{Effect of various feature ablations on object detection using R-CNN\cite{Rcnn}.}
+\label{table:det-ablation}
+\scalebox{0.70}{
+\begin{tabular}{l|cccccccccccccccccccc||c}
+\hline\noalign{\smallskip}
+Feature & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & table & dog & horse & mbike & person & plant & sheep & sofa & train & tv & mAP \\
+\noalign{\smallskip}
+\hline
+sp-max & 35.0 & 38.7 & 17.3 & 16.9 & 13.9 & 38.4 & 45.6 & 29.2 & 11.0 & 20.2 & 21.0 & 23.5 & 27.2 & 37.0 & 20.5 & 7.0 & 30.3 & 13.4 & 28.3 & 32.9 & 25.4 \\
+max-bin-loc & 49.1 & 48.0 & 19.0 & 15.2 & 12.9 & 44.7 & 57.0 & 32.8 & 11.9 & 32.5 & 19.0 & 25.0 & 37.5 & 41.6 & 34.8 & 15.6 & 34.1 & 13.0 & 35.7 & 44.9 & 31.2 \\
+crop-1 & 48.2 & 59.8 & 32.2 & 20.0 & 24.6 & 46.2 & 61.2 & 41.6 & 20.6 & 46.3 & 32.9 & 38.6 & 49.9 & 53.1 & 41.8 & 25.1 & 45.0 & 23.8 & 46.2 & 51.7 & 40.4 \\
+bin & 57.9 & 61.3 & 32.6 & 24.7 & 27.5 & 55.0 & 64.7 & 49.8 & 25.3 & 47.4 & 44.5 & 40.3 & 54.6 & 56.4 & 43.6 & 27.1 & 48.4 & 41.6 & 54.3 & 57.6 & 45.7 \\
+pool-5  & 57.8 & 63.9 & 38.8 & 28.0 & 29.0 & 54.8 & 66.9 & 51.3 & 30.5 & 52.1 & 45.2 & 43.2 & 57.3 & 58.8 & 46.0 & 27.2 & 51.2 & 39.3 & 53.3 & 56.6 & 47.6 \\
+\noalign{\smallskip}
+\hline
+\end{tabular}}
+\end{center}
+\end{table}
+\setlength{\tabcolsep}{1.4pt}
+
+**To-Do: maxLocBIn ? **
 
 \subsection{Discussion}
-** To Come ** 
+Our experiments indicate that if the goal is classification layer 5 features can be simply treated as bag of filters without much loss in performance. On the other hand, binarizing layer 5 features doesnot hurt detection performance. We also find that different ablations have affect different layers in different ways. This is a good thing to know when designing systems which use features from multiple layers.
 
 \section{How common are Grand-Mother like Units ?}
 \label{sec:grand-mother}
