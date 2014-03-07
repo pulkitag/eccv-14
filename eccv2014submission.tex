@@ -38,30 +38,36 @@
 
 
 \section{Introduction}
-The break-through work of \cite{Kriz} created a big splash in the computer vision community by presenting a convolutional neural network model which easily surpassed all existing methods on the Imagenet ILSVRC-2012 challenge.  The top-5 error rates dropped by an exceptional amount to 16.4\% from  26.2 \% achieved by the second best alternative. At that time, it was unclear if these networks would be useful for other computer vision tasks. The recent work of \cite{Decaf} demonstrated that features learnt by such massive networks generalize and achieve state of the art results on classification datasets such as SUN-397, Caltech-UCSD Birds and Caltech-101 among others. 
+The break-through work of \cite{Kriz} created a big splash in the computer vision community by presenting a convolutional neural network model which easily surpassed all existing methods on the Imagenet ILSVRC-2012 challenge.  The top-5 error rates dropped by an exceptional amount to 16.4\% from  26.2 \% (achieved by the second best alternative.) At that time, it was unclear if these networks would be useful for other computer vision tasks. The recent work of \cite{Decaf} demonstrated that features learnt by such massive networks generalize and achieve state of the art results on classification datasets such as SUN-397, Caltech-UCSD Birds and Caltech-101 among others. 
 
 In a more recent big development (R-CNN)\cite{Rcnn}, features extracted using convolutional networks were succesfully used to achieve results on object detection which dwarf the existing state of art by a big margin. They achieved a mAP of 54.1 (as compared to 41.7 in  \cite{regionlets}) on PASCAL VOC 2007 detection challenge and showed impressive results on the task of semantic segmentation. The significance of these results can be well appreciated in light of the fact that negligible progress was made over the last few iterations of the PASCAL-VOC challenge. These observations strongly suggest that we might be on the brink of a feature revolution akin to the one ushered by introduction of HOG \cite{Hog} and SIFT \cite{Sift} in the mid 2000's.  
 
 It is not the first time that convolutional neural networks have generated a great interest in the computer vision community. In late 80s and early nineties Le-nets \cite{Lecun89} achieved state of art performance on the task of MNIST digit classification. By the end of nineties and throughout the last decade interest in neural networks waned and they were attributed as dark art. One of the main reasons behind this was the fact that a large number of parameters such as the number of layers, number of units in each layer, the learning rate needed to be manually set in order to succesfully train these networks. Support Vector machines on the other hand provided an easy alternative for achieving the same performance levels with only one parameter (C) to tune. However, given impressive performance of conv-nets - they are now a force to be reckoned with! 
 
-In this work we take the view that rich feature heirarchies provided by convolutional nets are an interesting object which are very likely to emerge as the prominent feature extractor for computer vision models over the next few years. Feature extractors such as SIFT and HOG afford an intuitive interpretation of templates composed of oriented edge filters. However, currently we have little understanding of what different layers of a deep convolutional network encode and what is the most efficient way of using this information. We believe that developing such an understanding is not only an interesting scientific pursuit but is also the stepping stone towards designing methods which can optimally use these features.  
+In this work we take the view that rich feature heirarchies provided by convolutional nets are an interesting object which are very likely to emerge as the prominent feature extractor for computer vision models over the next few years. Feature extractors such as SIFT and HOG afford an intuitive interpretation of templates composed of oriented edge filters. However, currently we have little understanding of what different layers of a deep convolutional network encode and what is the most efficient way of using this information. We believe that developing such an understanding is not only an interesting scientific pursuit but is also the stepping stone towards designing methods which can optimally use these features.  In this work we try to develop such insights by asking 4 specific questions described below.
 
-We are not the first to ask this question. (Talk about Zeiler, Simoyan)
+For a long time proponets of multilayer networks have argued that unsupervised pre-training followed by fine-tuning is helpful for improving performance on discriminative tasks such as image classification \cite{GoogleCat} \cite{DeepPre} \cite{HintonPre}. However recent work of \cite{Decaf} and \cite{Rcnn} have made a strong case for the utility of learning features using discriminative pretraining and finetuning them for a specific task at hand. This leads us to our first question,
+\begin{center}
+``What happens during finetuning of a discriminatively pretrained network ?"
+\end{center}
+Most of the popular computer vision models can be categorized either as a Bag of Words model or as a template based model. We would like to understand if the features from the conv-net could be interpreted in any of these ways. More concretely we wish to understand, 
+\begin{center}
+``Is there information in the location of where filter activate or is it the magnitude of their activation?" 
+\end{center}
+
+Existence of grandmother cells (units tuned to a very specific visual entity)  has been a hotly debated topic in neuroscience \cite{Grandmother} and has been fairly discussed in papers such as \cite{GoogleCat} proposing multilayer architectures for object recognition. We explore this question in the form of: 
+\begin{center}
+``Does a multilayer conv-net learn Grand-Mother Cells ? Or in other words, how distributed is the representation ?" 
+\end{center}
+The last and the final question we address is,
+\begin{center}
+``How do different layers train in a conv-net? Do we really need 7 days for training ? "
+\end{center}
+
+  
+We are not the first to ask this question. \cite{Deconv} \cite{Simonyan} (Talk about Zeiler, Simoyan)
 
 Fine-tuning a network essentially involves starting from a set of pre-learned parameters and slowly updating them to minimize a target loss function. Till date, there has been little work looking at the effect of fine-tuning on various layers of a discriminatively trained convolutional neural network. In this work, we address this question. Our findings indicate that during finetuning most of the learning takes place in the top 2 fully connected layers whereas the convolutional layers are largely un-changed. We quantify this claim by first comparing entropy of filters before and after fine-tuning. Secondly, we demonstrate that keeping layers 1-5 fixed while fine-tuning leads to negligible decrease in performance. Next, we show pool-5 features can be treated as generic feature extractor on top of which non-linear classifiers can be used to achieve good results. For developing a scientific understanding of how the network trains, we analyse conv-nets trained for different number of iterations. We find that most of the learning happens quite early on and that the network naturally learns in a layer-wise fashion. Finally, we conclude by providing some insights into how important is the magnitude of feature activation, the location and so on. 
-
-This suggests, that layers 1-5 can be treated as a generic feature extraction engine which can serve as a starting point for other computer vision models. Reduce time for fine-tuning. 
-The most commonly used conv-net architecture, first proposed by Kr consists of 5 convolutional layers followed by 2 fully connected layer. 
- 
-Inspite of the impressive performance, the question of how information is represented and what various layers are encoding is unclear. 
-
-Some recent work has focussed on coming up with visualization techniques to analyze and understand the tuning properties of filters in different layers. Although, visually impressive its hard to draw meaningful conclusions about properties of filters in different layers. We start of f with a detailed analysis of how good are different layers for image classification. We provide an entropy analysis ...
-
-Next, we try to answer how much information is encoded by the activity of individual filters and how important is the spatial location of where the filters activate.      
-
-Next, we show that the network trains layer-wise and the convolutional layers are well formed quite early into the training. 
-
-Next, we argue that fine-tuning majorly effects the final two layers and that layers 1-5 can be treated as a generic feature extractor. This allows us a moderate speed-up in training time. 
 
 \section{Method}
 \subsection{Network-Architecture}

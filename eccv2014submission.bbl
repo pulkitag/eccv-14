@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Kriz}
 Krizhevsky, A., Sutskever, I., Hinton, G.E.:
@@ -33,6 +33,35 @@ LeCun, Y., Boser, B., Denker, J.S., Henderson, D., Howard, R.E., Hubbard, W.,
   Jackel, L.D.:
 \newblock Backpropagation applied to handwritten zip code recognition.
 \newblock Neural computation \textbf{1}(4) (1989)
+
+\bibitem{GoogleCat}
+Le, Q., Ranzato, M., Monga, R., Devin, M., Chen, K., Corrado, G., Dean, J., Ng,
+  A.:
+\newblock Building high-level features using large scale unsupervised learning.
+\newblock In: International Conference in Machine Learning. (2012)
+
+\bibitem{DeepPre}
+Erhan, D., Bengio, Y., Courville, A., Manzagol, P.A., Vincent, P., Bengio, S.:
+\newblock Why does unsupervised pre-training help deep learning?
+\newblock J. Mach. Learn. Res. \textbf{11} (March 2010)  625--660
+
+\bibitem{HintonPre}
+Hinton, G.E., Osindero, S., Teh, Y.W.:
+\newblock A fast learning algorithm for deep belief nets.
+\newblock Neural Comput. \textbf{18}(7) (July 2006)  1527--1554
+
+\bibitem{Grandmother}
+Quiroga, R.Q., Reddy, L., Kreiman, G., Koch, C., Fried, I.
+
+\bibitem{Deconv}
+Zeiler, M.D., Fergus, R.:
+\newblock Visualizing and understanding convolutional networks.
+\newblock CoRR \textbf{abs/1311.2901} (2013)
+
+\bibitem{Simonyan}
+Simonyan, K., Vedaldi, A., Zisserman, A.:
+\newblock Learning local feature descriptors using convex optimisation.
+\newblock IEEE Transactions on Pattern Analysis and Machine Intelligence (2014)
 
 \bibitem{caffe}
 Jia, Y.:
