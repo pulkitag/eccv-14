@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: eccv2014_sup.aux
+The style file: splncs.bst
+Database file #1: egbib.bib
+I was expecting a `,' or a `}'---line 65 of file egbib.bib
+ : 
+ : @article{Pascal,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 267 of file egbib.bib
+ : 
+ : TITLE = {Invariant visual representation by single neurons in the human brain.},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty booktitle in AmitGeman
+You've used 3 entries,
+            2087 wiz_defined-function locations,
+            511 strings with 4099 characters,
+and the built_in function-call counts, 692 in all, are:
+= -- 55
+> -- 32
+< -- 1
++ -- 12
+- -- 9
+* -- 56
+:= -- 107
+add.period$ -- 3
+call.type$ -- 3
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 37
+empty$ -- 70
+format.name$ -- 9
+if$ -- 154
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 3
+newline$ -- 18
+num.names$ -- 3
+pop$ -- 11
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 18
+stack$ -- 0
+substring$ -- 19
+swap$ -- 15
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 6
+width$ -- 4
+write$ -- 34
+(There were 2 error messages)

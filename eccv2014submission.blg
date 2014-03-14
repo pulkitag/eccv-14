@@ -14,49 +14,48 @@ I was expecting a `,' or a `}'---line 267 of file egbib.bib
 I'm skipping whatever remains of this entry
 A bad cross reference---entry "sun"
 refers to entry "conf/cvpr/2010", which doesn't exist
-Warning--I didn't find a database entry for "regionlets"
 Warning--I didn't find a database entry for "conf/cvpr/2010"
 Warning--empty title in Grandmother
 Warning--empty journal in Grandmother
-You've used 21 entries,
+You've used 24 entries,
             2087 wiz_defined-function locations,
-            621 strings with 7486 characters,
-and the built_in function-call counts, 5503 in all, are:
-= -- 487
-> -- 295
+            635 strings with 7904 characters,
+and the built_in function-call counts, 6189 in all, are:
+= -- 543
+> -- 333
 < -- 6
-+ -- 106
-- -- 85
-* -- 395
-:= -- 797
-add.period$ -- 27
-call.type$ -- 21
-change.case$ -- 20
++ -- 120
+- -- 96
+* -- 436
+:= -- 893
+add.period$ -- 33
+call.type$ -- 24
+change.case$ -- 23
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 288
-empty$ -- 538
-format.name$ -- 85
-if$ -- 1301
+cite$ -- 26
+duplicate$ -- 327
+empty$ -- 625
+format.name$ -- 96
+if$ -- 1471
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 20
-newline$ -- 106
-num.names$ -- 21
-pop$ -- 88
+int.to.str$ -- 24
+missing$ -- 23
+newline$ -- 121
+num.names$ -- 24
+pop$ -- 109
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 155
+skip$ -- 173
 stack$ -- 0
 substring$ -- 207
-swap$ -- 116
+swap$ -- 125
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 38
-width$ -- 23
-write$ -- 225
+while$ -- 41
+width$ -- 26
+write$ -- 255
 (There were 3 error messages)

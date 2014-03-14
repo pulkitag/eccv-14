@@ -9,6 +9,18 @@
 \usepackage{array}
 \usepackage{float}
 \usepackage{subfig,caption}
+\usepackage{lipsum}
+
+%\usepackage[printwatermark]{xwatermark}
+%\usepackage{xcolor}
+%\newwatermark[allpages,color=red!50,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
+
+\usepackage{draftwatermark}
+\SetWatermarkText{CONFIDENTIAL DRAFT, DO-NOT DISTRIBUTE}
+\SetWatermarkScale{1}
+
+
+
 %\usepackage{subcaption}
 \usepackage{comment}
 \renewcommand{\arraystretch}{1.1}
@@ -19,7 +31,7 @@
 % \linenumbers
 \pagestyle{headings}
 \mainmatter
-\def\ECCV14SubNumber{***}  % Insert your submission number here
+\def\ECCV14SubNumber{1355}  % Insert your submission number here
 
 \title{Analyzing The Performance of Multilayer Neural Networks for Object Recognition} % Replace with your title
 
@@ -34,26 +46,25 @@
 \maketitle
 
 \begin{abstract}
-
+In 2012 Krizhevsky et al. demonstrated that a Convolutional Neural Network (CNN) trained on large amount of data as part of the ImageNet challenge significantly outperformed traditional computer vision approaches on image classification. Subsequently, Girshick et al. (2013) exploited these features to establish the new state of the art on PASCAL object detection. This suggests that computer vision maybe in the process of a feature revolution akin to that following SIFT and HOG nearly a decade ago. It is therefore important to get more insights into features learned by these networks. Our paper provides answer to the following four questions: (a)What happens during finetuning of a discriminatively pretrained network? (b)How much information is in the location and how much of it is in the magnitude of filter activation? (c)Does a multilayer CNN contain Grand-Mother Cells? (d)How does training of CNN progress over time?
 \end{abstract}
 
 
 \section{Introduction}
-The break-through work of \cite{Kriz} created a big splash in the computer vision community by presenting a convolutional neural network model which easily surpassed all existing methods on the Imagenet ILSVRC-2012 challenge.  The top-5 error rates dropped by an exceptional amount to 16.4\% from  26.2 \% (achieved by the second best alternative.) At that time, it was unclear if these networks would be useful for other computer vision tasks. The recent work of \cite{Decaf} demonstrated that features learnt by such massive networks generalize and achieve state of the art results on classification datasets such as SUN-397, Caltech-UCSD Birds and Caltech-101 among others. 
+The breakthrough work of \cite{Kriz} created a splash in the computer vision community by presenting a convolutional neural network model which easily surpassed all existing methods on the ImageNet ILSVRC-2012 challenge \cite{imagenet}.  The top-5 error rates dropped by an exceptional amount to 16.4\% from  26.2 \% (achieved by the second best alternative.) At that time, it was unclear if these networks would be useful for other computer vision tasks. The recent work of \cite{Decaf} demonstrated that features learnt by such networks generalize and achieve state of the art results on classification datasets such as SUN-397, Caltech-UCSD Birds and Caltech-101 among others. 
 
-In a more recent big development (R-CNN)\cite{Rcnn}, features extracted using convolutional networks were succesfully used to achieve results on object detection which dwarf the existing state of art by a big margin. They achieved a mAP of 54.1 (as compared to 41.7 in  \cite{regionlets}) on PASCAL VOC 2007 detection challenge and showed impressive results on the task of semantic segmentation. The significance of these results can be well appreciated in light of the fact that negligible progress was made over the last few iterations of the PASCAL-VOC challenge. These observations strongly suggest that we might be on the brink of a feature revolution akin to the one ushered by introduction of HOG \cite{Hog} and SIFT \cite{Sift} in the mid 2000's.  
+In a more recent big development (R-CNN)\cite{Rcnn}, features extracted using convolutional networks were succesfully used to achieve results on object detection which dwarf the existing state of art by a big margin. They achieved a mAP of 54.1 (as compared to 41.7 in  \cite{regionlets}) on the PASCAL VOC 2007 detection challenge and showed impressive results on the task of semantic segmentation. The significance of these results can be well appreciated in light of the fact that negligible progress was made over the last few iterations of the PASCAL-VOC challenge. These observations strongly suggest that we might be in the middle of a feature revolution akin to the one ushered by introduction of HOG \cite{Hog} and SIFT \cite{Sift} in the mid 2000's.  
 
-It is not the first time that convolutional neural networks (CNNs) have generated a great interest in the computer vision community. In late 80s and early nineties LeNets \cite{Lecun89} achieved state of art performance on the task of MNIST digit classification. By the end of nineties and throughout the last decade interest in neural networks waned and they were attributed as dark art. One of the main reasons behind this was the fact that a large number of parameters such as the number of layers, number of units in each layer, the learning rate needed to be manually set in order to succesfully train these networks. Support Vector machines on the other hand provided an easy alternative for achieving the same performance levels with only one parameter (C) to tune. However, given the impressive performance of CNN's - the stage is all set for their second renaissance in mainstream computer vision. 
+It is not the first time that convolutional neural networks (CNNs) have generated great interest in the computer vision community. In late 80s and early nineties LeNet \cite{Lecun89} achieved state of art performance on the task of MNIST digit classification. By the end of nineties and throughout the last decade interest in neural networks waned. One of the main reasons behind this was the fact that a large number of parameters such as the number of layers, number of units in each layer, the learning rate needed to be manually set in order to succesfully train these networks. Support Vector machines on the other hand provided an easy alternative for achieving the same performance levels with only one parameter (C) to tune. However, given the impressive performance of CNN's - the stage is all set for their second renaissance in mainstream computer vision. 
 
-In this work we take the view that rich feature heirarchies provided by convolutional nets are an interesting object which are very likely to emerge as the prominent feature extractor for computer vision models over the next few years. Feature extractors such as SIFT and HOG afford an intuitive interpretation of templates composed of oriented edge filters. However, currently we have little understanding of what different layers of a deep convolutional network encode and what is the most efficient way of using this information. We believe that developing such an understanding is not only an interesting scientific pursuit but is also the stepping stone towards designing methods which can optimally use these features.  
+We take the view that rich feature heirarchies provided by convolutional nets  are very likely to emerge as the prominent feature extractor for computer vision models over the next few years. Feature extractors such as SIFT and HOG afford an intuitive interpretation of templates composed of oriented edge filters. However, currently we have little understanding of what different layers of a deep convolutional network encode and what is the most efficient way of using this information. We believe that developing such an understanding is an interesting scientific pursuit as well as  the stepping stone towards designing methods which can optimally use these features.  
+This paper is focussed on a scientific investigation of multilayer convolutional neural networks centered around answers to four questions detalied below:
 
-This paper is focussed on a scientific investigation of multilayer convolutional neural networks and presents insights which would be useful towards developing an object recognition system. We carry out this investigation by asking four questions detailed below.
-
-For a long time proponets of multilayer networks have argued that unsupervised pre-training followed by finetuning is helpful for improving performance on discriminative tasks such as image classification \cite{GoogleCat}, \cite{DeepPre}, \cite{HintonPre}. However recent work of \cite{Decaf} and \cite{Rcnn} have made a strong case for the utility of learning features using discriminative pretraining and finetuning them for a specific task at hand. This leads us to our first question,
+For a long time proponents of multilayer networks have argued that unsupervised pre-training followed by finetuning is helpful for improving performance on discriminative tasks such as image classification \cite{GoogleCat}, \cite{DeepPre}, \cite{HintonPre}. However recent work of \cite{Decaf} and \cite{Rcnn} have made a strong case for the utility of learning features using discriminative pretraining and finetuning them for a specific task at hand. This leads us to our first question,
 \begin{center}
 \textit{``What happens during finetuning of a discriminatively pretrained network?"}
 \end{center}
-Most of the popular computer vision models can be categorized either as a Bag of Words model or as a template based model. We would like to understand if the features from the conv-net could be interpreted in any of these ways. More concretely we wish to understand, 
+Most popular computer vision models can be categorized either as a Bag of Words models or template based models. We would like to understand if the features from the conv-net could be interpreted in any of these ways. More concretely we wish to understand, 
 \begin{center}
 \textit{``How much information is in the location and how much of it is in the magnitude of filter activation?"}
 \end{center}
@@ -67,7 +78,7 @@ The last and the final question we address is,
 \textit{``How does the training of CNN progress over time? Do we really need 7 days?"}
 \end{center}
 
-The rest of the paper describes the answer to these four questions and is organized as following: section \ref{sec:train} details the procedure used to train conv-nets.  Sections \ref{sec:fine}, \ref{sec-where-info}, \ref{sec:grand-mother} and \ref{sec:speed} are devoted to the four questions and our analysis is concluded in section \ref{sec:concl}.
+The rest of the paper is organized as following: section \ref{sec:train} details the procedure used to train conv-nets.  Sections \ref{sec:fine}, \ref{sec-where-info}, \ref{sec:grand-mother} and \ref{sec:speed} are devoted to the four questions and our analysis is concluded in section \ref{sec:conclusion}.
 \section{Training Procedure}
 \label{sec:train}
 \subsection{Network-Architecture and Nomenclature}
@@ -84,43 +95,47 @@ For our experiments with the SUN-397 \cite{sun} dataset we use a non-standard tr
 \label{sub:fine-train}
 For a particular task, we fine-tune conv-nets by running SGD (Stochastic Gradient) with a starting learning rate set to $\frac{1}{10}^{th}$ of the intial learning rate of the imagenet model. This choice has been made because we donot want to drastically change the parameters of the network and overfit to the training set. At every 20,000 iterations we reduce the learning rate by a factor of 10 and use a mini-batch size of 128. In order to finetune our networks for PASCAL-VOC-2007 detection setting we use region proposals for training closely following the procedure described in \cite{Rcnn}. Unless otherwise stated, the finetuned network for PASCAL experiments is finetuned for 70K iterations whereas that for SUN is finetuned for 40K iterations.
 
+\subsection{Method of Entropy Computation}
+\label{sub:def-ent}
+We define the entropy of a filter with respect to a given set of image-label paris in the following way. Each image, when passed through the convolutional neural network produces a $p \times p$ heatmap of filter responses. (eg p = 6, for a layer 5 filter). We vectorize this heatmap into a vector of scores of length $p^2$ and with each element of this vector we associate the class label of the image. Thus, for each image we have a score vector and a label vector of length $p^2$ each. Next, we concatenate score vectors and label vectors from N images into a giant score vector and a giant label vector  of size $Np^2$ each. Now for every score threshold we consider all the labels which have an associated score $\geq$ to this threshold score. The entropy of this set of labels is the entropy of the filter at this threshold. As this threshold changes, entropy traces out a curve which we call as the entropy curve.  
+
+
 \section{What happens when a discriminatively pretrained network is finetuned?}
 \label{sec:fine}
 Finetuning a network is the process of slowly updating pre-learned parameters to minimize a target loss function for a new task at hand. Since, convolutional networks have a large number of parameters they are prone to overfitting when trained on small datasets. Finetuning can be considered as a method of transfer learning and recent results from \cite{Rcnn}\cite{Decaf} present a strong case that this methodology boosts performance. Although, unsupervised pretraining has widely studied in the multilayer network literatue \cite{HintonPre}\cite{DeepPre}, till date, there has been almost no work analysing the effect of fine-tuning on different layers of a discriminatively trained multilayer convolutional networks such as the Alex-Net.
+
 
 We start our analysis by investigating how the entropy of filters across different layers changes as a result of discriminative fine-tuning (see sec \ref{sub:fine-entropy}). Since, entropy of a filter can be evaluated at different threshold level of activations we propose the metric of Area under the Entropy curve (AuE) to judge changes in filter selectivity. Our main finding is that most of the learning during finetuning happens only in the top two fully connected layers. Motivated by this observation, we finetune networks for PASCAL detection and SUN-397 scene classification task by setting non-zero learning rates only in the top 2 layers (see sec\ref{sub:fine-fc-only}). We find this results in a negligible drop in performance and allows for moderate speedups in finetuning time. Other conclusions are presented in the sec \ref{sub:fine-discussion}.
 
 \subsection{Entropy Analysis}
 \label{sub:fine-entropy}
-We compute entropy of each filter for all layers of Alex-Net and FT-Net using the ground-truth bounding boxes from the VOC-2007 test-set as input to these networks. For each filter, we collect all activations in response to ground truth bounding boxes. Next, we sort the scores in decreasing order and compute entropy of the distribution of 20 PASCAL classes at 100 equally spaced thresholds.
+We compute the entropy  curve of each filter (using the method described in \ref{sub:def-ent}) for all layers of Alex-Net and FT-Net using the ground-truth bounding boxes taken from the VOC-2007 test-set. 
 
-\begin{figure}
-\centering
-\includegraphics[scale=0.15]{images/vectorize.png}
-\caption{Illustration of the procedure for computing filter entropy.}
-\label{fig:vectorize}
-\end{figure}
+We use Area under this entropy curve (AuE) to quantify selectivity of each filter. The distribution of AuE for all filters across the seven layers of the CNN is illustrated in fig \ref{fig:fine-hist}. Next, in order to determine the overall change in a layer's tuning we use the Cumulative AuE (C-AuE) of filters sorted in decreasing order of their individual AuE's. We normalize this metric appropriately to account for different number of filters in different layers. We call this normalized C-AuE as MC-AuE. A lower value of MC-AuE means that a layer is more selective.  Fig \ref{fig:fine-entropy} plots MC-AuE as a function of fraction of filters in each layer. 
 
-We use Area under this entropy curve (AuE) to quantify selectivity of each filter. The distribution of AuE for all filters across the seven layers of the CNN is illustrated in fig \ref{fig:fine-hist}. Next, in order to determine the overall change in a layer's tuning we use the Mean Cumulative AuE (MC-AuE) of filters sorted in decreasing order of their individual AuE's. Fig \ref{fig:fine-entropy} plots MC-AuE as a function of fraction of filters in each layer. 
-
-\begin{figure}[H]
+\begin{figure}[t!]
 \centering
 \subfloat{\includegraphics[height=6.5cm]{images/ent_hist.png}}
-\caption{Distribution of AuE for different layers in Alex-Net and FT-Net. X-axis is the entropy and the Y-axis is the number of filters. Notice that the left tail for relu 6 and 7 becomes heavier after finetuning.}
+\caption{Distribution of AuE for different layers in Alex-Net and FT-Net. X-axis is the entropy and the Y-axis is the number of filters. Notice that the left tail for relu 6 and 7 becomes heavier after finetuning. This indicates that finetuning makes these filters more discriminative.}
 \label{fig:fine-hist}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t!]
 \centering
 \subfloat{\includegraphics[scale=0.15]{images/entropy_variation.png}}
 \caption{Mean Cumulative AuE plotted as fraction of filters (see sec \ref{sub:fine-entropy}). (Dash-Dot Line :Alex-Net, Solid Line: Fine-Tuned Network).}
 \label{fig:fine-entropy}
 \end{figure}
 
-From this analysis we draw 2 conclusions. The first that although the entropy of filters decreases, the change in entropy between layer 1 and layer 5 is small as compared to the change which happens while going from layer 5 to layer 6. Second, finetuning mostly reduces the entropy of filters in the fully connected layers, there are small changes in layer 5 and negligible changes in other layers. Classification accuracy (measured as mAP) for GT-BBOX is detailed in \ref{table:gt-bbox-fine} is in agreement with our conclusions.
+From figures \ref{fig:fine-hist} and \ref{fig:fine-entropy}, we draw 2 conclusions:
+\begin{enumerate}
+\item Although the entropy of filters decreases as we move to higher layers, the magnitude of change in entropy between layer 1 and layer 5 is small as compared to the change which happens when going from layer 5 to layer 6.
+\item Finetuning mostly reduces the entropy of filters in the fully connected layers, there are small changes in layer 5 and negligible changes in other layers.
+\end{enumerate} 
 
+Table \ref{table:gt-bbox-fine} summarizes the classification mean AP obtained on classifying GT-BBOX  using features from different layers of a fine-tuned and a non-finetuned network. It can be seen that is indeed the case performance advantage for the finetuned network only happens for higher layers.
 \setlength{\tabcolsep}{4pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
 \caption{mAP for gt-bbox classification(FT: Fine-Tuned,A-Net: Alex-Net).}
 \label{table:gt-bbox-fine}
@@ -143,31 +158,28 @@ pool-2  & 67.1 & 67.7 & relu-4 & 75.5 & 77.8 & relu-6 & 83.4 & 85.4 \\
 The observations made in \ref{sub:fine-entropy} indicate that finetuning the convolutional layers in the CNN may not be critical for achieving good-performance on novel datasets. We test this hypothesis on the 2 challenging tasks of object detection(PASCAL) and scene classification (SUN-397) by comparing the performance of a fully finetuned network with a network finetuned by only updating weights in the fully-connected (fc) layers. Our results are summarized in table \ref{table:fine-effect}.
 
 \setlength{\tabcolsep}{2pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
-\caption{Comparison in performance on 4 tasks for 3 network models. (ft-net: finetuned, fc-ft: finetuning fc layers only). For PASCAL tasks we report the mAP and classification accuracy for SUN.}
+\caption{Comparison in performance on of Alex-Net, Finetuned Network(ft-net) and a network with only fc layers finetuned (fc-ft).}
 \label{table:fine-effect}
-\scalebox{0.85}{
-\begin{tabular}{l|ccc|ccc|ccc|ccc}
-\hline\noalign{\smallskip}
-Layer & \multicolumn{3}{c}{img classification}  & \multicolumn{3}{c}{gt-bbox classification} & \multicolumn{3}{c}{detection} & \multicolumn{3}{c}{sun-397} \\
+\scalebox{1}{
+\begin{tabular}{|l|ccc|ccc|}
 \hline
-      & alex-net & ft-net & fc-ft & alex-net & ft-net & fc-ft & alex-net & ft-net & fc-ft  & alex-net & ft-net & fc-ft\\
+Layer & \multicolumn{3}{c}{detection(mAP)} & \multicolumn{3}{c|}{sun-397 (accuracy)} \\
 \hline
-pool-5   & 65.6 & 64.6 & - & 79.1 & 82.2 & 79.1  & 45.0 & 47.6 & 45.0 & - & - & - \\
-relu-6   & 70.6 & 71.7 & - & 83.4 & 85.4 & 82.0  &  -   & 53.1 & 51.0 & - & - & -  \\
-relu-7   & 73.6 & 73.2 & - & 84.0 & 87.1 & 83.4  & 45.5 & 54.1 & 53.3 & 53.1 & 56.1 & 55.5  \\
+      & alex-net & ft-net & fc-ft  & alex-net & ft-net & fc-ft\\
+\hline
+relu-7 & 45.5 & 54.1 & 53.3 & 53.1 & 56.1 & 55.5  \\
 \hline
 \end{tabular}}
 \end{center}
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-We find that indeed it is the case that the final performace in the detection setup only drops by 0.8 points and by 0.6 points for scene-classification. It is note-worthy that image classification accuracy on PASCAL is almost untouched by finetuning. This is suggestive of the fact finetuning is a task specific operation and finetuning for detection doesnot necessarily leads to an increase in classification performance, even though the classes and images are shared across PASCAL classification and detection challenges. 
-It is also notable that although ft-net achieve superior performance on gt-bbox classification whereas the fc-ft fails to do so. We conjecture, that this is a consequence of the fact that for good performance on detection it is more critical to discriminate against background rather than to discriminate between classes on which both the networks are already doing a pretty good job. 
+We find that indeed it is the case that the final performace in the detection setup only drops by 0.8 points and by 0.6 points for scene-classification. In our experiments we also noted accuracy of image classification on PASCAL is almost untouched by finetuning. This is suggestive of the fact finetuning is a task specific operation and finetuning for detection doesnot necessarily leads to an increase in classification performance, even though the classes and images are shared across PASCAL classification and detection challenges. 
 
 \setlength{\tabcolsep}{1pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
 \caption{Evaluation of effect finetuning towards the task of object detection. (l5, l6, l7: layers 5, 6 and 7 of Alex Net)}
 \label{table:det-fine}
@@ -192,7 +204,7 @@ l7-fc-ft & 62.9 & 65.2 & 47.5 & 39.0 & 30.3 & 63.1 & 68.4 & 59.7 & 34.2 & 58.5 &
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-Detection performance obtained after using features from layers 5,6,7 for all pascal categories and the 3 network configurations is presented in table \ref{table:det-fine}. Notice that for both the finetuned networks there is big jump in the performance while going from layer 5 to 6 and a rather small jump from layer 6 to 7. For Alex-Net, the performance is virtually the same for layers 5 and 7. It is also notable, that although the performance for FT-net is better by 2.6 points at layer 5 - the performance is virtually the same at layer 7. 
+A detailed layerwise analysis of detection performance for all PASCAL classes and the 3 network configurations is presented in table \ref{table:det-fine}. Notice that for both the finetuned networks there is big jump in the performance while going from layer 5 to 6 and a rather small jump from layer 6 to 7. For Alex-Net, the performance is virtually the same for layers 5 and 7. It is also notable, that although the performance for FT-net is better by 2.6 points at layer 5 - the performance is virtually the same at layer 7. 
 \subsection{Discussion}
 \label{sub:fine-discussion}
 Since layers 1-5 change a little over the course finetuning, this suggests that these are generic features. Although, one could always improve performance by a few points by finetuning the full network - for a lot of applications this may not be practical. 
@@ -211,10 +223,10 @@ In this work we focus on 2 particular questions:
 
 In order to answer these questions we constructed a series of ablation experiments (see fig \ref{fig:features}) and we use the difference in performance from the un-ablated feature representation (vectorized layer features) as a measure of how important each of these aspects is. We study these questions under the  settings of image classification (see table \ref{table:class-ablation}) and object detection using pool-5 features (see table\ref{table:det-ablation}). 
 
-\begin{figure}[H]
+\begin{figure}[t!]
 \centering
 \includegraphics[height=6.5cm]{images/features1.png}
-\caption{Description of feature ablations: For the purpose of illustration, consider each 3*3 block in (a) as the spatial activation of individual filters. Each block in (a) is a seperate filter from the same layer. Ablation 1: \textit{spatial-shuffle-(b)} (sp-shuffle), involves applying an independent spatial random permutation to each feature map (different images see different permuations). Ablation 2: \textit{spatial max}-(c) (sp-max), select the max activation value in each featue map. Ablation 3: \textit{binarization}-(d) (bin). Ablation 4: \textit{max-loc-bin}-(e) Find the location with the maximum value in each feature map and binarize it. Ablation 5: \textit{max-loc} similar to ablation 4, but retain the maximum value instead of binarizing. Ablation 6: \textit{sp-max-bin} - binarized sp-max.}
+\caption{Description of feature ablations: For the purpose of illustration, consider each 3*3 block in (a) as the spatial activation of individual filters. Each block in (a) is a seperate filter from the same layer. Ablation 1: \textit{spatial-shuffle-(b)} (sp-shuffle), involves applying an independent spatial random permutation to each feature map (different images see different permuations). Ablation 2: \textit{spatial max}-(c) (sp-max), select the max activation value in each featue map. Ablation 3: \textit{binarization}-(d) (bin). Ablation 4: \textit{sp-max-bin} - binarized sp-max.}
 \label{fig:features}
 \end{figure}
 
@@ -222,23 +234,23 @@ In order to answer these questions we constructed a series of ablation experimen
 \label{sub:imp-loc}
 The two transformations which devoid the feature vector of any information about the location of where the filter activates (namely sp-max and sp-shuffle) seem to have a little effect on classification performance using pool-5 features. In contrast, for detection taking a spatial max (table \ref{table:det-ablation}) is disastrous and the performance drops by around 50\%. 
 \setlength{\tabcolsep}{4pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
 \caption{Feature ablation analysis on PASCAL Image Classification (see fig \ref{fig:features})}
 \label{table:class-ablation}
-\begin{tabular}{lccccccc}
+\begin{tabular}{lccccc}
 \hline\noalign{\smallskip}
-layer & unroll & sp-shuffle & sp-max & sp-max-bin & bin & max-bin-loc & max-loc\\
+layer & unroll & sp-shuffle & sp-max & sp-max-bin & bin \\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
-pool-1 & 25.1 & 15.0 & 19.5 & 9.0 & 25.4 & 10.0 & 9.0\\
-pool-2 & 44.9 & 33.5 & 40.2 & - &43.0 & 24.2 & -\\
-conv-3 & 50.1 & 40.4 & 54.2 & - &47.0 & 28.5 & -\\
-conv-4 & 54.2 & 45.3 & 57.0 & - &51.3 & 33.5 & -\\
-pool-5 & 65.6 & 59.6 & 62.6 & 27.2 &60.5 & 40.6 & 45.0\\
-relu-6 & 70.6 &  -   &  -   & -& 71.4 &  -   & - \\
-relu-7 & 73.6 &  -   &  -   & - &74.1 &  -   & - \\
+pool-1 & 25.1 & 15.0 & 19.5 & 9.0 & 25.4  \\ 
+pool-2 & 44.9 & 33.5 & 40.2 & - &43.0 \\ 
+conv-3 & 50.1 & 40.4 & 54.2 & - &47.0 \\
+conv-4 & 54.2 & 45.3 & 57.0 & - &51.3  \\
+pool-5 & 65.6 & 59.6 & 62.6 & 27.2 &60.5 \\
+relu-6 & 70.6 &  -   &  -   & -& 71.4     \\
+relu-7 & 73.6 &  -   &  -   & - &74.1     \\
 \hline
 \end{tabular}
 \end{center}
@@ -247,10 +259,10 @@ relu-7 & 73.6 &  -   &  -   & - &74.1 &  -   & - \\
 
 \subsection{How important is the magnitude of activation ?}
 \label{sub:imp-mag}
-Binarization is the ablation which berefts the features about the magnitude of activation. For classification, this results in a drop in performance greater than that due to sp-max. This suggests that it is more important to retain the magnitude than the location for classification. Rather, surprisingly binarization has little effect on detection performance.
+Binarization is the ablation which berefts features from their magnitude of activation. For classification, this results in a drop in performance greater than that due to sp-max. This suggests that it is more important to retain the magnitude than the location for classification. Rather, surprisingly binarization has little effect on detection performance.
 
 \setlength{\tabcolsep}{1pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
 \caption{Effect of various feature ablations on object detection using R-CNN\cite{Rcnn}.}
 \label{table:det-ablation}
@@ -261,7 +273,6 @@ Feature & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & t
 \noalign{\smallskip}
 \hline
 sp-max & 35.0 & 38.7 & 17.3 & 16.9 & 13.9 & 38.4 & 45.6 & 29.2 & 11.0 & 20.2 & 21.0 & 23.5 & 27.2 & 37.0 & 20.5 & 7.0 & 30.3 & 13.4 & 28.3 & 32.9 & 25.4 \\
-max-bin-loc & 49.1 & 48.0 & 19.0 & 15.2 & 12.9 & 44.7 & 57.0 & 32.8 & 11.9 & 32.5 & 19.0 & 25.0 & 37.5 & 41.6 & 34.8 & 15.6 & 34.1 & 13.0 & 35.7 & 44.9 & 31.2 \\
 bin & 57.9 & 61.3 & 32.6 & 24.7 & 27.5 & 55.0 & 64.7 & 49.8 & 25.3 & 47.4 & 44.5 & 40.3 & 54.6 & 56.4 & 43.6 & 27.1 & 48.4 & 41.6 & 54.3 & 57.6 & 45.7 \\
 pool-5  & 57.8 & 63.9 & 38.8 & 28.0 & 29.0 & 54.8 & 66.9 & 51.3 & 30.5 & 52.1 & 45.2 & 43.2 & 57.3 & 58.8 & 46.0 & 27.2 & 51.2 & 39.3 & 53.3 & 56.6 & 47.6 \\
 \noalign{\smallskip}
@@ -271,7 +282,7 @@ pool-5  & 57.8 & 63.9 & 38.8 & 28.0 & 29.0 & 54.8 & 66.9 & 51.3 & 30.5 & 52.1 & 
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-**To-Do: maxLocBin ? - frame it properly - want to mention we tried it but training data/svm restricts our interpretations. **
+
 
 \subsection{Discussion}
 Our experiments indicate that if the goal is classification layer 5 features can be treated as bag of filters without much loss in performance. We also find that different ablations effect different layers in different ways. For example, where as spatial-max is brutal for layer-1 it doesnot really effect classification is layer 5 features are used. On the other hand while binarization has little effect on layer-1 features it results into a drop of performance for layer-5. This is a good thing to know when designing systems which use features from multiple layers.
@@ -284,21 +295,27 @@ How information is represented in deep architectures such as convolutional neura
 
 Some recent work such as \cite{DeConv}, \cite{Simonyan} have addressed this question by coming up with visualization techniques to understand tuning of various units. \cite{DeConv} present a deconvolution strategy for backprojecting into the image the regions which maximally activate a certain filter.  \cite{Simonyan}, on the other hand pose tuning as an optimization problem and try to estimate optimal stimuli for a given filter. \cite{GoogleCat} train a massive non-convolutional network and argue about the presence of cat and people specific filters in their network. Although visualizations are helpful, we feel they donot convey the full story. They are subjective and it is unclear what conclusions one might draw. In particular, visualizing the tuning of a few filters tells us very little about what the other filters might be doing. To best of our knowledge there is little work which tries to find an objective answer to this question.
 
-Most of the above mentioned work can be looked upon as estimating P(Activity of a Filter $\geq$ thresh/Class). Arguably, if one is interested in discrimination, then a more natural metric to consider is $\textit{P(Class } | \textit{Activity of filter} \geq \textit{thresh})$. This is also the definition of precision. Grandmother cells have been described as   
+Most of the above mentioned work can be mathematically treated either as estimating Prob(Filter Activity$\geq$ thresh $|$ Class) or finding the optimal stimulus for a specific unit. We argue that this by itself is an incomplete metric for interpreting how selective a certain filter is. (A hypothetical filter which has the same activation for all classes will score high on this measure.)  The right metric to evaluate if a certain filter is very selective (aka Grand-Mother Cell \cite{Barlow}) is precision defined as Prob(Class $|$Filter Activity $\geq$thresh)
 
+We divide our analysis into two parts. In sec \ref{sub:class-specific-unit} we try to address if there exist filters with very high precision (aka Grand-Mother cells) and in sec \ref{sub:how-many} we answer how many filters are required to discriminate a class. 
 
-\subsection{Are there high precision filters?}
+\subsection{Are there high precision filters in layer 5?}
 \label{sub:class-specific-unit}
-In order to study the tuning properties of various units, for each PASCAL class we emperically estimate $\textit{P(Class } | \textit{Activity of filter} \geq \textit{thresh})$ for all 256 filters in layer 5. For this purpose, we restrict ourselves to ground truth bounding boxes in contrast to full images as a single image may contain multiple objects and thereby confound any interpretations drawn from our analysis. 
+Precision for each filter from layer 5 is computed in a way analogous to entropy computation described in \ref{sub:def-ent}. In the final step instead of computing the entropy, we compute Prob(Class $|$ Filter Activity $\geq$ threshold). We define the selectivity of a filter as the area under the precision curve. For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
+From figure \ref{fig:prob-sel} it is clear that for some classes such persons and bicycles there are indeed some very high precision filters, but for a lot of classes like sofa and horses no such filters exist. 
 
-Each filter in Pool-5 layer appears as $6 \times 6$ spatial map. Thus for each ground truth bounding box we get 36 activation samples for a particular unit. Given, N boxes we end up with 36N samples for each filter. For each filter, we sort the activations values and use this to compute the probability of a unit representing a class given its value is more than some threshold. We compute this probability for 1000 thr
-
+\begin{figure}[t!]
+\centering
+\includegraphics[scale=0.20]{images/prob_sel_dims_top5.png}
+\caption{This plot shows the precision curve for the top 5 most selective filters taken from Alex-Net (Blue) and FT-Net(Red) for all PASCAL classes. Y-axis is the precision and X-axis is number of examples.}
+\label{fig:prob-sel}
+\end{figure}
 
 \subsection{How many filters are required for discrimination?}
 \label{sub:how-many}
 In order to answer this question we train linear a svm for each class using only a subset of 256 pool-5 filters. In particular we construct subsets of size k, where k takes the values - [1,2,3,5,10,15,20,25,30,35,40,45, \newline 50,80, 100,128,256]. A subset of size k is constucted independently for each class using a greedy selection strategy described in figure \ref{fig:sel-strategy}. We use the variation in performance with the number of filters needed as a metric to evaluate how many filters are needed for each class. 
   
-\begin{figure}
+\begin{figure}[t!]
 \centering
 \includegraphics[scale=0.30]{images/how-many.png}
 \caption{Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section \ref{sub:imp-loc}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.}
@@ -307,7 +324,7 @@ In order to answer this question we train linear a svm for each class using only
 
 The results of our analysis are summarized in fig \ref{fig:svm-sel-dims} and table \ref{table:num-fil}. For classes such as persons, cars, cats we require a relatively few number of filters, but for most of the classes we need to look at around 30-40 filters to achieve atleast 90\% of the full performance. This also indicates, that for a few classes yes, there are grand-mother kind of neurons but for a lot of classes the representation is distributed. Also, as expected the fine-tuned network requires activations of a fewer numbers of filters to achieve the same performance but this reduction in number of filters is not large. 
 
-\begin{figure}[H]
+\begin{figure}[t!]
 \centering
 \includegraphics[height=6.5cm]{images/svm_seldims.png}
 \caption{Analysis of how many filters are required to classify ground truth bounding boxes for 20 categories taken from PASCAL-2007 detection challenge. The y-axis in each of plot represents classification accuracy measured as mean-ap where as x-axis stand for the number of filters.)}
@@ -317,7 +334,7 @@ The results of our analysis are summarized in fig \ref{fig:svm-sel-dims} and tab
 
 
 \setlength{\tabcolsep}{1pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
 \caption{Number of filters required to achieve 50\% ,90\% of the full performance for PASCAL classes using Alex-Net(AN) and the Fine-Tuned network(FT)}
 \label{table:num-fil}
@@ -339,7 +356,6 @@ FT & 90 & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 30 & 40 & 
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-
 \subsection{Discussion}
 Although in our analysis we find that for discriminating some classes only a few units suffice whereas for others quite a lot of them are required. The ''extent" to which the code is distributed is likely to be a function of number of filters. If there are a few filters we will expect the code to be more distributed whereas if there are a large number of filters we expect to find more Grandmother kind of cells. The other important tradeoffs to consider are accuracy and training time as a function of number of filters in each layer. We as a community have only had a chance to experiment with a few network architectures out of the exponentially large number of possibilities. Although, it is beyond the scope of the current work determining the optimal number of filters in each layer is an open important question which needs to be addressed! 
 
@@ -349,7 +365,7 @@ Convolutional neural networks take a long time to train. For achieving state of 
 
 As a first step towards addressing this problem, we looked at the evolution of training loss and validation accuracy as the training progresses (fig \ref{fig:conv1}.) The top-1 accuracy on the imagenet validation set at 15K iterations is at 29.5 \% and 38.13\% at 50K iterations (compared to 57.4 \% at 310K iterations). The training loss rapidly increases initially and then there is a slow sluggish decay except at the stage where learning rate is decimated by a factor of 10 at 100K iterations.
 
-\begin{figure}
+\begin{figure}[t!]
 \centering
 \subfloat{\includegraphics[scale=0.10]{images/l1_filters_iter5000.png}} \hspace{2mm}
 \subfloat{\includegraphics[scale=0.10]{images/l1_filters_iter15000.png}} \hspace{2mm}
@@ -359,16 +375,13 @@ As a first step towards addressing this problem, we looked at the evolution of t
 \label{fig:conv1}
 \end{figure}
 
-The first question we ask is - Is there is an insightful intepretation of the fast intial drop in training loss? Towards this end, we visualized layer 1 filters at different time instances. Surprisingly, we found that within 15K iterations these filters look almost identical to what they would be by the end of the training (See fig \ref{fig:conv1}). This naturally leads us to ask the following questions:
-\begin{itemize}
-\item {How fast do different layers train? }
-\item {Given that discriminative pre-training is helpful, is it the case that there exists a critical point after which learning on imagenet is not helpful for generalizing to other datasets/tasks? A "yes" answer to this question would imply that we can indeed speed-up finetuning.}
-\end{itemize}  
+The first question we ask is - Is there is an insightful intepretation of the fast intial drop in training loss? Towards this end, we visualized layer 1 filters at different time instances. Surprisingly, we found that within 15K iterations these filters look almost identical to what they would be by the end of the training (See fig \ref{fig:conv1}). This naturally leads us to ask the following questions: (a) How fast do different layers train? (b)Given that discriminative pre-training is helpful, is it the case that there exists a critical point after which learning on imagenet is not helpful for generalizing to other datasets/tasks? A ``yes" answer to this question would imply that we can indeed speed-up finetuning.
+
 
 For a better understanding. we evaluated performance of a linear svm classifier learned on features extracted from individual layers on Pascal 2007 classification challenge. The results are summarized in table \ref{table:det-traj-classify}.It is quite surprising to note that by 15K iterations all layers are within 80\% and at 50K iterations within 90\% of there final performance. This strongly indicates that a great portion of training required for generalization happens quite quickly. 
 
 \setlength{\tabcolsep}{4pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
 \caption{Variation in classification accuracy (mean-AP) on PASCAL VOC 2007 challenge using features extracted from different layers of Alex-Net as a function of number of iterations.}
 \label{table:det-traj-classify}
@@ -394,7 +407,7 @@ relu-7 & 30.9 & 61.3 & 64.1 & 65.1 & 65.8 & 67.8 & 71.8 & 73.2\\
 Motivated by these observations we trained a 50-50 network (50K iterations on imagenet and finetuned for 50K iterations using the procedure described in sec. \ref{sub:fine-train}) and evaluated its performance on the  Pascal 2007 detection challenge (see table \ref{table:det-trajectory} for results). Consistent with our earlier results we find that this network achieves a surprising performance of 48.6 mean AP points compared to 54.1 achieved by pre-training for 310K iterations. 
 
 \setlength{\tabcolsep}{1pt}
-\begin{table}
+\begin{table}[t!]
 \begin{center}
 \caption{Performance of 50-50 network for detection on pascal-voc-2007 challenge. (l5 is pool-5 and l7 is relu-7)}
 \label{table:det-trajectory}
@@ -415,15 +428,11 @@ l7(full) & 64.3 & 69.6 & 50.1 & 41.8 & 32.0 & 62.6 & 71.0 & 60.6 & 32.8 & 58.5 &
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-The take home message from this analysis is that a majority of training happens very early on in the training and a lot of time is spent to achieve the final few points. (**Ross do we suggest any directions for reducing training time? **)
+The above analysis acts as an re-inforcement to our beleif that indeed majority of training required for generalization happens quite quickly as compared to the full training time of the network. This observation suggest that there may exist clever ways which can help us speed up the training.
 
-\section{Conclusions}
-\label{sec:concl}
-The paper ends with a conclusion. 
-
-\clearpage\mbox{}Page \thepage\ of the manuscript.
-
-\clearpage
+\section{Conclusion}
+\label{sec:conclusion}
+In this paper we analysed different properties of convolutional neural networks with the aim of gaining insights required to efficiently exploit the rich feature hierarchies provided by such networks.
 
 \bibliographystyle{splncs}
 \bibliography{egbib}

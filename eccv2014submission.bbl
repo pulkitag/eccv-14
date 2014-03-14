@@ -5,6 +5,11 @@ Krizhevsky, A., Sutskever, I., Hinton, G.E.:
 \newblock Imagenet classification with deep convolutional neural networks.
 \newblock In: NIPS. (2012)
 
+\bibitem{imagenet}
+Deng, J., Dong, W., Socher, R., Li, L.J., Li, K., Fei-Fei, L.:
+\newblock {ImageNet: A Large-Scale Hierarchical Image Database}.
+\newblock In: CVPR09. (2009)
+
 \bibitem{Decaf}
 Donahue, J., Jia, Y., Vinyals, O., Hoffman, J., Zhang, N., Tzeng, E., Darrell,
   T.:
@@ -17,6 +22,12 @@ Girshick, R., Donahue, J., Darrell, T., Malik, J.:
 \newblock Rich feature hierarchies for accurate object detection and semantic
   segmentation.
 \newblock arXiv preprint arXiv:1311.2524 (2013)
+
+\bibitem{regionlets}
+Wang, X., Yang, M., Zhu, S., Lin, Y.:
+\newblock Regionlets for generic object detection.
+\newblock In: The IEEE International Conference on Computer Vision (ICCV).
+  (December 2013)
 
 \bibitem{Hog}
 Dalal, N., Triggs, B.:
@@ -112,5 +123,11 @@ Zeiler, M.D., Fergus, R.:
 Simonyan, K., Vedaldi, A., Zisserman, A.:
 \newblock Learning local feature descriptors using convex optimisation.
 \newblock IEEE Transactions on Pattern Analysis and Machine Intelligence (2014)
+
+\bibitem{Barlow}
+Barlow, H.:
+\newblock Single units and sensations: A neuron doctrine for perceptual
+  psychology?
+\newblock In: Perception. (1972)
 
 \end{thebibliography}

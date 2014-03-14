@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{AmitGeman}
+Geman, D., Amit, Y., Wilder, K.:
+\newblock Joint induction of shape features and tree classifiers.
+\newblock (1997)
+
+\bibitem{Breiman}
+Breiman, L.:
+\newblock Random forests.
+\newblock Mach. Learn. \textbf{45}(1) (October 2001)  5--32
+
+\bibitem{Pascal}
+Everingham, M., Van~Gool, L., Williams, C.K.I., Winn, J., Zisserman, A.:
+\newblock The pascal visual object classes (voc) challenge.
+\newblock IJCV \textbf{88}(2) (2010)
+
+\end{thebibliography}
