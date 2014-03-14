@@ -53,7 +53,7 @@ We vectorize the heatmap into a vector of scores of length $p^2$ and with each e
 
 \subsubsection{Weighted Label Entropy}
 \label{sub:def-weighted-label-ent}
-We get a giant $Np^2$  sized score and label vector as described above. Next, we construct a $C$ dimensional histogram, where each bin corresponds to a distinct class. The value of $i^{th}$ bin is the sum of scores of all examples which have label $i$ and a score greater than threshold scores (Note: Since we are using the outputs of rectified linear units, all the scores are $geq$ 0). The entropy of this histogram is the entropy of the filter at a given threshold. As this threshold changes, entropy traces out a curve which we call as the entropy curve.  
+We get a giant $Np^2$  sized score and label vector as described above. Next, we construct a $C$ dimensional histogram, where each bin corresponds to a distinct class. The value of $i^{th}$ bin is the sum of scores of all examples which have label $i$ and a score greater than threshold scores (Note: Since we are using the outputs of rectified linear units, all the scores are $\geq$ 0). The entropy of this histogram is the entropy of the filter at a given threshold. As this threshold changes, entropy traces out a curve which we call as the entropy curve.  
 
 \subsubsection{Spatial-Max (spMax) Label Entropy}
 \label{sub:def-spmax-label-ent}
@@ -68,14 +68,14 @@ For each filter in the layer we first calculate the area under entropy (AuE) cur
 \setlength{\tabcolsep}{1pt}
 \begin{table}
 \begin{center}
-\caption{This table lists percentage decrease in MCAuE as a result of finetuning when only 0.1, 0.25, 0.50 and 1.00 fraction of all the filters were used for computing MCAUE.
+\caption{This table lists percentage decrease in MCAuE as a result of finetuning when only 0.1, 0.25, 0.50 and 1.00 fraction of all the filters were used for computing MCAuE.
 A negative value indicated increase in entropy. Note that for all the metrics maximum decrease in entropy takes place while moving from layer 5 to layer 7.}
 \label{table:fine-change}
 \scalebox{0.85}{
 \newcolumntype{d}[2]{D{.}{\cdot}{#1} }
 \begin{tabular}{|c|p{1cm} p{1cm} p{1cm} p{1cm}| p{1cm} p{1cm} p{1cm} p{1cm}|p{1cm} p{1cm} p{1cm} p{1cm}|}
 \hline
-Layer & \multicolumn{4}{c|}{Label-Entropy} & \multicolumn{4}{c|}{Weighted Label-Entropy} & \multicolumn{4}{c|}{spMax Label-Entropy} \\
+Layer & \multicolumn{4}{c|}{Label-Entropy} & \multicolumn{4}{c|}{Weighted-Label-Entropy} & \multicolumn{4}{c|}{spMax-Label-Entropy} \\
 \hline
 & 0.1 & 0.25 & 0.5 & 1.0 & 0.1 & 0.25 & 0.5 & 1 & 0.1 & 0.25 & 0.5 & 1.0 \\
 \hline
@@ -96,7 +96,7 @@ relu-7 & $5.17$  & $2.66$  & $1.33$  & $0.44$  & $20.58$  & $14.75$  & $11.12$  
 \centering
 \subfloat{\includegraphics[scale=0.15]{images/weighted_layer_entropy.png}} \\
 \subfloat{\includegraphics[scale=0.15]{images/spmax_layer_entropy.png}}
-\caption{Mean Cumulative AuE plotted as fraction of filters for all layers of the Conv-Net. Dash-Dot Line: Alex-Net, Solid Line: Fine-Tuned Network. The top plot shows entropy calculated using Weighted Label-Entropy Method, whereas the bottom plot entropy calculated using spMax Label-Entropy Method. (see sec \ref{sub:def-label-ent} for method definitions.)}
+\caption{Mean Cumulative AuE plotted as fraction of filters for all layers of the Conv-Net. Dash-Dot Line: Alex-Net, Solid Line: Fine-Tuned Network. The top plot shows entropy calculated using Weighted-Label-Entropy Method, whereas the bottom plot entropy calculated using spMax-Label-Entropy Method. (see sec \ref{sub:def-label-ent} for method definitions.)}
 \label{fig:fine-entropy}
 \end{figure}
 
