@@ -102,7 +102,7 @@ relu-7 & $5.17$  & $2.66$  & $1.33$  & $0.44$  & $20.58$  & $14.75$  & $11.12$  
 \end{figure}
 
 \subsection{Discussion}
-The change in MCAuE for different layers as measured using alternative definitions of entropy can be seen in fig \ref{fig:fine-entropy}. A quantitative measure of change in entropy after finetuning is provided in table \ref{table:fine-change}. The percentage change in MCAuE is calculated as:
+The change in MCAuE for different layers as measured using alternative definitions of entropy can be seen in fig \ref{fig:fine-entropy} (Please see sec 3 of the main paper for more details on the procedure). A quantitative measure of change in entropy after finetuning is provided in table \ref{table:fine-change}. The percentage change in MCAuE is calculated as:
 \begin{eqnarray}
 \text{Percent Decrease} = 100 \times \frac{MCAuE_{untuned} - MCAuE_{fine}}{MCAuE_{untuned}}
 \end{eqnarray}
@@ -112,9 +112,8 @@ Although, the most natural way to compute entropy is Label-Entropy as used by \c
 
 \section{On Grand-Mother Cells}
 
-\section{More Details on Training Setup} 
-
-
+\section{Epoch Numbers}
+The Imagenet Training(Alex-Net) was performed using 310000 iterations, which corresponds to 33 epochs. (1 epoch is one pass over the entire training set.) For fine-tuning, we used a scheme closely following \cite{Rcnn} which samples positives with a higher probability as compared to the negatives and hence reporting epoch numbers is not insightful. Please look into \cite{Rcnn} for more details.
 
 \bibliographystyle{splncs}
 \bibliography{egbib}

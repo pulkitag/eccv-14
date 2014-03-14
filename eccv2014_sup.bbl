@@ -15,4 +15,10 @@ Everingham, M., Van~Gool, L., Williams, C.K.I., Winn, J., Zisserman, A.:
 \newblock The pascal visual object classes (voc) challenge.
 \newblock IJCV \textbf{88}(2) (2010)
 
+\bibitem{Rcnn}
+Girshick, R., Donahue, J., Darrell, T., Malik, J.:
+\newblock Rich feature hierarchies for accurate object detection and semantic
+  segmentation.
+\newblock arXiv preprint arXiv:1311.2524 (2013)
+
 \end{thebibliography}
