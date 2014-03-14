@@ -7,51 +7,46 @@ I was expecting a `,' or a `}'---line 65 of file egbib.bib
  : @article{Pascal,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 267 of file egbib.bib
- : 
- : TITLE = {Invariant visual representation by single neurons in the human brain.},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
 Warning--empty booktitle in AmitGeman
-You've used 4 entries,
+You've used 6 entries,
             2087 wiz_defined-function locations,
-            517 strings with 4293 characters,
-and the built_in function-call counts, 875 in all, are:
-= -- 68
-> -- 46
-< -- 1
-+ -- 17
-- -- 13
-* -- 69
-:= -- 138
-add.period$ -- 4
-call.type$ -- 4
-change.case$ -- 4
+            532 strings with 4589 characters,
+and the built_in function-call counts, 1451 in all, are:
+= -- 123
+> -- 67
+< -- 2
++ -- 25
+- -- 19
+* -- 106
+:= -- 212
+add.period$ -- 7
+call.type$ -- 6
+change.case$ -- 6
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 47
-empty$ -- 87
-format.name$ -- 13
-if$ -- 194
+cite$ -- 7
+duplicate$ -- 81
+empty$ -- 146
+format.name$ -- 19
+if$ -- 338
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 4
-newline$ -- 23
-num.names$ -- 4
-pop$ -- 15
+int.to.str$ -- 6
+missing$ -- 6
+newline$ -- 33
+num.names$ -- 6
+pop$ -- 23
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 20
+skip$ -- 44
 stack$ -- 0
-substring$ -- 19
-swap$ -- 17
-text.length$ -- 1
+substring$ -- 46
+swap$ -- 35
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 7
-width$ -- 5
-write$ -- 44
-(There were 2 error messages)
+while$ -- 11
+width$ -- 7
+write$ -- 66
+(There was 1 error message)

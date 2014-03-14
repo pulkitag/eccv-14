@@ -130,7 +130,7 @@ booktitle = {International Conference in Machine Learning}
   bibsource = {DBLP, http://dblp.uni-trier.de}
 }
 @Article{Grandmother,
-AUTHOR = {Quiroga, R Quian and Reddy, L and Kreiman, G and Koch, C and Fried, I}
+AUTHOR = {Quiroga, R Quian and Reddy, L and Kreiman, G and Koch, C and Fried, I},
 TITLE = {Invariant visual representation by single neurons in the human brain.},
 JOURNAL = {Nature},
 VOLUME = {435},
@@ -238,7 +238,7 @@ year = {1972}
     title = {Joint Induction of Shape Features and Tree Classifiers},
     year = {1997}
 }
-@article{Breiman:2001:RF:570181.570182,
+@article{Breiman,
  author = {Breiman, Leo},
  title = {Random Forests},
  journal = {Mach. Learn.},

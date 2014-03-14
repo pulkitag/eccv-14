@@ -41,7 +41,7 @@
 
 \section{On Using Entropy For Measuring Change in Selectivity}
 \subsection{Motivation}
-In answer to question -``What happens when a discriminatively pretrained network is fine-tuned" (sec 3 of the main paper) we have used entropy of filters and entropy of layers as a measure of how selective each layer is. The choice of entropy is motivated by: Entropy naturally measures how selective a particular feature is across different classes and not just individual classes. Consequently, entropy has been extensively used in a lot of computer vision applications based on decision trees such as \cite{AmitGeman} \cite{Breiman}. 
+In answer to question -``What happens when a discriminatively pretrained network is fine-tuned" (sec 3 of the main paper) we used entropy of filters and entropy of layers as a measure of how selective each layer is. The choice of entropy is motivated by: Entropy naturally measures how selective a particular feature is across different classes and not just individual classes. Consequently, entropy has been extensively used in a lot of computer vision applications based on decision trees such as \cite{AmitGeman} \cite{Breiman}.
 
 \subsection{Method of Entropy Computation}
 We presented a natural way of computing entropy of each unit of every layer in sec 2.3 of the paper. We call this Label-Entropy. However, one might also compute entropy of units in other ways. We considered two more such methods as described below.
@@ -72,9 +72,8 @@ For each filter in the layer we first calculate the area under entropy (AuE) cur
 A negative value indicated increase in entropy. Note that for all the metrics maximum decrease in entropy takes place while moving from layer 5 to layer 7.}
 \label{table:fine-change}
 \scalebox{0.85}{
-\ldots
 \newcolumntype{d}[2]{D{.}{\cdot}{#1} }
-\begin{tabular}{c|p{1cm} p{1cm} p{1cm} p{1cm}| p{1cm} p{1cm} p{1cm} p{1cm}|p{1cm} p{1cm} p{1cm} p{1cm}|}
+\begin{tabular}{|c|p{1cm} p{1cm} p{1cm} p{1cm}| p{1cm} p{1cm} p{1cm} p{1cm}|p{1cm} p{1cm} p{1cm} p{1cm}|}
 \hline
 Layer & \multicolumn{4}{c|}{Label-Entropy} & \multicolumn{4}{c|}{Weighted Label-Entropy} & \multicolumn{4}{c|}{spMax Label-Entropy} \\
 \hline
@@ -97,7 +96,7 @@ relu-7 & $5.17$  & $2.66$  & $1.33$  & $0.44$  & $20.58$  & $14.75$  & $11.12$  
 \centering
 \subfloat{\includegraphics[scale=0.15]{images/weighted_layer_entropy.png}} \\
 \subfloat{\includegraphics[scale=0.15]{images/spmax_layer_entropy.png}}
-\caption{Mean Cumulative AuE plotted as fraction of filters for all layers of the Conv-Net. Dash-Dot Line: Alex-Net, Solid Line: Fine-Tuned Network. The top plot shows entropy calculated using Weighted Label-Entropy Method, whereas the bottom plot entropy calculated using spMax Label-Entropy Method.}
+\caption{Mean Cumulative AuE plotted as fraction of filters for all layers of the Conv-Net. Dash-Dot Line: Alex-Net, Solid Line: Fine-Tuned Network. The top plot shows entropy calculated using Weighted Label-Entropy Method, whereas the bottom plot entropy calculated using spMax Label-Entropy Method. (see sec \ref{sub:def-label-ent} for method definitions.)}
 \label{fig:fine-entropy}
 \end{figure}
 
@@ -111,6 +110,16 @@ where, $MCAuE_{fine}$ is for fine-tuned network and $MCAuE_{untuned}$ is for net
 Although, the most natural way to compute entropy is Label-Entropy as used by \cite{Breiman}, \cite{AmitGeman}, the alternative metrics also support the claim that most of the changes due to fine-tuning happen while moving from layers 5 to 7. At the same time, it is noteworthy, that for label-entropy pool-5 undergoes negligible change in entropy, whereas changes in pool-5 as measured by Weighted-Label Entropy and spMax-Label-Entropy are comparable to changes in relu-6 and relu-7.
 
 \section{On Grand-Mother Cells}
+\begin{figure}[t!]
+\centering
+\subfloat{\includegraphics[scale=0.20]{images/gtbbox_pascal_prerec_pool5units.png}}
+\caption{Precision-Recall Curves for 20 PASCAL Classes calculated using pool-5 filter responses on ground truth bounding boxes. Red-Curves: Fine Tuned Network, Blue-Curves: Alex-Net. The figure only displays 5 best filters for each class based on AP  upto a recall threshold of 0.25. For most classes, precision drops significantly even at modest recall values.}
+\label{fig:ap}
+\end{figure}
+
+Originally, Grand-Mother Cells were described as ``hypothetical" neurons in the brain which only respond to very specific visual stimulus \cite{Barlow} \cite{Grandmother}. Mathematically, these can be expressed as high precision units and we presented this analysis in sec 5.1 of our main paper. Although, presence/absence of Grand-Mother is a scientifically  interesting question to pursue - for recognition, only filters with high precision are not sufficient. We also require high recall. Consequently we also analysed if there are pool-5 units which have high AP. Figure \ref{fig:ap} plots precision-recall curves of 5 filters with highest AP for each of the PASCAL classes.
+
+From this figure, it is clear that even at modest recalls, for most of the classes precision degrades quite fast. Its only for a few classes such as Person, Bicycle, Cars that we have filters which have relatively high AP values. These results further cement the conjecture that indeed the mid-level representations in these networks are distributed.
 
 \section{Epoch Numbers}
 The Imagenet Training(Alex-Net) was performed using 310000 iterations, which corresponds to 33 epochs. (1 epoch is one pass over the entire training set.) For fine-tuning, we used a scheme closely following \cite{Rcnn} which samples positives with a higher probability as compared to the negatives and hence reporting epoch numbers is not insightful. Please look into \cite{Rcnn} for more details.

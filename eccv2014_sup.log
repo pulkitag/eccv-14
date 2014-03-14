@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.12)  13 MAR 2014 22:34
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.12)  13 MAR 2014 23:21
 entering extended mode
  %&-line parsing enabled.
 **eccv2014_sup.tex
@@ -437,10 +437,6 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
 
 ]
-Overfull \hbox (3.68509pt too wide) in paragraph at lines 91--92
- [] 
- []
-
 <images/weighted_layer_entropy.png, id=15, 1584.92125pt x 901.3675pt>
 File: images/weighted_layer_entropy.png Graphic file (type png)
 
@@ -450,31 +446,35 @@ File: images/spmax_layer_entropy.png Graphic file (type png)
 
 <use images/spmax_layer_entropy.png> [2] [3 <./images/weighted_layer_entropy.pn
 g (PNG copy)> <./images/spmax_layer_entropy.png (PNG copy)>]
-(./eccv2014_sup.bbl) [4] (./eccv2014_sup.aux) ) 
+<images/gtbbox_pascal_prerec_pool5units.png, id=26, 1595.9625pt x 900.36375pt>
+File: images/gtbbox_pascal_prerec_pool5units.png Graphic file (type png)
+
+<use images/gtbbox_pascal_prerec_pool5units.png> [4 <./images/gtbbox_pascal_pre
+rec_pool5units.png (PNG copy)>] (./eccv2014_sup.bbl) [5] (./eccv2014_sup.aux) )
+ 
 Here is how much of TeX's memory you used:
- 4162 strings out of 493848
- 57456 string characters out of 1152823
- 241541 words of memory out of 3000000
- 7372 multiletter control sequences out of 15000+50000
+ 4169 strings out of 493848
+ 57691 string characters out of 1152823
+ 242541 words of memory out of 3000000
+ 7378 multiletter control sequences out of 15000+50000
  11178 words of font info for 43 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  44i,12n,42p,1013b,343s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pf
-b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texl
-ive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cms
-s10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on eccv2014_sup.pdf (4 pages, 234207 bytes).
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/tex
+mf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fo
+nts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmss9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on eccv2014_sup.pdf (5 pages, 271383 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
+ 77 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
