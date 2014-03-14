@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.12)  13 MAR 2014 21:58
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.3.12)  13 MAR 2014 22:14
 entering extended mode
  %&-line parsing enabled.
 **eccv2014_sup.tex
@@ -437,7 +437,7 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 
 
 ]
-Overfull \hbox (1.95851pt too wide) in paragraph at lines 90--91
+Overfull \hbox (1.95851pt too wide) in paragraph at lines 91--92
  [] 
  []
 
@@ -448,20 +448,17 @@ File: images/weighted_layer_entropy.png Graphic file (type png)
 <images/spmax_layer_entropy.png, id=16, 1644.1425pt x 907.39pt>
 File: images/spmax_layer_entropy.png Graphic file (type png)
 
-<use images/spmax_layer_entropy.png> (./eccv2014_sup.bbl
-Underfull \vbox (badness 3260) has occurred while \output is active []
-
- [2]
-[3 <./images/weighted_layer_entropy.png (PNG copy)> <./images/spmax_layer_entro
-py.png (PNG copy)>]) [4] (./eccv2014_sup.aux) ) 
+<use images/spmax_layer_entropy.png> [2] [3 <./images/weighted_layer_entropy.pn
+g (PNG copy)> <./images/spmax_layer_entropy.png (PNG copy)>]
+(./eccv2014_sup.bbl) [4] (./eccv2014_sup.aux) ) 
 Here is how much of TeX's memory you used:
  4161 strings out of 493848
- 57610 string characters out of 1152823
+ 57450 string characters out of 1152823
  241541 words of memory out of 3000000
  7371 multiletter control sequences out of 15000+50000
  11178 words of font info for 43 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 44i,12n,42p,1013b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,12n,42p,1013b,343s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/
 type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/publi
 c/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
@@ -475,7 +472,7 @@ s10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss8.pfb></us
 r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texm
 f-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/f
 onts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on eccv2014_sup.pdf (4 pages, 229304 bytes).
+Output written on eccv2014_sup.pdf (4 pages, 232537 bytes).
 PDF statistics:
  73 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

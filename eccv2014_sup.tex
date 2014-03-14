@@ -68,8 +68,9 @@ For each filter in the layer we first calculate the area under entropy (AuE) cur
 \setlength{\tabcolsep}{1pt}
 \begin{table}
 \begin{center}
-\caption{This table lists percentage decrease in MCAuE as a result of finetuning when only 0.1, 0.25, 0.50 and 1.00 fraction of all the filters were used for computing MCAUE.}
-\label{table:det-trajectory. A negative value indicated increase in entropy. Note that for all the metrics maximum decrease in entropy takes place while moving from layer 5 to layer 7.}
+\caption{This table lists percentage decrease in MCAuE as a result of finetuning when only 0.1, 0.25, 0.50 and 1.00 fraction of all the filters were used for computing MCAUE.
+A negative value indicated increase in entropy. Note that for all the metrics maximum decrease in entropy takes place while moving from layer 5 to layer 7.}
+\label{table:fine-change}
 \scalebox{0.85}{
 \ldots
 \newcolumntype{d}[2]{D{.}{\cdot}{#1} }
@@ -100,6 +101,14 @@ relu-7 & $5.17$  & $2.66$  & $1.33$  & $0.44$  & $20.58$  & $14.75$  & $11.12$  
 \label{fig:fine-entropy}
 \end{figure}
 
+\subsection{Discussion}
+The change in MCAuE for different layers as measured using alternative definitions of entropy can be seen in fig \ref{fig:fine-entropy}. A quantitative measure of change in entropy after finetuning is provided in table \ref{table:fine-change}. The percentage change in MCAuE is calculated as:
+\begin{eqnarray}
+\text{Percent Decrease} = 100 \times \frac{MCAuE_{untuned} - MCAuE_{fine}}{MCAuE_{untuned}}
+\end{eqnarray}
+where, $MCAuE_{fine}$ is for fine-tuned network and $MCAuE_{untuned}$ is for network trained on imagenet only.
+
+Although, the most natural way to compute entropy as used by \cite{Breiman}, \cite{AmitGeman}.
 
 \section{On Grand-Mother Cells}
 
