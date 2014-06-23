@@ -4,3 +4,5 @@
 *.swp
 *.blg
 *.bbl
+*.gz
+!images/*.pdf
