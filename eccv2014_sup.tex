@@ -53,7 +53,7 @@ We vectorize the heatmap into a vector of scores of length $p^2$ and with each e
 
 \subsubsection{Weighted Label Entropy}
 \label{sub:def-weighted-label-ent}
-When computing the label histogram as described above, instead of the label count we use the sum of the scores associated with the labels to construct the histogram. 
+When computing the label histogram as described above, instead of the label count we use the sum of the scores associated with the labels to construct the histogram. (Note: Since we are using outputs from relu or rectified linear units, all scores are $\geq 0$.)
 
 \subsubsection{Spatial-Max (spMax) Label Entropy}
 \label{sub:def-spmax-label-ent}
