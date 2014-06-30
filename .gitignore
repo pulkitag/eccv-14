@@ -5,4 +5,5 @@
 *.blg
 *.bbl
 *.gz
+Presentation/*
 !images/*.pdf
