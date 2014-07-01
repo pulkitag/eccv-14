@@ -1,54 +1,44 @@
-% last updated in April 2002 by Antje Endemann
+% update for ECCV'14 by Michael Stark and Mario Fritz
+% updated in April 2002 by Antje Endemann
 % Based on CVPR 07 and LNCS, with modifications by DAF, AZ and elle, 2008 and AA, 2010, and CC, 2011; TT, 2014
 
 \documentclass[runningheads]{llncs}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb} % define this before the line numbering.
-\usepackage{ruler}
 \usepackage{color}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+%\usepackage{ruler}
 \usepackage{array}
 \usepackage{float}
 \usepackage{subfig,caption}
 \usepackage{lipsum}
-
-%\usepackage[printwatermark]{xwatermark}
-%\usepackage{xcolor}
-%\newwatermark[allpages,color=red!50,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
-
-%\usepackage{draftwatermark}
-%\SetWatermarkText{CONFIDENTIAL DRAFT, DO-NOT DISTRIBUTE}
-%\SetWatermarkScale{1}
-
-
-
-%\usepackage{subcaption}
 \usepackage{comment}
 \renewcommand{\arraystretch}{1.1}
-\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+
 \begin{document}
 % \renewcommand\thelinenumber{\color[rgb]{0.2,0.5,0.8}\normalfont\sffamily\scriptsize\arabic{linenumber}\color[rgb]{0,0,0}}
 % \renewcommand\makeLineNumber {\hss\thelinenumber\ \hspace{6mm} \rlap{\hskip\textwidth\ \hspace{6.5mm}\thelinenumber}}
 % \linenumbers
 \pagestyle{headings}
 \mainmatter
-\def\ECCV14SubNumber{1355}  % Insert your submission number here
-
 \title{Analyzing The Performance of Multilayer Neural Networks for Object Recognition} % Replace with your title
 
-\titlerunning{ECCV-14 submission ID \ECCV14SubNumber}
+\titlerunning{Analyzing The Performance of Multilayer Neural Networks for Object Recognition}
 
-\authorrunning{ECCV-14 submission ID \ECCV14SubNumber}
+\authorrunning{Pulkit Agrawal, Ross Girshick, Jitendra Malik}
 
-\author{Anonymous ECCV submission}
-\institute{Paper ID \ECCV14SubNumber}
+\author{Pulkit Agrawal, Ross Girshick, Jitendra Malik \\ \{pulkitag, rbg, malik\}$@$eecs.berkeley.edu}
+\institute{University of California Berkeley}
 
 
 \maketitle
 
 \begin{abstract}
 In 2012 Krizhevsky et al. demonstrated that a Convolutional Neural Network (CNN) trained on large amount of data as part of the ImageNet challenge significantly outperformed traditional computer vision approaches on image classification. Subsequently, Girshick et al. (2013) exploited these features to establish the new state of the art on PASCAL object detection. This suggests that computer vision is undergoing a feature revolution akin to that following SIFT and HOG nearly a decade ago. It is therefore important to get more insights into features learned by these networks. Our paper provides answer to the following four questions: (a)What happens during finetuning of a discriminatively pretrained network? (b)How much information is in the location and how much of it is in the magnitude of filter activation? (c)Does a multilayer CNN contain Grand-Mother Cells? (d)How does training of CNN progress over time?
+\dots
+\keywords{We would like to encourage you to list your keywords within
+the abstract section}
 \end{abstract}
-
 
 \section{Introduction}
 The breakthrough work of \cite{Kriz} created a splash in the computer vision community by presenting a convolutional neural network (CNN) model which easily surpassed all existing methods on the ImageNet ILSVRC-2012 image classification challenge \cite{imagenet}.  The top-5 error rates dropped by an exceptional amount to 16.4\% from  26.2 \% (achieved by the second best alternative.) At that time, it was unclear if these networks would be useful for other computer vision tasks. A few months later, \cite{Decaf} demonstrated that features learnt by such networks generalize and achieve state of the art results on image classification challenges such as SUN-397\cite{sun}, Caltech-UCSD Birds and Caltech-101. 
@@ -63,8 +53,8 @@ In this paper we address some of these issues through an empirical scientific in
 
 Proponents of multilayer networks have argued in the past that unsupervised pre-training followed by finetuning is helpful for learning features which improve performance on discriminative tasks such as image classification \cite{GoogleCat, DeepPre, HintonPre}. Finetuning a network is the process of slowly updating pre-learned parameters to minimize a target loss function for a new task at hand. Since, multilayer networks consist of a large number of parameters they are prone to overfitting when trained on small datasets. Instead of unsupervised pre-training, \cite{Decaf, Rcnn} have made a strong case for learning features using discriminative pre-training followed by finetuning for a specific task at hand. They first trained a network for the task of image classification on Imagenet and then finetuned the network for object detection on PASCAL. In this work, we analyse the effect of finetuning on different layers of a CNN (section \ref{sec:fine}). We find that for moderately sized datasets (upto $\sim$ 50K images), finetuning only effects the top two fully connected layers (section \ref{sub:net-arch}) whereas the lower convolutional layers are mostly unchanged. We show that this observation can be used to make finetuning 2x faster with negligible effect on performance. We also demonstrate that a network can be trained from scratch using data only from the PASCAL dataset to achieve the state of art performance on object detection reported by \cite{Rcnn}. Further, by simply using more data for finetuning, we report a $10\%$ increase in performance for object detection over \cite{Rcnn}. 
 
-Finetuning can also be viewed as a method for transfer learning (NEED REF for transfer learning). It is interesting to draw a parallel between this and the way we humans learn. As children, we can easily learn new things but as we grow older it becomes harder. Similarly, it is possible that if CNNs are pretrained for too long, it becomes harder to generalize to a new task. In other words, pre-training can lead to overfitting and consequently lead to worse performance on a new task due to dataset bias \cite{datasetBias}. Thus, we are faced with the question - is there an optimal time for which pre-training should be carried out? Rather surprisingly, we find that fitting better to ImageNet allows lower generalization error when moving to other datasets (section \ref{sec:train}), i.e. pre-training more improves performance.   
- 
+Finetuning can also be viewed as a method for transfer learning (NEED REF for transfer learning). It is interesting to draw a parallel between this and the way we humans learn. As children, we can easily learn new things but as we grow older it becomes harder. Similarly, it is possible that if CNNs are pretrained for too long, it becomes harder to generalize to a new task. In other words, pre-training can lead to overfitting and consequently lead to worse performance on a new task due to dataset bias \cite{datasetBias}. Thus, we are faced with the question - is there an optimal time for which pre-training should be carried out? Rather surprisingly, we find that fitting better to ImageNet allows lower generalization error when moving to other datasets (section \ref{sec:train}), i.e. pre-training more improves performance.
+
 \section{Training Procedure}
 \label{sec:train}
 \subsection{Network-Architecture and Nomenclature}
@@ -296,6 +286,7 @@ pool-2  & 67.1 & 67.7 & relu-4 & 75.5 & 77.8 & relu-6 & 83.4 & 85.4 \\
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
+
 \subsection{Is finetuning only the fully-connected layers sufficient?}
 \label{sub:fine-fc-only}
 The observations made in \ref{sub:fine-entropy} indicate that finetuning the convolutional layers in the CNN may not be critical for achieving good-performance on novel datasets. We test this hypothesis on the 2 challenging tasks of object detection(PASCAL) and scene classification (SUN-397) by comparing the performance of a fully finetuned network with a network finetuned by only updating weights in the fully-connected (fc) layers. Our results are summarized in table \ref{table:fine-effect}.
@@ -428,6 +419,13 @@ In this paper we analysed different properties of convolutional neural networks 
 
 \noindent \textbf{Acknowledgements}
 
-\bibliographystyle{splncs}
+\begin{align}
+  \psi (u) & = \int_{0}^{T} \left[\frac{1}{2}
+  \left(\Lambda_{0}^{-1} u,u\right) + N^{\ast} (-u)\right] dt \; \\
+& = 0 ?
+\end{align}
+
+
+\bibliographystyle{splncs03}
 \bibliography{egbib}
 \end{document}
