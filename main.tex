@@ -21,23 +21,28 @@
 % \linenumbers
 \pagestyle{headings}
 \mainmatter
-\title{Analyzing The Performance of Multilayer Neural Networks for Object Recognition} % Replace with your title
+\title{Analyzing the Performance of Multilayer Neural Networks for Object Recognition} % Replace with your title
 
 \titlerunning{Analyzing The Performance of Multilayer Neural Networks}
 
+
 \authorrunning{Pulkit Agrawal, Ross Girshick, Jitendra Malik}
 
-\author{Pulkit Agrawal, Ross Girshick, Jitendra Malik \\ \{pulkitag, rbg, malik\}$@$eecs.berkeley.edu}
+\author{Pulkit Agrawal, Ross Girshick, Jitendra Malik\\
+\texttt{\{pulkitag,rbg,malik\}@eecs.berkeley.edu}}
 \institute{University of California Berkeley}
 
 
 \maketitle
 
 \begin{abstract}
-In 2012 Krizhevsky et al. demonstrated that a Convolutional Neural Network (CNN) trained on large amount of data as part of the ImageNet challenge significantly outperformed traditional computer vision approaches on image classification. Subsequently, Girshick et al. (2013) exploited these features to establish the new state of the art on PASCAL object detection. This suggests that computer vision is undergoing a feature revolution akin to that following SIFT and HOG nearly a decade ago. It is therefore important to get more insights into features learned by these networks. Our paper provides answer to the following four questions: (a)What happens during finetuning of a discriminatively pretrained network? (b)How much information is in the location and how much of it is in the magnitude of filter activation? (c)Does a multilayer CNN contain Grand-Mother Cells? (d)How does training of CNN progress over time?
-\dots
-\keywords{We would like to encourage you to list your keywords within
-the abstract section}
+Over the last two years, convolutional neural networks (CNN) have rapidly outperformed methods based on engineered features on a wide variety of visual recognition tasks. This trend started in 2012 with Krizhevsky et al.'s breakthrough results in the ImageNet classification challenge. Subsequently, Donahue et al. demonstrated the general usefulness of CNN features on several classification datasets (DeCAF). Concurrently, Girshick et al. used CNN features computed on bottom-up region proposals to dramatically outperform existing object detection methods on PASCAL VOC and ImageNet detection (R-CNN). These results suggest that computer vision is undergoing a feature revolution akin to the one following SIFT and HOG nearly a decade ago. It is therefore important to gain insight into the features learned by these networks and better understand the behaviour of their training algorithms. Towards this direction, our paper is an empirical study of addressing four questions: 
+(1) What happens during fine-tuning of a discriminatively pretrained network? 
+(2) How important is a feature's spatial location and its activation magnitude?
+(3) Does a multilayer CNN contain ``grandmother'' cells?
+(4) How does task performance vary as a function of CNN training time?
+
+\keywords{convolutional neural networks, object recognition, empirical analysis}
 \end{abstract}
 
 \section{Introduction}
