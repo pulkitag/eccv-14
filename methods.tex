@@ -1,18 +1,58 @@
-\section{Training Procedure}
+\section{Experimental setup}
 \label{sec:train}
-\subsection{Network-Architecture and Nomenclature}
+
+\subsection{Datasets and tasks}
+In this paper, we report experimental results using a several standard datasets and tasks, which we summarize here.
+
+\paragraph{Image classification.} For the task of image classification we consider two datasets, the first of which is PASCAL VOC 2007.
+We refer to experiments on this dataset by ``PASCAL CLS''.
+Results on PASCAL CLS are reported using the standard average precision (AP) and mean AP metrics.
+
+PASCAL CLS is fairly small-scale with only 5k images for training and 5k images for testing.
+Therefore, we also consider the SUN dataset \cite{sun} which has around 108k images and 397 classes.
+We refer to experiments on SUN by ``SUN CLS''.
+In these experiments we use a non-standard train-test split since it was computationally infeasible to run all of our experiments on the 10 standard subsets proposed by \cite{sun}. 
+Instead, we randomly split the dataset into three parts (train, val and test) using 50\%,10\% and 40\% of the data, respectively. 
+The distribution of classes was uniform across all the three sets.
+We emphasize that results on these splits are only used to support investigations into properties of CNNs and not for comparing against other scene-classification methods in the literature.
+For SUN CLS, we report 1-of-397 classification accuracy averaged over all classes, which is the standard metric for this dataset.
+
+\paragraph{Object detection.} For the task of object detection we use PASCAL VOC 2007, training on the train and val sets and testing on the test set.
+We refer to this dataset and task by ``PASCAL DET''.
+PASCAL DET uses the same set of images as PASCAL CLS.
+We note that it is standard practice to use the 2007 version of PASCAL for reporting results of abalation studies and hyperparameter sweeps.
+We report performance on PASCAL DET using the standard AP and mAP metrics.
+In some of our experiments we use only the ground-truth PASCAL DET bounding boxes.
+We refer to this setup as ``PASCAL DET-GT''.
+
+\subsection{Network architecture and layer nomenclature}
 \label{sub:net-arch}
-We closely followed the CNN architecture proposed in \cite{Kriz} and publically available code of \cite{caffe} for all our experiments. The various layers of the CNN are organized as following: first 2 layers are subdivided into 4 sublayers each - convolution (conv), followed by rectified linear units (relu), pooling (pool) and contrast normalization (norm). Layers 3, 4 are composed of conv units followed by relu units. Layer 5 consists of conv units, followed by relu and pool units. The last two layers are fully connected (fc). In this work, when we refer to layers 1,2 and 5 we mean the output of pool units and for layers 3,4,6,7 we mean the output of relu units. The imagenet network was trained for 310000 iterations and achieved an error rate of only about 2\% higher on the ILSVRC validation set 2012. \newline
-The term ImgNet is used to refer to a CNN trained for Imagenet classification. FT or FT-Net refers to a finetuned network whereas as FC-FT or FC-FT-Net refers to a network finetuned by setting the learning rate of the first 5 layers to zero. We use the terms CNNs and ConvNets interchangeably to refer to multilayer network architectures of the type proposed in \cite{Kriz}. Terms filter/unit are used interchangeably to refer to filters of the CNN and GT-BBOX/gt-bbox stands for Ground truth bounding boxes from the PASCAL-VOC-2007 detection challenge and mAP refers to mean average precision \cite{Pascal}.
+All of our experiments use a single CNN architecture.
+This architecture is the Caffe \cite{caffe} implementation of the network proposed by Krizhevsky et al. \cite{Kriz}.
+The layers of the CNN are organized as follows: the first two are subdivided into 4 sublayers each: convolution (conv), $\max(x,0)$ rectifying non-linear units (ReLUs), max pooling, and local response normalization. 
+Layers 3 and 4 are composed of convolutional units followed by ReLUs.
+Layer 5 consists of convolutional units, followed by ReLUs and max pooling.
+The last two layers are fully connected (fc). 
+When we refer to ``conv-1'', ``conv-2'' and ``conv-5'' we mean the output of max pooling units following the convolution and ReLU operations \todo{after LRN for conv-1 and conv-2?}.
+For layers conv-3, conv-4, fc-6, and fc-7 we mean the output of ReLU units.
+%FT or FT-Net refers to a finetuned network whereas as FC-FT or FC-FT-Net refers to a network finetuned by setting the learning rate of the first 5 layers to zero. We use the terms CNNs and ConvNets interchangeably to refer to multilayer network architectures of the type proposed in \cite{Kriz}. Terms filter/unit are used interchangeably to refer to filters of the CNN and GT-BBOX/gt-bbox stands for Ground truth bounding boxes from the PASCAL-VOC-2007 detection challenge and mAP refers to mean average precision \cite{Pascal}.
 
-\subsection{Training Setup} 
-\label{sub:train-setup}
-Results for image and GT-BBOX classification were obtained by training linear SVMs on train-val sets of PASCAL-VOC-2007 \cite{Pascal} and tested on the test set. For detection we closely follow the RCNN setup described in \cite{Rcnn}. For SUN-397 \cite{sun} we used a non-standard train-test splits since it was infeasible to finetune CNNs for 10 standard subsets proposed by \cite{sun}. Instead, we randomly split the dataset into 3 parts namely train,val and test using 50\%,10\% and 40\% of the data. The distribution of classes was uniform across all the 3 sets. Results on these splits are only used to support investigations into properties of CNNs and not for comparing against other scene-classification methods.  
+%\subsection{Training Setup} 
+%\label{sub:train-setup}
+%Results for image and GT-BBOX classification were obtained by training linear SVMs on train-val sets of PASCAL-VOC-2007 \cite{Pascal} and tested on the test set. For detection we closely follow the RCNN setup described in \cite{Rcnn}. For SUN-397 \cite{sun} we used a non-standard train-test splits since it was infeasible to finetune CNNs for 10 standard subsets proposed by \cite{sun}. Instead, we randomly split the dataset into 3 parts namely train,val and test using 50\%,10\% and 40\% of the data. The distribution of classes was uniform across all the 3 sets. Results on these splits are only used to support investigations into properties of CNNs and not for comparing against other scene-classification methods.  
  
-\subsubsection{Fine-Tuning}
+\subsection{Supervised pre-training and fine-tuning}
 \label{sub:fine-train}
-CNN were finetuned using SGD (Stochastic Gradient) with a starting learning rate set to $\frac{1}{10}^{th}$ of the initial learning rate used for training the network for Imagenet classification. This choice was made to prevent overfitting of CNNs to the new task for which the network was finetuned for. At every 20,000 iterations learning rate was reduced by a factor of 10 and mini-batch size of 128 was used. We closely followed \cite{Rcnn} for finetuning CNNs for object detection. 
+We employ the supervised pre-training, domain-specific fine-tuning paradigm used by R-CNN \cite{Rcnn} in many experiments.
+The idea of supervised pre-training is to use a data-rich auxiliary dataset and task, such as ImageNet classification, to initialize a large CNN before training on a small dataset.
+This procedure allows the small dataset to be used while avoiding disasterously overfitting the large network to it.
+%For experiments in which the network is pre-trained on ImageNet, stochastic gradient descent is run for 310000 iterations (66 epochs).
 
-\subsection{Method of Entropy Computation}
-\label{sub:def-ent}
-We define the entropy of a filter with respect to a given set of image-label pairs in the following way. Each image, when passed through the convolutional neural network produces a $p \times p$ heatmap of filter responses. (e.g. p = 6, for a layer 5 filter). We vectorize this heatmap into a vector of scores of length $p^2$ and with each element of this vector we associate the class label of the image. Thus, for each image we have a score vector and a label vector of length $p^2$ each. Next, we concatenate score vectors and label vectors from N images into a giant score vector and a giant label vector  of size $Np^2$ each. Now for every score threshold we consider all the labels which have an associated score $\geq$ to this threshold score. The entropy of this set of labels is the entropy of the filter at this threshold. As this threshold changes, entropy traces out a curve which we call as the entropy curve.  
+For fine-tuning, we run stochastic gradient descent (SGD) with a starting learning rate set to $0.001$ ($1/10$-th of the initial learning rate used for training the network for Imagenet classification). 
+This choice was made to prevent overfitting of CNNs to the new dataset.
+At every 20,000 iterations of fine-tuning we reduce the learning rate by a factor of 10.
+For object detection, we follow the fine-tuning procedure described in \cite{Rcnn}.
+
+%\subsection{Method of Entropy Computation}
+%\label{sub:def-ent}
+%We define the entropy of a filter with respect to a given set of image-label pairs in the following way. Each image, when passed through the convolutional neural network produces a $p \times p$ heatmap of filter responses. (e.g. p = 6, for a layer 5 filter). We vectorize this heatmap into a vector of scores of length $p^2$ and with each element of this vector we associate the class label of the image. Thus, for each image we have a score vector and a label vector of length $p^2$ each. Next, we concatenate score vectors and label vectors from N images into a giant score vector and a giant label vector  of size $Np^2$ each. Now for every score threshold we consider all the labels which have an associated score $\geq$ to this threshold score. The entropy of this set of labels is the entropy of the filter at this threshold. As this threshold changes, entropy traces out a curve which we call as the entropy curve.  
