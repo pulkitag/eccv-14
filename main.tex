@@ -228,6 +228,21 @@ FT & 90 & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 30 & 40 & 
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1.0\linewidth]{images/ftNet_commonfilters.png}
+\caption{This plot depicts the degree of overlap among the top-50 filters in layer 5 of
+finetuned network used for classifying each category of the PASCAL 2007 challenge. Entry
+(i,j) of the matrix is the fraction of filters of the i th class which are common with j th class. This plot indicates, that there is very little overlap between filters used for different classes.}
+\label{fig:svm-sel-dims}
+\end{figure}
+
+
+
+
+
+
+
 \subsection{Discussion}
 Although in our analysis we find that for discriminating some classes only a few units suffice whereas for others quite a lot of them are required. The ''extent" to which the code is distributed is likely to be a function of number of filters. If there are a few filters we will expect the code to be more distributed whereas if there are a large number of filters we expect to find more Grandmother kind of cells. The other important tradeoffs to consider are accuracy and training time as a function of number of filters in each layer. We as a community have only had a chance to experiment with a few network architectures out of the exponentially large number of possibilities. Although, it is beyond the scope of the current work determining the optimal number of filters in each layer is an open important question which needs to be addressed! 
 
@@ -266,26 +281,6 @@ From figures \ref{fig:fine-hist} and \ref{fig:fine-entropy}, we draw 2 conclusio
 \item Although the entropy of filters decreases as we move to higher layers, the magnitude of change in entropy between layer 1 and layer 5 is small as compared to the change which happens when going from layer 5 to layer 6.
 \item Finetuning mostly reduces the entropy of filters in the fully connected layers, there are small changes in layer 5 and negligible changes in other layers.
 \end{enumerate} 
-Table \ref{table:gt-bbox-fine} summarizes the classification mean AP obtained on classifying GT-BBOX  using features from different layers of a fine-tuned and a non-finetuned network.
-\setlength{\tabcolsep}{4pt}
-\begin{table}[t!]
-\begin{center}
-\caption{mAP for gt-bbox classification(FT: Fine-Tuned,A-Net: Alex-Net).}
-\label{table:gt-bbox-fine}
-\begin{tabular}{ccc|ccc|ccc|ccc}
-\hline\noalign{\smallskip}
-Layer & A-Net & FT & Layer & A-Net & FT & Layer & A-Net & FT & Layer & A-Net & FT \\
-\noalign{\smallskip}
-\hline
-\noalign{\smallskip}
-pool-1 & 43.2 & 43.2  & relu-3 & 73.3 & 73.7 & pool-5 & 79.1 & 82.2 & relu-7 & 84.0 & 87.1 \\
-pool-2  & 67.1 & 67.7 & relu-4 & 75.5 & 77.8 & relu-6 & 83.4 & 85.4 \\
-\hline
-\end{tabular}
-\end{center}
-\end{table}
-\setlength{\tabcolsep}{1.4pt}
-
 
 \subsection{Is finetuning only the fully-connected layers sufficient?}
 \label{sub:fine-fc-only}
@@ -296,14 +291,14 @@ The observations made in \ref{sub:fine-entropy} indicate that finetuning the con
 \begin{center}
 \caption{Comparison in performance on of Alex-Net, Finetuned Network(ft-net) and a network with only fc layers finetuned (fc-ft).}
 \label{table:fine-effect}
-\scalebox{1}{
-\begin{tabular}{|l|ccc|ccc|}
+\scalebox{0.85}{
+\begin{tabular}{|l|cccc|cccc|cccc|}
 \hline
-Layer & \multicolumn{3}{c}{detection(mAP)} & \multicolumn{3}{c|}{sun-397 (accuracy)} \\
+Layer &  \multicolumn{4}{c|}{sun-397} & \multicolumn{4}{c|}{det VOC-2007-finetune} & \multicolumn{4}{c|}{det VOC-all-finetune} \\
 \hline
-      & alex-net & ft-net & fc-ft  & alex-net & ft-net & fc-ft\\
+  &    scratch & i-net & ft & fc-ft  & scratch & i-net & ft & fc-ft & scratch & i-net & ft & fc-ft\\
 \hline
-relu-7 & 45.5 & 54.1 & 53.3 & 53.1 & 56.1 & 55.5  \\
+fc-7 & $40.2 \pm $ & $53.1 \pm 0.2$ & $56.8 \pm 0.2$ & $56.2 \pm 0.1$ & 40.7 & 45.5 & 54.1 & 53.3 & 52.3 & 53.1 & 56.0 & 59.2 \\ 
 \hline
 \end{tabular}}
 \end{center}
@@ -373,13 +368,13 @@ Layer  & 5K & 15K & 25K & 35K & 45K & 95K & 105K & 310K \\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
-pool-1 & 23.0 & 24.3 & 24.4 & 24.5 & 24.6 & 24.8 & 24.7 & 25.1\\
-pool-2 & 33.7 & 40.4 & 40.9 & 41.8 & 42.0 & 43.2 & 44.0 & 45.0\\
+conv-1 & 23.0 & 24.3 & 24.4 & 24.5 & 24.6 & 24.8 & 24.7 & 25.1\\
+conv-2 & 33.7 & 40.4 & 40.9 & 41.8 & 42.0 & 43.2 & 44.0 & 45.0\\
 conv-3 & 34.2 & 46.8 & 47.0 & 48.2 & 48.5 & 49.4 & 51.6 & 50.1\\
 conv-4 & 33.5 & 49.0 & 48.7 & 50.2 & 50.6 & 51.6 & 54.1 & 54.2\\
-pool-5 & 33.0 & 53.4 & 55.0 & 56.8 & 57.4 & 59.2 & 63.5 & 65.6\\
-relu-6 & 34.2 & 59.7 & 62.6 & 62.7 & 64.1 & 65.6 & 69.3 & 70.6\\
-relu-7 & 30.9 & 61.3 & 64.1 & 65.1 & 65.8 & 67.8 & 71.8 & 73.2\\
+conv-5 & 33.0 & 53.4 & 55.0 & 56.8 & 57.4 & 59.2 & 63.5 & 65.6\\
+fc-6 & 34.2 & 59.7 & 62.6 & 62.7 & 64.1 & 65.6 & 69.3 & 70.6\\
+fc-7 & 30.9 & 61.3 & 64.1 & 65.1 & 65.8 & 67.8 & 71.8 & 73.2\\
 \hline
 \end{tabular}
 \end{center}
@@ -391,7 +386,7 @@ Motivated by these observations we trained a 50-50 network (50K iterations on im
 \setlength{\tabcolsep}{1pt}
 \begin{table}[t!]
 \begin{center}
-\caption{Performance of 50-50 network for detection on pascal-voc-2007 challenge. (l5 is pool-5 and l7 is relu-7)}
+\caption{Performance of 50-50 network for detection on pascal-voc-2007 challenge. (l5 is conv-5 and l7 is fc-7)}
 \label{table:det-trajectory}
 \scalebox{0.70}{
 \begin{tabular}{l|cccccccccccccccccccc||c}
