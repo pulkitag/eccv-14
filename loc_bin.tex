@@ -36,25 +36,16 @@ $87.5 \pm 4.4$ & $44.5 \pm 4.4$ & $31.8 \pm 2.4$ & $32.0 \pm 2.7$ & $27.7 \pm 5.
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-We can asses the importance of feature magnitude by setting each feature activation $x$ to 1 if $x > 0$ and to $0$ otherwise.
-This binarization is performed prior to using the features in a linear classifier and leads to loss of information contained in the magnitude of feature responses while still retaining information about which feature channels fired and where they fired. 
+We can asses the importance of feature magnitude by setting each feature activation $x$ to 1 if $x > 0$ and to $0$ otherwise. This binarization is performed prior to using the features in a linear classifier and leads to loss of information contained in the magnitude of feature responses while still retaining information about which feature channels fired and where they fired. 
 In Tables \ref{table:class-ablation} and \ref{table:det-ablation} we show that binarization leads to a negligible decline in performance for both classification and detection. 
 
-For the fully-connected layers (fc-6 and fc-7) PASCAL image classification performance is nearly identical before and after binarization, which is a non-trivial property since transforming traditional computer vision features into short (or sparse) binary codes is an active research area.
-Such codes are important for practical applications in large-scale image retrieval and mobile image analysis \todo{add citations}.
-Here we observe that sparse binary codes come essentially ``for free'' when using the representations learned in the fully-connected layers.
+For the fully-connected layers (fc-6 and fc-7) PASCAL image classification performance is nearly identical before and after binarization, which is a non-trivial property since transforming traditional computer vision features into short (or sparse) binary codes is an active research area. Such codes are important for practical applications in large-scale image retrieval and mobile image analysis \todo{add citations}. Here we observe that sparse binary codes come essentially ``for free'' when using the representations learned in the fully-connected layers.
 
 \subsection{How important is activation location?}
 \label{sub:imp-loc}
-Now we turn to removing spatial information from feature activations while retaining information about their activation magnitudes.
-We consider two methods for ablating spatial information from features computed by the convolutional layers (the fully-connected layers do not contain \emph{explicit} spatial information).
+Now we turn to removing spatial information from feature activations while retaining information about their activation magnitudes. We consider two methods for ablating spatial information from features computed by the convolutional layers (the fully-connected layers do not contain \emph{explicit} spatial information).
 
-The first method (``sp-max'') simply collapses the $k \times k$ spatial map into a single value per feature channel by max pooling.
-The second method (``sp-shuffle'') retains the original distribution of feature activation values, but scrambles spatial correlations between columns of feature channels.
-To perform sp-shuffle, we permute the spatial locations in the $k \times k$ spatial map.
-This permutation is performed independently for each network input (i.e., different inputs undergo different permutations).
-Columns of feature channels move together, which preserves correlations between features within each (shuffled) spatial location.
-These transformations are illustrated in Figure \ref{fig:features}.
+The first method (``sp-max'') simply collapses the $k \times k$ spatial map into a single value per feature channel by max pooling. The second method (``sp-shuffle'') retains the original distribution of feature activation values, but scrambles spatial correlations between columns of feature channels. To perform sp-shuffle, we permute the spatial locations in the $k \times k$ spatial map. This permutation is performed independently for each network input (i.e., different inputs undergo different permutations). Columns of feature channels move together, which preserves correlations between features within each (shuffled) spatial location. These transformations are illustrated in Figure \ref{fig:features}.
 
 For image classification, damaging spatial information leads to a large difference in performance between original and spatially-ablated conv-1 features, but with a gradually decreasing difference for higher layers (Table \ref{table:class-ablation}). 
 In fact, the performance of conv-5 after sp-max is close to the original performance. 

@@ -17,7 +17,7 @@ The distribution of classes was uniform across all the three sets.
 We emphasize that results on these splits are only used to support investigations into properties of CNNs and not for comparing against other scene-classification methods in the literature.
 For SUN CLS, we report 1-of-397 classification accuracy averaged over all classes, which is the standard metric for this dataset.
 
-\paragraph{Object detection.} For the task of object detection we use PASCAL VOC 2007, training on the train and val sets and testing on the test set.
+\paragraph{Object detection.} For the task of object detection we use PASCAL VOC 2007, training on the train and val sets and testing on the test set. 
 We refer to this dataset and task by ``PASCAL DET''.
 PASCAL DET uses the same set of images as PASCAL CLS.
 We note that it is standard practice to use the 2007 version of PASCAL for reporting results of abalation studies and hyperparameter sweeps.
@@ -43,9 +43,11 @@ For layers conv-3, conv-4, fc-6, and fc-7 we mean the output of ReLU units.
  
 \subsection{Supervised pre-training and fine-tuning}
 \label{sub:fine-train}
-We employ the supervised pre-training, domain-specific fine-tuning paradigm used by R-CNN \cite{Rcnn} in many experiments.
-The idea of supervised pre-training is to use a data-rich auxiliary dataset and task, such as ImageNet classification, to initialize a large CNN before training on a small dataset.
-This procedure allows the small dataset to be used while avoiding disasterously overfitting the large network to it.
+It is not possible to train a CNN with a large number of parameters on small dataset of images due to the problem of over-fitting. The idea of supervised pre-training is to use a data-rich auxiliary dataset and task, such as ImageNet classification, to initialize the CNN parameters before training models on a small dataset. \cite{Decaf} demonstrated that such pre-training leads to state of art of results on various image classification tasks. To further improve performance, CNN parameters can be slowly updated to minimize the target loss function \cite{Rcnn}. This procedure is called fine-tuning.   
+
+%We employ the supervised pre-training, domain-specific fine-tuning paradigm used by R-CNN \cite{Rcnn} in many experiments.
+%The idea of supervised pre-training is to use a data-rich auxiliary dataset and task, such as ImageNet classification, to initialize a CNN with large number of parameters before training on a small dataset. Such initialization procedure allows the network parameters to be modified to achieve good performance on a small dataset without overfitting the large network to it.
+%This procedure allows the small dataset to be used while avoiding disastrously overfitting the large network to it.
 %For experiments in which the network is pre-trained on ImageNet, stochastic gradient descent is run for 310000 iterations (66 epochs).
 
 For fine-tuning, we run stochastic gradient descent (SGD) with a starting learning rate set to $0.001$ ($1/10$-th of the initial learning rate used for training the network for Imagenet classification). 
