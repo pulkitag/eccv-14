@@ -1,6 +1,6 @@
-\section{How do the different layers of a CNN train over time? How much pretraining is sufficient?}
+\section{How do the different layers of a CNN train over time? How much pre-training is sufficient?}
 \label{sec:speed}
-Training CNNs is very time consuming. \cite{Kriz} trained for around 7 days for achieving state of art results on Imagenet. Even finetuning for PASCAL object detection \cite{Rcnn} takes over 12 hours on the advanced GPUs such as the Nvidia Tesla-K40. This is a big barrier towards exploring different network architectures. Layerwise training has been previously used for learning parameters of multilayer networks(REF). We hypothesized, that maybe such methods which train one layer at a time can be used to speed-up CNN training. Before, testing this we sought to determine if simultaneous learning of parameters in all layers of CNNs by itself proceeds in a layerwise manner. 
+Pre-Training is the process of initializing CNN parameters for a target application using images from a (generally larger) separate dataset. Features learned by a CNN pre-trained on Imagenet have been shown to generalize and achieve state of art results across multiple computer vision datasets (see section \ref{sec:fine} and \cite{Decaf}). Since, no single image dataset fully captures the variation in natural images, all datasets are biased (cite Alyosha). Consequently, it can be expected that excessive pre-training can cause the CNN to overfit on Imagenet and thus hurt generalization performance. 
 
 
 \setlength{\tabcolsep}{4pt}
@@ -36,7 +36,7 @@ fc-7 & 30.9 & 61.3 & 64.1 & 65.1 & 65.8 & 67.8 & 71.8 & 73.2\\
 \label{fig:conv1}
 \end{figure}
 
-For probing this, linear SVM was trained for PASCAL 2007 image classification using features extracted from individual layers. The results are summarized in table \ref{table:det-traj-classify}.It is quite surprising to note that by 15K iterations all layers are within 80\% and at 50K iterations within 90\% of there final performance. This strongly indicates that a great portion of training required for generalization happens quite quickly. 
+We investigated this by training linear SVMs for the task of PASCAL 2007 image classification using features extracted from individual layers of CNNs trained for different number of steps. The results are summarized in table \ref{table:det-traj-classify}.It is quite surprising to note that by 15K iterations all layers are within 80\% and at 50K iterations within 90\% of there final performance. This strongly indicates that a great portion of training required for generalization happens quite quickly. 
 
 Motivated by these observations we trained a 50-50 network (50K iterations on imagenet and finetuned for 50K iterations using the procedure described in sec. \ref{sub:fine-train}) and evaluated its performance on the  Pascal 2007 detection challenge (see table \ref{table:det-trajectory} for results). Consistent with our earlier results we find that this network achieves a surprising performance of 48.6 mean AP points compared to 54.1 achieved by pre-training for 310K iterations. 
 
