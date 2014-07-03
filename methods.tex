@@ -5,12 +5,12 @@
 In this paper, we report experimental results using a several standard datasets and tasks, which we summarize here.
 
 \paragraph{Image classification.} For the task of image classification we consider two datasets, the first of which is PASCAL VOC 2007.
-We refer to experiments on this dataset by ``PASCAL CLS''.
+We refer to experiments on this dataset by ``PASCAL-CLS''.
 Results on PASCAL CLS are reported using the standard average precision (AP) and mean AP metrics.
 
 PASCAL CLS is fairly small-scale with only 5k images for training and 5k images for testing.
 Therefore, we also consider the SUN dataset \cite{sun} which has around 108k images and 397 classes.
-We refer to experiments on SUN by ``SUN CLS''.
+We refer to experiments on SUN by ``SUN-CLS''.
 In these experiments we use a non-standard train-test split since it was computationally infeasible to run all of our experiments on the 10 standard subsets proposed by \cite{sun}. 
 Instead, we randomly split the dataset into three parts (train, val and test) using 50\%,10\% and 40\% of the data, respectively. 
 The distribution of classes was uniform across all the three sets.
@@ -18,12 +18,12 @@ We emphasize that results on these splits are only used to support investigation
 For SUN CLS, we report 1-of-397 classification accuracy averaged over all classes, which is the standard metric for this dataset.
 
 \paragraph{Object detection.} For the task of object detection we use PASCAL VOC 2007, training on the train and val sets and testing on the test set. 
-We refer to this dataset and task by ``PASCAL DET''.
-PASCAL DET uses the same set of images as PASCAL CLS.
+We refer to this dataset and task by ``PASCAL-DET''.
+PASCAL DET uses the same set of images as PASCAL-CLS.
 We note that it is standard practice to use the 2007 version of PASCAL for reporting results of abalation studies and hyperparameter sweeps.
-We report performance on PASCAL DET using the standard AP and mAP metrics.
-In some of our experiments we use only the ground-truth PASCAL DET bounding boxes.
-We refer to this setup as ``PASCAL DET-GT''.
+We report performance on PASCAL-DET using the standard AP and mAP metrics.
+In some of our experiments we use only the ground-truth PASCAL-DET bounding boxes.
+We refer to this setup as ``PASCAL-DET-GT''.
 
 \subsection{Network architecture and layer nomenclature}
 \label{sub:net-arch}

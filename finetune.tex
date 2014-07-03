@@ -1,12 +1,38 @@
 
 \section{What happens when a discriminatively pretrained network is finetuned?}
 \label{sec:fine}
-Finetuning a network is the process of slowly updating pre-learned parameters to minimize a target loss function for a new task at hand. Since, CNNs consist of large number of parameters they are prone to overfitting when trained on small datasets. Finetuning can be considered as a method of transfer learning and recent results from \cite{Rcnn, Decaf} presented a strong case for this methodology boosting performance. Although, unsupervised pretraining has been widely studied in the multilayer network literature \cite{AmitGeman, DeepPre}, there is no work analysing the effect of fine-tuning on different layers of a discriminatively trained multilayer convolutional networks.
+%Finetuning a network is the process of slowly updating pre-learned parameters to minimize a target loss function for a new task at hand. Since, CNNs consist of large number of parameters they are prone to overfitting when trained on small datasets. Finetuning can be considered as a method of transfer learning and recent results from \cite{Rcnn, Decaf} presented a strong case for this methodology boosting performance. Although, unsupervised pretraining has been widely studied in the multilayer network literature \cite{AmitGeman, DeepPre}, there is no work analysing the effect of fine-tuning on different layers of a discriminatively trained multilayer convolutional networks.
 
-We start our analysis by investigating how the discriminative capacity of different layers of the network changes as a result of finetuning. We measure discriminative capacity using the entropy of each layer  
+%We start our analysis by investigating how the discriminative capacity of different layers of the network changes as a result of finetuning. We measure discriminative capacity using the entropy of each layer  
 %We start our analysis by investigating how the entropy of filters across different layers changes as a result of discriminative fine-tuning (see sec \ref{sub:fine-entropy}). Since, entropy of a filter can be evaluated at different threshold level of activations we propose the metric of Area under the Entropy curve (AuE) to judge changes in filter selectivity. Our main finding is that most of the learning during finetuning happens only in the top two fully connected layers. Motivated by this observation, we finetune networks for PASCAL detection and SUN-397 scene classification task by setting non-zero learning rates only in the top 2 layers (see sec\ref{sub:fine-fc-only}). We find this results in a negligible drop in performance and allows for moderate speed-ups in finetuning time. Other conclusions are presented in the sec \ref{sub:fine-discussion}.
 
-\subsection{Entropy Analysis}
+Results from \cite{Rcnn} suggested that fine-tuning a discriminatively pre-trained network is a powerful method for task specific feature learning. Consequently, we studied the effect fine-tuning on performance under the experimental setups of SUN-CLS and PASCAL-DET (section \ref{sub:effect-finetune}). We provide objective evidence that with less data, pre-training followed by fine-tuning is required for good performance, whereas with enough data, a CNN can be trained from scratch. We also find that fine-tuning with more data leads to better performance and this is used to establish the new state of art results on PASCAL-DET.
+
+Given these results, it is important to understand the effect, fine-tuning has on the parameters of the CNN. Towards this end, we investigate the effect of fine-tuning for PASCAL-DET has on the discriminative capacity of individual features extracted from different layers of the CNN (section .) We find that discriminative capacity of individual features from layers 1 to 5 does not changes much, whereas features in layers 6 to 7 become substantially more discriminative. We use this observation to show that fine-tuning only the top two layers (i.e. 6,7) leads to as good performance as fine-tuning all layers on datasets of size PASCAL-DET and SUN-CLS. However, we also note that given larger datasets, fine-tuning only layers 6,7 is insufficient. This suggests that work such as (\todo{REF}) can benefit from fine-tuning all layers.        
+
+\subsection{Effect of fine-tuning on performance}
+\label{sub:effect-finetune}
+\setlength{\tabcolsep}{2pt}
+\begin{table}[t!]
+\begin{center}
+\caption{Comparing the performance of a CNN trained from scratch, pre-trained on Imagenet and fine-tuned for the particular task. VOC 2007 + 2012 data was used for training from scratch and fine-tuning for PASCAL-DET-2. }
+\label{table:fine-effect}
+\scalebox{0.9}{
+\begin{tabular}{|l|ccc|ccc|ccc|}
+\hline
+Layer &  \multicolumn{3}{c|}{SUN-CLS} & \multicolumn{3}{c|}{PASCAL-DET} & \multicolumn{3}{c|}{PASCAL-DET-2} \\
+\hline
+  &    scratch & pre-train & fine-tune  & scratch & pre-train & fine-tune & scratch & pre-train & fine-tune\\
+\hline
+fc-7 & $40.2 \pm $ & $53.1 \pm 0.2$ & $56.8 \pm 0.2$ & 40.7 & 45.5 & 54.1 & 52.3 & 45.5 & 59.2 \\ 
+\hline
+\end{tabular}}
+\end{center}
+\end{table}
+\setlength{\tabcolsep}{1.4pt}
+
+
+\subsection{Effect of fine-tuning on network parameters}
 \label{sub:fine-entropy}
 We compute the entropy  curve of each filter (using the method described in \ref{sub:def-ent}) for all layers of Alex-Net and FT-Net using the ground-truth bounding boxes taken from the VOC-2007 test-set. 
 
