@@ -1,28 +1,31 @@
 \section{Are there Grand Mother Cells in CNNs? How distributed are the representations?}
 \label{sec:grand-mother}
-Neuroscientists conjectured the presence of cells in the brain which only respond to very specific and complex visual stimulus (such as the face of one's grand mother) and  called them as Grand Mother Cells (GMC) \cite{Barlow}, \cite{Grandmother}. Proponents of artificial neural networks have shown a great interest in reporting the presence of such features in their networks \cite{GoogleCat}. More recently, for understanding feature representations in CNN, \cite{DeConv}, \cite{Simonyan} presented methods for finding the optimal visual input for a single feature. Mathematically, this computation can be expressed as finding the set of images $\mathcal{I}$ which maximally activate a single feature (i.e. find $i \in \mathcal{I}$ s.t. Feature-score(i) $\geq th$ $\forall i $, where $th$ is a threshold value). This distribution of class labels associated with this set of images ($\mathcal{I}$), defines the \textit{precision} of the feature. However, this distribution does not account for the \textit{recall}.  The presence/absence of GMC is a scientifically interesting question to pursue, but for recognition, we require features with both high precision and high recall. Consequently, we argue that for computer vision GMC should be interpreted as features with high AP and not not just the recall. 
+Neuroscientists have conjectured that cells in the human brain which only respond to very specific and complex visual stimulus (such as the face of one's grand mother) are involved in object recognition and termed them as Grand Mother Cells (GMC) \cite{Barlow}, \cite{Grandmother}. Proponents of artificial neural networks have shown a great interest in reporting the presence of GMC like features in their networks \cite{GoogleCat}. More recently, for understanding feature representations in CNN, \cite{DeConv}, \cite{Simonyan} presented methods for finding the optimal visual input for a single feature. Mathematically, this computation can be expressed as finding the set of images $\mathcal{I}$ which maximally activate a single feature (i.e. find $i \in \mathcal{I}$ s.t. Feature-score(i) $\geq th$ $\forall i $, where $th$ is a threshold value). The distribution of class labels associated with this set of images ($\mathcal{I}$), defines the \textit{precision} of the feature. However, this distribution does not account for the \textit{recall}.  The presence/absence of GMC is a scientifically interesting question to pursue, but for recognition, we require features with both high precision and high recall. Consequently, we argue that if the goal is object recognition,  then GMC should be interpreted as features with high AP and not just high precision. 
  
-
-%\begin{align}
-%  \psi (u) & = \int_{0}^{T} \left[\frac{1}{2}
-%\end{align}
-Until \cite{Kriz}, the dominant approaches for image and scene classification were either based on constructing feature vectors from a bag of local descriptors such as SIFT \cite{SPM} or using mid-level patches \cite{Mid1}, \cite{Blocks}. Since, each local descriptor by itself is a weak feature, the first approach essentially constituted a distributed code. The problem of    
-
-They are subjective and it is unclear what conclusions may be drawn. Visualizing the tuning of a few filters tells us very little about what the other filters might be doing. To the best of our knowledge there is little work which tries to find an objective answer to this question.
+Prior to \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (or words) such as SIFT (BoW model, \cite{SPM}) or using mid-level patches \cite{Mid1}, \cite{Blocks}. The BoW feature representation is a distributed code (i.e. a single feature by itself is not discriminative, but a group of features taken together is.), whereas problem of finding good mid-level parts is often posed as a greedy search for high recall discriminative templates. Mid-level patches are consequently closer to the GMC-like representation. Given this, it is interesting to investigate the CNN features to find the kind of representations they employ. 
 
 We divide our analysis into two parts. In sec \ref{sub:class-specific-unit} we try to address if there exist filters with very high precision (aka Grand-Mother cells) and in sec \ref{sub:how-many} we answer how many filters are required to discriminate a class. 
 
-\subsection{Are there high precision filters in layer 5?}
+\subsection{Finding Grand Mother Cells}
 \label{sub:class-specific-unit}
-Precision for each filter from layer 5 is computed in a way analogous to entropy computation described in \ref{sub:def-ent}. In the final step instead of computing the entropy, we compute Prob(Class $|$ Filter Activity $\geq$ threshold). We define the selectivity of a filter as the area under the precision curve. For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
-From figure \ref{fig:prob-sel} it is clear that for some classes such persons and bicycles there are indeed some very high precision filters, but for a lot of classes like sofa and horses no such filters exist. 
+%Precision for each filter from layer 5 is computed in a way analogous to entropy computation described in \ref{sub:def-ent}. In the final step instead of computing the entropy, we compute Prob(Class $|$ Filter Activity $\geq$ threshold). We define the selectivity of a filter as the area under the precision curve. 
+
+For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
+From figure \ref{fig:ap} it is clear that for some classes such persons and bicycles there are indeed some very high precision filters, but for a lot of classes like sofa and horses no such filters exist. 
 
 \begin{figure}[t!]
 \centering
-\includegraphics[scale=0.20]{images/prob_sel_dims_top5.png}
-\caption{This plot shows the precision curve for the top 5 most selective filters taken from Alex-Net (Blue) and FT-Net(Red) for all PASCAL classes. Y-axis is the precision and X-axis is number of examples.}
-\label{fig:prob-sel}
+\subfloat{\includegraphics[scale=0.20]{images/gtbbox_pascal_prerec_pool5units.png}}
+\caption{Precision-Recall Curves for 20 PASCAL Classes calculated using pool-5 filter responses on ground truth bounding boxes. Red-Curves: Fine Tuned Network, Blue-Curves: Alex-Net. The figure only displays 5 best filters for each class based on AP  upto a recall threshold of 0.25. For most classes, precision drops significantly even at modest recall values.}
+\label{fig:ap}
 \end{figure}
+
+%\begin{figure}[t!]
+%\centering
+%\includegraphics[scale=0.20]{images/prob_sel_dims_top5.png}
+%\caption{This plot shows the precision curve for the top 5 most selective filters taken from Alex-Net (Blue) and FT-Net(Red) for all PASCAL classes. Y-axis is the precision and X-axis is number of examples.}
+%\label{fig:prob-sel}
+%\end{figure}
 
 \subsection{How many filters are required for discrimination?}
 \label{sub:how-many}
