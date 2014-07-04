@@ -1,0 +1,33 @@
+\subsection{Effect of fine-tuning on network parameters}
+\label{sub:fine-entropy}
+We have provided additional evidence that fine-tuning a discriminatively pre-trained network is very effective in terms of task performance.
+Now we look inside the network to see how fine-tuning changes its parameters.
+To do this, we define a way to measure the capacity of each filter in the network to discriminate between object classes.
+
+To measure the discriminative capacity of a filter, we start by collecting filter responses from a set of $N$ images.
+Each image, when passed through the CNN produces a $p \times p$ heat map of scores for each filter in a given layer (e.g., $p = 6$ for a conv-5 filter and $p = 1$ for an fc-6 filter).
+This heat map is vectorized (\texttt{x(:)} in MATLAB) into a vector of scores of length $p^2$. With each element of this vector we associate the class label of the image. 
+Thus, for every image we have a score vector and a label vector of length $p^2$ each.
+Next, the score vectors from all $N$ images are concatenated into an $Np^2$-length score vector.
+The same is done for the label vectors.
+
+Now, for a given score threshold $\tau$, we define the \emph{class entropy of a filter} to be the entropy of the normalized histogram of class labels that have an associated score $\geq \tau$.
+A low class entropy means that at scores above $\tau$, the filter is very class selective.
+As this threshold changes, the class entropy traces out a curve which we call the \emph{entropy curve}.
+The \emph{area under the entropy curve} (AuE), summarizes the class entropy at all thresholds and is used as a measure of discriminative capacity of the filter. 
+The lower the AuE value, the more class selective the filter is.
+
+We can also characterize the distribution of discriminative ability of all filters of a layer.
+To do this, we sort the filter according to their AuE.
+Then, the cumulative sum of AuE values in the sorted list is calculated (called \emph{cumulative AuE} or CAuE). 
+The $i$-th entry of the CAuE list is the sum of the AuE scores of the top $i$ most discriminative filters.
+The difference in the value of the $i$-th entry before and after fine-tuning measures the change in class selectivity of the top $i$ most discriminative filters due to fine-tuning.
+For comparing results across different layers, the CAuE values are normalized to account for different numbers of filters in each layer. 
+Specifically, the $i$-th entry of the CAuE list is divided by $i$. 
+This normalized CAuE is called the Mean Cumulative Area Under the Entropy Curve (MCAuE).
+A lower value of MCAuE indicates that the set filters is more discriminative.
+
+Figure \ref{fig:fine-entropy} shows MCAuE computed on PASCAL-DET-GT image-label pairs using two networks: the first, was pre-trained on ImageNet only whereas the second was fine-tuned for PASCAL-DET. 
+%The  $k^{th}$ threshold point for layer l corresponds to MCAuE of top $N_l(k/30)$ filters, where $N_l$ is number of filters in layer $l$. 
+PASCAL-DET-GT was used for this study instead of classification to ensure that filter responses were a direct result of presence of object categories of interest and not the background as might happen in the classification task.
+
