@@ -8,6 +8,8 @@ We perform such analysis in two phases using conv-5 features. In the first phase
 
 \subsection{Finding Grandmother Cells}
 \label{sub:class-specific-unit}
+To come - awaiting results before updating. Data on work-4 got deleted :(
+%The output of conv-5 layer is the response of 256 filters in a $6\times 6$ spatial grid. For determining if a conv-5 filters behave like GMC, this spatial map is first collapsed into a single value using max-pooling and is considered to be the response of the filter to the image \footnote{section \label{sub:imp-mag} shows that such transformation causes negligible drop in performance.}. Next, using this response, the AP value for each filter is calculated for the task of PASCAL-DET-GT. All filters are then sorted in the decreasing order of their APs. The precision-recall curves for top five conv-5 filters are shown in figure \ref{fig:ap}. Notice that for a few classes such as 
 %Precision for each filter from layer 5 is computed in a way analogous to entropy computation described in \ref{sub:def-ent}. In the final step instead of computing the entropy, we compute Prob(Class $|$ Filter Activity $\geq$ threshold). We define the selectivity of a filter as the area under the precision curve. 
 
 %For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
