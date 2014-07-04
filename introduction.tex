@@ -15,7 +15,7 @@ Since this initial set of results, several other papers have reported similar fi
 
 Feature transforms such as SIFT and HOG afford an intuitive interpretation as histograms of oriented edge filter responses arranged into spatial arrays.
 However, we have little understanding of what visual features the different layers of a CNN encode.
-Given that rich feature hierarchies provided by CNN are likely to emerge as the prominent feature extractor for computer vision models over the next few years, we believe that developing such an understanding is an interesting scientific pursuit and an essential exercise prior to designing computer vision methods which can optimally use these features.
+Given that rich feature hierarchies provided by CNNs are likely to emerge as the prominent feature extractor for computer vision models over the next few years, we believe that developing such an understanding is an interesting scientific pursuit and an essential exercise prior to designing computer vision methods which can optimally use these features.
 Therefore, in this paper we study several aspects of CNNs through an empirical lens.
 
 % Therefore in this paper, we study several aspects of CNNs
@@ -27,10 +27,10 @@ Therefore, in this paper we study several aspects of CNNs through an empirical l
 \subsection{Summary of findings}
 
 \subsubsection{Grandmother cells and distributed codes.}
-Recent work on visualizing features from deep networks (e.g., \cite{GoogleCat,DeConv}) suggests that the feature code might consist mainly of ``grandmother'' cells \cite{Barlow,Grandmother}.
-In otherwords, the CNN learns features that fire only when a specific semantic class, such as \emph{cat}, is present.
+Recent work on visualizing features from deep networks (e.g., \cite{GoogleCat,DeConv}) suggests that the features might consist mainly of ``grandmother'' cells \cite{Barlow,Grandmother}.
+In other words, that the CNN learns features that fire only when a specific semantic class, such as \emph{cat}, is present.
 Our analysis shows that the representation is more subtle.
-There are a small number of grandmother-cell-like features, but most of the code is distributed and several features must fire to effectively discriminate between classes.
+There are a small number of grandmother-cell-like features, but most of the feature code is distributed and several features must fire in concert to effectively discriminate between classes.
 
 \subsubsection{Effects of fine-tuning.} 
 Girshick et al. \cite{Rcnn} showed that supervised pre-training and fine-tuning are effective when training data is scarce.
@@ -41,11 +41,11 @@ However, we also show that in this data regime, supervised pre-training is still
 \subsubsection{Effects of pre-training on generalization.}
 One concern when using supervised pre-training is that achieving a better model fit to ImageNet, for example, might lead to higher generalization error when applying the learned features to another dataset and task.
 If this is the case, then some form of regularization, such as early stopping, would be beneficial.
-We show the suprising result that pre-training for longer yields better results, with diminishing returns, but does increase generalization error.
+We show the suprising result that pre-training for longer yields better results, with diminishing returns, but does \emph{not} increase generalization error.
 This implies that fitting the CNN to ImageNet induces a general and portable feature representation.
 
 \subsubsection{Importance of feature location and magnitude.}
-Our final set of experiments investigate what role a feature's spatial location and magnitude play in image classification and object detection.
+Our final set of experiments investigates what role a feature's spatial location and magnitude play in image classification and object detection.
 Matching intuition, we find that spatial location is critical for object detection, but matters little for image classification.
 More surprisingly, we find that feature magnitude is largely unimportant.
 For example, binarizing features (at a threshold of 0) barely degrades performance.
