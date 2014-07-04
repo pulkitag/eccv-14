@@ -1,10 +1,22 @@
-\section{Are there Grandmother Cells in CNNs? How distributed are the representations?}
+\section{Are there grandmother cells in CNNs?}
 \label{sec:grand-mother}
-Neuroscientists have conjectured that cells in the human brain which only respond to very specific and complex visual stimulus (such as the face of one's grandmother) are involved in object recognition and termed them as Grandmother Cells (GMC) \cite{Barlow}, \cite{Grandmother}. Proponents of artificial neural networks have shown a great interest in reporting the presence of GMC like filters for specific object classes in their networks \cite{GoogleCat}. More recently, for understanding feature representations in CNN, \cite{DeConv}, \cite{Simonyan} presented methods for finding the optimal visual input for individual filters. Mathematically, this computation is expressed as finding the set of images $\mathcal{I}$ which maximally activate a single feature (i.e. find $i \in \mathcal{I}$ s.t. Feature-score(i) $\geq th$ $\forall i $, where $th$ is a threshold value). The distribution of class labels associated with this set of images ($\mathcal{I}$), defines the \textit{precision} of the feature. However, this distribution does not account for the \textit{recall}.  The presence/absence of GMC is a scientifically interesting question to pursue, but for recognition, we require features with both high precision and high recall. Consequently, we argue that if the goal is object recognition, then GMC for a particular object class should be interpreted as features with high AP and not just high precision. 
- 
-Further, prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (or words) such as SIFT (BoW model, \cite{SPM}) or using mid-level patches \cite{Mid1}, \cite{Blocks}. The BoW feature representation is a distributed code (i.e. a single feature by itself is not discriminative, but a group of features taken together is.), whereas the problem of finding good mid-level patches is often posed as a greedy search for high recall discriminative templates. Mid-level patches are closer to the GMC-like representation. Given this, it is interesting to investigate the CNN features to find the kind of representations they employ.
+Neuroscientists have conjectured that cells in the human brain which only respond to very specific and complex visual stimuli (such as the face of one's grandmother) are involved in object recognition.
+These neurons are often referred to as \emph{grandmother cells} (GMC) \cite{Barlow,Grandmother}. Proponents of artificial neural networks have shown a great interest in reporting the presence of GMC-like filters for specific object classes in their networks (see, for example, the cat filter reported in \cite{GoogleCat}). More recently, for understanding feature representations in CNNs, \cite{Simonyan,DeConv} presented methods for finding locally optimal visual inputs for individual filters.
+These methods isolate individual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold.
+If, for example, we wish to see if the network contains a GMC filter for the \emph{cat} class, then we should look for a particular filter that fires strongly on all cats and nothing else.
+This criteria can be expressed as looking for a filter that has high \emph{precision} and high \emph{recall}.
+That is, a GMC filter for class $C$ is a filter that has a high average precision when tasked with classifying inputs from class $C$ versus inputs from all other classes.
 
-We perform such analysis in two phases using conv-5 features. In the first phase, we directly address the question of finding GMC (section \ref{sub:class-specific-unit}) by computing AP of individual filters. Next, we determine the total number of filters required for achieving the same performance as all the filters for objectively assessing how distributed are the feature representations (section \ref{sub:how-many}).
+%Mathematically, this computation is expressed as finding the set of images $\mathcal{I}$ which maximally activate a single feature (i.e. find $i \in \mathcal{I}$ s.t. Feature-score(i) $\geq th$ $\forall i $, where $th$ is a threshold value). The distribution of class labels associated with this set of images ($\mathcal{I}$), defines the \textit{precision} of the feature. However, this distribution does not account for the \textit{recall}.  The presence/absence of GMC is a scientifically interesting question to pursue, but for recognition, we require features with both high precision and high recall. Consequently, we argue that if the goal is object recognition, then GMC for a particular object class should be interpreted as features with high AP and not just high precision. 
+ 
+Further, the notion of GMC-like features is related to standard feature encodings for image classification.
+Prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (BoW), such as SIFT (e.g., \cite{SPM}), or by first finding a set of mid-level patches \cite{Mid1,Blocks} and then encoding images in terms of them. 
+The problem of finding good mid-level patches is often posed as a search for a set of high recall discriminative templates. 
+In this sense, mid-level patch discovery is the search for a set of GMC templates. 
+The low-level BoW representation, in contrast, is a \emph{distributed code} in the sense that a single feature by itself is not discriminative, but a group of features taken together is.
+Given this, it is interesting to investigate the CNN features to find the kind of representations they employ.
+
+We perform our analysis in two phases using conv-5 features. In the first phase, we directly address the question of finding GMC filters by computing the AP of individual filters. Then, we determine the total number of filters required for achieving the same performance as using all the filters in order to assess how distributed the feature representation is.
 
 \subsection{Finding Grandmother Cells}
 \label{sub:class-specific-unit}
@@ -36,7 +48,9 @@ We perform such analysis in two phases using conv-5 features. In the first phase
 \label{fig:sel-strategy}
 \end{figure}
 
-In addition to visualizing the AP curves of individual filters, we objectively determined the number of filters required to recognize objects of a particular class. Feature selection was performed to construct subsets \footnote{filter subsets of size [1,2,3,5,10,15,20,25,30,35,40,45,50,80,100,128,256] were used.} of consequently increasing number of filters using the greedy strategy described in figure \ref{fig:sel-strategy}. The variation in performance with the number of filters is shown in figure \ref{fig:svm-sel-dims}. 
+In addition to visualizing the AP curves of individual filters, we measured the number of filters required to recognize objects of a particular class.
+Feature selection was performed to construct nested subsets of filters, ranging from a single filter to all filters, using the greedy strategy described in Figure \ref{fig:sel-strategy}.\footnote{Filter subsets of size [1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256] were used.}
+The variation in performance with the number of filters is shown in figure \ref{fig:svm-sel-dims}. 
 
 \begin{figure}[t!]
 \centering
@@ -69,19 +83,20 @@ fine-tune & 90\% & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 3
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
   
-Table \ref{table:num-fil} lists the number of filters required to achieve 50\% and 90\% of the complete performance. For classes such as persons, cars and cats a relatively few number of filters are required but for most classes around 30-40 filters are required to achieve atleast 90\% of the full performance. This indicates that in conv-5, for a few classes there are GMC like filters, but mostly the feature representation are distributed \footnote{Please see the supplementary material for results on fc-7}. We also find that after fine-tuning, slightly fewer number of filters are required to achieve performance levels similar to a pre-trained network. 
+Table \ref{table:num-fil} lists the number of filters required to achieve 50\% and 90\% of the complete performance. For classes such as persons, cars, and cats relatively few filters are required, but for most classes around 30 to 40 filters are required to achieve at least 90\% of the full performance. This indicates that in conv-5, for a few classes (like cat and person) there are GMC-like filters, but for the most part the feature representation is distributed.
+Results using layer fc-7 are presented in the the supplementary material.
+We also find that after fine-tuning, slightly fewer filters are required to achieve performance levels similar to a pre-trained network. 
 
 \begin{figure}[t!]
 \centering
 \includegraphics[width=1.0\linewidth]{images/ftNet_commonfilters.png}
-\caption{The extent of overlap between the top-50 filters of conv-5 for each class determined using PASCAL-DET-GT.
-Entry (i,j) of the matrix is the fraction of filters of class i common with class j (section \ref{sub:how-many}). It can be seen, that there is little overlap between filters used for different classes.}
+\caption{The extent of overlap between the 50 most discriminative filters of conv-5 for each class determined using PASCAL-DET-GT.
+Entry $(i, j)$ of the matrix is the fraction of top-50 filters class $i$ has in common with class $j$ (Section \ref{sub:how-many}). It can be seen, that there is little overlap between filters used for different classes.}
 \label{fig:overlap}
 \end{figure}
 
-Next, we estimated the extent of overlap between the filters used for discriminating different classes. Towards this end, for each class the 50 most discriminative filter were chosen. The extent of overlap was evaluated by:
-\begin{align}
-\frac{S_{cl^i} \cap S_{cl^j}}{N}
-\end{align}
-where, $S_{cl^i}$ is the set of filters for class $i$ and $N = |S_{cl^i}| = |S_{cl^j}| = 50$. The results are visualized in figure \ref{fig:overlap}. It can be seen that different classes use different subsets of conv-5 filters and there is little overlap between classes. This further indicates that intermediate representations in CNN are distributed and different sets of are used to distinguish between different classes. 
+Next, we estimated the extent of overlap between the filters used for discriminating between different classes.
+For each class $i$, we selected the 50 most discriminative filters (out of 256) and stored the selected filter indicies in the set $S_i$.
+The extent of overlap between class $i$ and $j$ was evaluated by $(|S_i \cap S_j|) / N$,
+where $N = |S_i| = |S_j| = 50$. The results are visualized in Figure \ref{fig:overlap}. It can be seen that different classes use different subsets of conv-5 filters and there is little overlap between classes. This further indicates that intermediate representations in CNN are distributed and different sets of are used to distinguish between different classes. 
 
