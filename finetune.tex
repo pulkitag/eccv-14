@@ -38,7 +38,9 @@ The discriminative capacity of an individual filter is measured using the follow
 
 For characterizing the distribution of discriminative ability of all filters of a layer - filters were sorted according to their AuE. Then, the cumulative sum of this sorted list of AuE was calculated (called as Cumulative Area under Entropy (CAuE)). The $i^{th}$ entry of the CAuE list is the sum of entropies of the top $i$ most discriminative filters. The difference in the value of the $i^{th}$ entry before and after fine-tuning measures the changes in the individual entropy of the top $i$ most discriminative filters due to fine-tuning. For comparing results across different layers, the CAuE values are normalized to account for different number of filters in each layer. Specifically, the $i^{th}$ entry of the CAuE list is divided by $i$. This normalized CAuE is called the Mean Cumulative Area Under the Entropy Curve (MCAuE). A lower value of MCAuE indicates that the filters are more discriminative.
 
-The value of MCAuE at 30 threshold points was computed on PASCAL-DET-GT image-label pairs using two networks: the first, was pre-trained on Imagenet only whereas the second was fine-tuned for PASCAL-DET (figure \ref{fig:fine-entropy}). The  $k^{th}$ threshold point for layer l corresponds to MCAuE of top $N_l(k/30)$ filters, where $N_l$ is number of filters in layer $l$. PASCAL-DET-GT was used for this study instead of classification to ensure that filter responses were a direct result of presence of object categories of interest and not the background as might happen in the classification task.
+In order to summarize the class selectivity for a \emph{set} of filters, we sort them from the most selective to least selective and plot the average selectivity of the first $k$ filters while sweeping $k$ down the sorted list.
+Figure \ref{fig:fine-entropy} shows the class selectivity for the sets of filters in layers 1 to 7 before and after fine-tuning (on VOC 2007 trainval).
+Selectivity is measured using the ground truth boxes from PASCAL-DET-GT instead of a whole-image classification task to ensure that filter responses are a direct result of the presence of object categories of interest and not correlations with image background.
 
 \begin{comment}
 \begin{figure}[t!]
@@ -56,7 +58,14 @@ The value of MCAuE at 30 threshold points was computed on PASCAL-DET-GT image-la
 \label{fig:fine-entropy}
 \end{figure}
 
-Figure \ref{fig:fine-entropy} shows that MCAuE decreases from layers 1 to 7 for both the networks, which means that individual filters grow more discriminative from layers 1 to 7. This result is not surprising and consistent with performance numbers reported in table \ref{table:det-traj-classify}. However, it is interesting to note that entropy changes due to fine-tuning are only significant for layers 6 and 7. This observation indicates that fine-tuning only layers 6,7 (i.e. fc-6 and fc-7) may suffice for achieving good performance. We test this hypothesis on SUN-CLS and PASCAL-DET for small  by comparing the performance of a fine-tuned network (ft) with a network which is fine-tuned by only updating weights of fc-6 and fc-7 (fc-ft network). Results are summarized in table \ref{table:fine-effect}.
+Figure \ref{fig:fine-entropy} shows that class selectivity increases from layer 1 to 7 for both networks.
+This result is consistent with performance numbers reported in Table \ref{table:det-traj-classify}. 
+However, it is interesting to note that entropy changes due to fine-tuning are only significant for layers 6 and 7. 
+This observation indicates that fine-tuning only layers 6 and 7 may suffice for achieving good performance when fine-tuning data is limited. 
+We test this hypothesis on SUN-CLS and PASCAL-DET by comparing the performance of a fine-tuned network (ft) with a network which is fine-tuned by only updating weights of fc-6 and fc-7 (fc-ft network). 
+Results are summarized in Table \ref{table:fine-fc-ft}.
+With small amounts of data, fine-tuning amounts to ``rewiring'' the fully connected layers.
+However, when more fine-tuning data is available (PASCAL-DET+DATA), there is still substantial benefit from fine-tuning all network parameters.
 
 \setlength{\tabcolsep}{2pt}
 \begin{table}[t!]
