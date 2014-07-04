@@ -77,15 +77,6 @@ Selectivity is measured using the ground truth boxes from PASCAL-DET-GT instead 
 \label{fig:fine-entropy}
 \end{figure}
 
-Figure \ref{fig:fine-entropy} shows that class selectivity increases from layer 1 to 7 for both networks.
-This result is consistent with performance numbers reported in Table \ref{table:det-traj-classify}. 
-However, it is interesting to note that entropy changes due to fine-tuning are only significant for layers 6 and 7. 
-This observation indicates that fine-tuning only layers 6 and 7 may suffice for achieving good performance when fine-tuning data is limited. 
-We test this hypothesis on SUN-CLS and PASCAL-DET by comparing the performance of a fine-tuned network (ft) with a network which is fine-tuned by only updating weights of fc-6 and fc-7 (fc-ft network). 
-Results are summarized in Table \ref{table:fine-fc-ft}.
-With small amounts of data, fine-tuning amounts to ``rewiring'' the fully connected layers.
-However, when more fine-tuning data is available (PASCAL-DET+DATA), there is still substantial benefit from fine-tuning all network parameters.
-
 \setlength{\tabcolsep}{2pt}
 \begin{table}[t!]
 \begin{center}
@@ -102,6 +93,15 @@ $56.8 \pm 0.2$ & $56.2 \pm 0.1$ & 54.1 & 53.3 & 59.2 & 56.0 \\
 \end{center}
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
+
+Figure \ref{fig:fine-entropy} shows that class selectivity increases from layer 1 to 7 for both networks.
+This result is consistent with performance numbers reported in Table \ref{table:det-traj-classify}. 
+However, it is interesting to note that entropy changes due to fine-tuning are only significant for layers 6 and 7. 
+This observation indicates that fine-tuning only layers 6 and 7 may suffice for achieving good performance when fine-tuning data is limited. 
+We test this hypothesis on SUN-CLS and PASCAL-DET by comparing the performance of a fine-tuned network (ft) with a network which is fine-tuned by only updating weights of fc-6 and fc-7 (fc-ft network). 
+Results are summarized in Table \ref{table:fine-fc-ft}.
+With small amounts of data, fine-tuning amounts to ``rewiring'' the fully connected layers.
+However, when more fine-tuning data is available (PASCAL-DET+DATA), there is still substantial benefit from fine-tuning all network parameters.
 
 %We find that the final performance in the detection setup only drops by 0.8 points and by 0.6 points for scene-classification.  
 
