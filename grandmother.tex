@@ -4,7 +4,7 @@ Neuroscientists have conjectured that cells in the human brain which only respon
  
 Further, prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (or words) such as SIFT (BoW model, \cite{SPM}) or using mid-level patches \cite{Mid1}, \cite{Blocks}. The BoW feature representation is a distributed code (i.e. a single feature by itself is not discriminative, but a group of features taken together is.), whereas the problem of finding good mid-level patches is often posed as a greedy search for high recall discriminative templates. Mid-level patches are closer to the GMC-like representation. Given this, it is interesting to investigate the CNN features to find the kind of representations they employ.
 
-We perform such analysis in two phases using conv-5 features. In the first phase, we directly address the question of finding GMC (section \ref{sub:class-specific-unit}) by computing AP of individual filters. Next, we determine the total number of filters 
+We perform such analysis in two phases using conv-5 features. In the first phase, we directly address the question of finding GMC (section \ref{sub:class-specific-unit}) by computing AP of individual filters. Next, we determine the total number of filters required for achieving the same 
 
 We divide our analysis into two parts. In sec \ref{sub:class-specific-unit} we try to address if there exist filters with very high precision (aka Grand-Mother cells) and in sec \ref{sub:how-many} we answer how many filters are required to discriminate a class. 
 
@@ -35,7 +35,7 @@ In order to answer this question we train linear a svm for each class using only
   
 \begin{figure}[t!]
 \centering
-\includegraphics[scale=0.30]{images/how-many.png}
+\includegraphics[scale=0.35]{images/how-many.pdf}
 \caption{Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section \ref{sub:imp-loc}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.}
 \label{fig:sel-strategy}
 \end{figure}

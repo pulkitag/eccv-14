@@ -10,7 +10,7 @@ In this section, we experimentally analyze the role of feature magnitude and spa
 
 \begin{figure}[t!]
 \centering
-\includegraphics[height=6.5cm]{images/features1.png}
+\includegraphics[height=6.5cm]{images/ablation.pdf}
 \caption{Illustrations of ablations of feature activation spatial and magnitude information.
 See \ref{sub:imp-mag} and \ref{sub:imp-loc} for details. \todo{replace with PDF}}
   %(a) For illustration, consider the output of a hypothetical layer of size k*k*N (k=3 for convolutional layers and k=1 for FC layers), which has N filters and their responses at k*k spatial locations. Linear SVMs were trained (one for each layer) after vectorizing (i.e. x(:) in matlab) features into a one-dimensional vector of length k*k*N to measure performance of different layers. Next, feature ablations as described below were applied before training SVMs and performance was compared against the un-ablated features. The set of k*k locations for each filter is called its feature map. (b) \textit{spatial-shuffle}(sp-shuffle) -  A random permutation is applied to the set of k*k activations associated with each feature map. Different images see different permutations. (c)\textit{spatial max}(sp-max): For each feature map, the maximum value is selected from the set of k*k activations. (d)\textit{binarization}(bin) Feature dimensions with value $>0$ are set to 1 and others to 0.}
