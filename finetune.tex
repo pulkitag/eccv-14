@@ -57,9 +57,9 @@ The precise definition of this measure is given in the supplementary material.
 Intuitively, we use the class-label entropy of a filter given its activations on a set of images.
 Since this measure is entropy-based, a low value indicates that the filter is highly class selective while a large value indicates that the filter fires regardless of class.
 
-Figure \ref{fig:fine-entropy} shows the class selectivity for the filters in layers 1 to 7 before and after fine-tuning.
-In order to summarize the class selectivity for a \emph{set} of filters, we sort them from the most selective to least selective and plot the average selectivity while sweeping down the sorted list.
-For these experiments we use PASCAL-DET-GT instead of a whole-image classification task to ensure that filter responses are a direct result of presence of object categories of interest and not the background.
+In order to summarize the class selectivity for a \emph{set} of filters, we sort them from the most selective to least selective and plot the average selectivity of the first $k$ filters while sweeping $k$ down the sorted list.
+Figure \ref{fig:fine-entropy} shows the class selectivity for the sets of filters in layers 1 to 7 before and after fine-tuning (on VOC 2007 trainval).
+Selectivity is measured using the ground truth boxes from PASCAL-DET-GT instead of a whole-image classification task to ensure that filter responses are a direct result of the presence of object categories of interest and not correlations with image background.
 
 \begin{comment}
 \begin{figure}[t!]
@@ -77,10 +77,10 @@ For these experiments we use PASCAL-DET-GT instead of a whole-image classificati
 \label{fig:fine-entropy}
 \end{figure}
 
-Figure \ref{fig:fine-entropy} shows that class selectivity increases from layer 1 to 7 for both networks, which means that individual filters grow more discriminative from layers 1 to 7.
+Figure \ref{fig:fine-entropy} shows that class selectivity increases from layer 1 to 7 for both networks.
 This result is consistent with performance numbers reported in Table \ref{table:det-traj-classify}. 
 However, it is interesting to note that entropy changes due to fine-tuning are only significant for layers 6 and 7. 
-This observation indicates that fine-tuning only layers 6, 7 may suffice for achieving good performance when fine-tuning data is limited. 
+This observation indicates that fine-tuning only layers 6 and 7 may suffice for achieving good performance when fine-tuning data is limited. 
 We test this hypothesis on SUN-CLS and PASCAL-DET by comparing the performance of a fine-tuned network (ft) with a network which is fine-tuned by only updating weights of fc-6 and fc-7 (fc-ft network). 
 Results are summarized in Table \ref{table:fine-fc-ft}.
 With small amounts of data, fine-tuning amounts to ``rewiring'' the fully connected layers.
