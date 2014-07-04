@@ -4,21 +4,19 @@ Neuroscientists have conjectured that cells in the human brain which only respon
  
 Further, prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (or words) such as SIFT (BoW model, \cite{SPM}) or using mid-level patches \cite{Mid1}, \cite{Blocks}. The BoW feature representation is a distributed code (i.e. a single feature by itself is not discriminative, but a group of features taken together is.), whereas the problem of finding good mid-level patches is often posed as a greedy search for high recall discriminative templates. Mid-level patches are closer to the GMC-like representation. Given this, it is interesting to investigate the CNN features to find the kind of representations they employ.
 
-We perform such analysis in two phases using conv-5 features. In the first phase, we directly address the question of finding GMC (section \ref{sub:class-specific-unit}) by computing AP of individual filters. Next, we determine the total number of filters required for achieving the same 
-
-We divide our analysis into two parts. In sec \ref{sub:class-specific-unit} we try to address if there exist filters with very high precision (aka Grand-Mother cells) and in sec \ref{sub:how-many} we answer how many filters are required to discriminate a class. 
+We perform such analysis in two phases using conv-5 features. In the first phase, we directly address the question of finding GMC (section \ref{sub:class-specific-unit}) by computing AP of individual filters. Next, we determine the total number of filters required for achieving the same performance as all the filters for objectively assessing how distributed are the feature representations (section \ref{sub:how-many}).
 
 \subsection{Finding Grandmother Cells}
 \label{sub:class-specific-unit}
 %Precision for each filter from layer 5 is computed in a way analogous to entropy computation described in \ref{sub:def-ent}. In the final step instead of computing the entropy, we compute Prob(Class $|$ Filter Activity $\geq$ threshold). We define the selectivity of a filter as the area under the precision curve. 
 
-For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
-From figure \ref{fig:ap} it is clear that for some classes such persons and bicycles there are indeed some very high precision filters, but for a lot of classes like sofa and horses no such filters exist. 
+%For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
+%From figure \ref{fig:ap} it is clear that for some classes such persons and bicycles there are indeed some very high precision filters, but for a lot of classes like sofa and horses no such filters exist. 
 
 \begin{figure}[t!]
 \centering
 \subfloat{\includegraphics[scale=0.20]{images/gtbbox_pascal_prerec_pool5units.png}}
-\caption{Precision-Recall Curves for 20 PASCAL Classes calculated using pool-5 filter responses on ground truth bounding boxes. Red-Curves: Fine Tuned Network, Blue-Curves: Alex-Net. The figure only displays 5 best filters for each class based on AP  upto a recall threshold of 0.25. For most classes, precision drops significantly even at modest recall values.}
+\caption{The precision-recall curves for the top five (based on AP) conv-5 filter responses on PASCAL-DET-GT. Red-Curves: Fine Tuned Network, Blue-Curves: Pre-Trained Network. For most classes, precision drops significantly even at modest recall values. \todo{update figure with PDF}}
 \label{fig:ap}
 \end{figure}
 
@@ -29,67 +27,61 @@ From figure \ref{fig:ap} it is clear that for some classes such persons and bicy
 %\label{fig:prob-sel}
 %\end{figure}
 
-\subsection{How many filters are required for discrimination?}
+\subsection{How distributed are the feature representations?}
 \label{sub:how-many}
-In order to answer this question we train linear a svm for each class using only a subset of 256 pool-5 filters. In particular we construct subsets of size k, where k takes the values - [1,2,3,5,10,15,20,25,30,35,40,45, \newline 50,80, 100,128,256]. A subset of size k is constructed independently for each class using a greedy selection strategy described in figure \ref{fig:sel-strategy}. We use the variation in performance with the number of filters needed as a metric to evaluate how many filters are needed for each class. 
-  
 \begin{figure}[t!]
 \centering
 \includegraphics[scale=0.35]{images/how-many.pdf}
-\caption{Illustration of our greedy strategy for constructing subsets of filters. For each class we first train a linear-svm using the spatial-max feature transformation described in section \ref{sub:imp-loc}. Spatial-max leaves us with a 256-D vector wherein each dimension has a one to one correspondence with 256 pool-5 filters. We use the magnitude of each dimension of the learnt weight vector as a proxy for the importance of that dimension towards discriminating a given class. For the purpose of illustration we describe the procedure with a 4-D weight vector shown on the extreme left (the numbers on each bar are the "dimension"). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.}
+\caption{Illustration of the greedy strategy used for selecting filters. For each class, a linear SVM is trained after ``sp-max'' feature transformation described in section \ref{sub:imp-loc} is applied. ``sp-max''  reduces conv-5 features into a 256-D vector, wherein each dimension corresponds to one of the 256 conv-5 filters. The magnitude of individual dimensions of the weight vector learned by SVM is used as a proxy for determining the importance of each dimension. For the sake of clarity, this procedure is described using a 4-D weight vector shown on the extreme left (the numbers on each bar are the dimension). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.}
 \label{fig:sel-strategy}
 \end{figure}
 
-The results of our analysis are summarized in fig \ref{fig:svm-sel-dims} and table \ref{table:num-fil}. For classes such as persons, cars, cats we require a relatively few number of filters, but for most of the classes we need to look at around 30-40 filters to achieve atleast 90\% of the full performance. This also indicates, that for a few classes yes, there are grand-mother kind of neurons but for a lot of classes the representation is distributed. Also, as expected the fine-tuned network requires activations of a fewer numbers of filters to achieve the same performance but this reduction in number of filters is not large. 
+In addition to visualizing the AP curves of individual filters, we objectively determined the number of filters required to recognize objects of a particular class. Feature selection was performed to construct subsets \footnote{filter subsets of size [1,2,3,5,10,15,20,25,30,35,40,45,50,80,100,128,256] were used.} of consequently increasing number of filters using the greedy strategy described in figure \ref{fig:sel-strategy}. The variation in performance with the number of filters is shown in figure \ref{fig:svm-sel-dims}. 
 
 \begin{figure}[t!]
 \centering
 %\includegraphics[height=6.5cm]{images/svm_seldims.png}
 \includegraphics[height=6.5cm]{images/pool5_spmax_num_svm_filters.pdf}
-\caption{Analysis of how many filters are required to classify ground truth bounding boxes for 20 categories taken from PASCAL-2007 detection challenge. The y-axis in each of plot represents classification accuracy measured as mean-ap where as x-axis stand for the number of filters.)}
+\caption{ The fraction of complete performance (Y-Axis) on PASCAL-DET-GT achieved by conv-5 filter subsets of different sizes (X-axis). Complete performance is the AP computed by considering responses of all the filters. Notice, that for a few classes such as ``person'' and ``bicycle'' only a few filters are required, but for most classes substantially more number of filters are needed.}
 \label{fig:svm-sel-dims}
-\end{figure}
-
-
+\end{figure}  
 
 \setlength{\tabcolsep}{1pt}
 \begin{table}[t!]
 \begin{center}
-\caption{Number of filters required to achieve 50\% ,90\% of the full performance for PASCAL classes using Alex-Net(AN) and the Fine-Tuned network(FT)}
+\caption{Number of filters required to achieve 50\% ,90\% of the complete performance on PASCAL-DET-GT using a CNN pre-trained on Imagenet and fine-tuned for PASCAL-DET using conv-5 features.}
 \label{table:num-fil}
 \tiny
 \begin{tabular}{lc||cccccccccccccccccccc}
 \hline\noalign{\smallskip}
-Net & AP & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & table & dog & horse & mbike & person & plant & sheep & sofa & train & tv \\
+CNN & AP & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & table & dog & horse & mbike & person & plant & sheep & sofa & train & tv \\
 \noalign{\smallskip}
 \hline
-AN & 50 & 15 & 3 & 15 & 15 & 10 & 10 & 3 & 2 & 5 & 15 & 15 & 2 & 10 & 3 & 1 & 10 & 20 & 25 & 10 & 2 \\ 
-FT & 50 & 10 & 1 & 20 & 15 & 5 & 5 & 2 & 2 & 3 & 10 & 15 & 3 & 15 & 10 & 1 & 5 & 15 & 15 & 5 & 2 \\
+pre-train & 50\% & 15 & 3 & 15 & 15 & 10 & 10 & 3 & 2 & 5 & 15 & 15 & 2 & 10 & 3 & 1 & 10 & 20 & 25 & 10 & 2 \\ 
+fine-tune & 50\% & 10 & 1 & 20 & 15 & 5 & 5 & 2 & 2 & 3 & 10 & 15 & 3 & 15 & 10 & 1 & 5 & 15 & 15 & 5 & 2 \\
 \hline
 \noalign{\smallskip}
-AN & 90 & 40 & 35 & 80 & 80 & 35 & 40 & 30 & 20 & 35 & 100 & 80 & 30 & 45 & 40 & 15 & 45 & 50 & 100 & 45 & 25 \\
-FT & 90 & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 30 & 40 & 10 & 35 & 40 & 80 & 40 & 20 \\
+pre-train & 90\% & 40 & 35 & 80 & 80 & 35 & 40 & 30 & 20 & 35 & 100 & 80 & 30 & 45 & 40 & 15 & 45 & 50 & 100 & 45 & 25 \\
+fine-tune & 90\% & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 30 & 40 & 10 & 35 & 40 & 80 & 40 & 20 \\
 \hline
 \end{tabular}
 \end{center}
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
+  
+Table \ref{table:num-fil} lists the number of filters required to achieve 50\% and 90\% of the complete performance. For classes such as persons, cars and cats a relatively few number of filters are required but for most classes around 30-40 filters are required to achieve atleast 90\% of the full performance. This indicates that in conv-5, for a few classes there are GMC like filters, but mostly the feature representation are distributed \footnote{Please see the supplementary material for results on fc-7}. We also find that after fine-tuning, slightly fewer number of filters are required to achieve performance levels similar to a pre-trained network. 
 
 \begin{figure}[t!]
 \centering
 \includegraphics[width=1.0\linewidth]{images/ftNet_commonfilters.png}
-\caption{This plot depicts the degree of overlap among the top-50 filters in layer 5 of
-finetuned network used for classifying each category of the PASCAL 2007 challenge. Entry
-(i,j) of the matrix is the fraction of filters of the i th class which are common with j th class. This plot indicates, that there is very little overlap between filters used for different classes.}
-\label{fig:svm-sel-dims}
+\caption{The extent of overlap between the top-50 filters of conv-5 for each class determined using PASCAL-DET-GT.
+Entry (i,j) of the matrix is the fraction of filters of class i common with class j (section \ref{sub:how-many}). It can be seen, that there is little overlap between filters used for different classes.}
+\label{fig:overlap}
 \end{figure}
 
-
-
-
-\subsection{Discussion}
-%Although in our analysis we find that for discriminating some classes only a few units suffice whereas for others quite a lot of them are required. 
-%The ''extent" to which the code is distributed is likely to be a function of number of filters. If there are a few filters we will expect the code to be more distributed whereas if there are a large number of filters we expect to find more Grandmother kind of cells. The other important tradeoffs to consider are accuracy and training time as a function of number of filters in each layer. We as a community have only had a chance to experiment with a few network architectures out of the exponentially large number of possibilities. Although, it is beyond the scope of the current work determining the optimal number of filters in each layer is an open important question which needs to be addressed! 
-To include somewhere: It is also notable to point out that the more or less generic representations learnt in layer 4 and 5 are in contrast with some of the mid-level feature learning work such as \cite{Blocks} \cite{Mid1} wherein the problem of finding good mid-level parts is often posed as a greedy search for high recall discriminative templates.
-
+Next, we estimated the extent of overlap between the filters used for discriminating different classes. Towards this end, for each class the 50 most discriminative filter were chosen. The extent of overlap was evaluated by:
+\begin{align}
+\frac{S_{cl^i} \cap S_{cl^j}}{N}
+\end{align}
+where, $S_{cl^i}$ is the set of filters for class $i$ and $N = |S_{cl^i}| = |S_{cl^j}| = 50$. The results are visualized in figure \ref{fig:overlap}. It can be seen that different classes use different subsets of conv-5 filters and there is little overlap between classes. This further indicates that intermediate representations in CNN are distributed and different sets of are used to distinguish between different classes. 
 
