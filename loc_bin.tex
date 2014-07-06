@@ -53,7 +53,7 @@ For image classification, damaging spatial information leads to a large differen
 In fact, the performance of conv-5 after sp-max is close to the original performance. 
 This indicates, that a lot of information important for classification is encoded in the activation of the filters and not necessarily in the spatial pattern of their activations. %(\todo{Discuss about spatial overlap}).
 Note, this observation is not an artefact of small number of classes in PASCAL-CLS. On ImageNet validation data, conv-5 features and conv-5 after sp-max result into accuracy of 43.2 and 41.5 respectively. 
-However, for detection sp-max (Tables \ref{table:det-ablation}) leads to a large drop in performance. 
+However, for detection sp-max (Table \ref{table:det-ablation}) leads to a large drop in performance. 
 This may not be surprising as in contrast to classification, detection requires spatial information for precise localization.
 
 \setlength{\tabcolsep}{4pt}

@@ -16,7 +16,7 @@ Instead, we randomly split the dataset into three parts (train, val, and test) u
 The distribution of classes was uniform across all the three sets.
 We emphasize that results on these splits are only used to support investigations into properties of CNNs and not for comparing against other scene-classification methods in the literature.
 For SUN-CLS, we report 1-of-397 classification accuracy averaged over all classes, which is the standard metric for this dataset.
-For select experiments\footnote{It was computationally infeasible to compute error bars for all experiments.} we report the error bars in performance as mean $\pm$ standard deviation in accuracy over 5 runs. For each run, a different random split of train, val and test sets was used.  
+For select experiments (it was computationally infeasible to compute error bars for all experiments) we report the error bars in performance as mean $\pm$ standard deviation in accuracy over 5 runs. For each run, a different random split of train, val, and test sets was used.  
 
 \subsubsection{Object detection.} For the task of object detection we use PASCAL VOC 2007.
 We train using the trainval set and test on the test set.
@@ -26,7 +26,7 @@ We note that it is standard practice to use the 2007 version of PASCAL VOC for r
 We report performance on PASCAL-DET using the standard AP and mAP metrics.
 In some of our experiments we use only the ground-truth PASCAL-DET bounding boxes, in which case we refer to the setup by ``PASCAL-DET-GT''.
 
-In order to provide a larger detection training set to support select experiments, we also make use of the ``PASCAL-DET+DATA'' dataset, which we define as including VOC 2007 trainval union with VOC 2012 trainval.
+In order to provide a larger detection training set for certain experiments, we also make use of the ``PASCAL-DET+DATA'' dataset, which we define as including VOC 2007 trainval union with VOC 2012 trainval.
 The VOC 2007 test set is still used for evaluation.
 This dataset contains approximately 37k labeled bounding boxes, which is roughly three times the number contained in PASCAL-DET.
 
@@ -39,7 +39,7 @@ The first two are subdivided into four sublayers each: convolution (conv), $\max
 Layers 3 and 4 are composed of convolutional units followed by ReLUs.
 Layer 5 consists of convolutional units, followed by ReLUs and max pooling.
 The last two layers are fully connected (fc). 
-When we refer to conv-1, conv-2 and conv-5 we mean the output of max pooling units following the convolution and ReLU operations (also following LRN when applicable).
+When we refer to conv-1, conv-2, and conv-5 we mean the output of max pooling units following the convolution and ReLU operations (also following LRN when applicable).\footnote{Note that this nomenclature differs slightly from \cite{Rcnn}.}
 For layers conv-3, conv-4, fc-6, and fc-7 we mean the output of ReLU units.
 %FT or FT-Net refers to a finetuned network whereas as FC-FT or FC-FT-Net refers to a network finetuned by setting the learning rate of the first 5 layers to zero. We use the terms CNNs and ConvNets interchangeably to refer to multilayer network architectures of the type proposed in \cite{Kriz}. Terms filter/unit are used interchangeably to refer to filters of the CNN and GT-BBOX/gt-bbox stands for Ground truth bounding boxes from the PASCAL-VOC-2007 detection challenge and mAP refers to mean average precision \cite{Pascal}.
 
@@ -54,16 +54,18 @@ It is not possible to train a CNN with a large number of parameters on small dat
 %This procedure is called \emph{fine-tuning}.
 The idea of supervised \emph{pre-training} is to use a data-rich auxiliary dataset and task, such as ImageNet classification, to initialize the CNN parameters. The procedure of training on a small dataset after initializing the CNN parameters by pre-training is called \emph{fine-tuning}.
 The R-CNN object detection work in \cite{Rcnn} demonstrated that fine-tuning is an effective strategy for training object detectors.
-\cite{Decaf} also demonstrated that such pre-training, even without fine-tuning, can lead to state-of-the-art results on various image classification tasks. 
+%\cite{Decaf} also demonstrated that such pre-training, even without fine-tuning, can lead to state-of-the-art results on various image classification tasks. 
 
 %We employ the supervised pre-training, domain-specific fine-tuning paradigm used by R-CNN \cite{Rcnn} in many experiments.
 %The idea of supervised pre-training is to use a data-rich auxiliary dataset and task, such as ImageNet classification, to initialize a CNN with large number of parameters before training on a small dataset. Such initialization procedure allows the network parameters to be modified to achieve good performance on a small dataset without overfitting the large network to it.
 %This procedure allows the small dataset to be used while avoiding disastrously overfitting the large network to it.
 %For experiments in which the network is pre-trained on ImageNet, stochastic gradient descent is run for 310000 iterations (66 epochs).
 
-For fine-tuning we follow the procedure described in \cite{Rcnn}.
-Specifically, we run stochastic gradient descent (SGD) starting from a learning rate set to $0.001$ ($1/10$-th of the initial learning rate used for training the network for ImageNet classification). 
-This choice was made to prevent overfitting of CNNs to the new dataset.
+For fine-tuning, we follow the procedure described in \cite{Rcnn}.
+First, we remove the CNN's classification layer, which was specific to the pre-training task and is not reusable.
+Next, we append a new randomly initialized classification layer with the desired number of output units for the target task.
+Finally, we run stochastic gradient descent (SGD) on the target loss function, starting from a learning rate set to $0.001$ ($1/10$-th of the initial learning rate used for training the network for ImageNet classification). 
+This choice was made to prevent clobbering the CNN's initialization.
 At every 20,000 iterations of fine-tuning we reduce the learning rate by a factor of 10.
 
 %\subsection{Method of Entropy Computation}

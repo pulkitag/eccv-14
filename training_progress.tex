@@ -1,7 +1,8 @@
 %\section{How does pre-training time affect generalization performance?}
 %\label{sec:speed}
 %Pre-Training is the process of initializing CNN parameters for a target application using images from a (generally larger) separate dataset. Features learned by a CNN pre-trained on Imagenet have been shown to generalize and achieve state of art results across multiple computer vision datasets (see section \ref{sec:fine} and \cite{Decaf}). Since, no single image dataset fully captures the variation in natural images, all datasets are biased (cite Alyosha). Consequently, it can be expected that excessive pre-training can cause the CNN to overfit on Imagenet and thus hurt generalization performance. 
-There is no single image dataset that fully captures the variation in natural images. This means that all datasets, including ImageNet, are biased in some way. Thus, there is a possibility that pre-training may eventually cause the CNN to overfit and consequently hurt generalization performance \cite{torralba2011unbiased}. To understand if this happens, in the specific case of ImageNet pre-training, we investigated the effect of pre-training time on generalization performance both with and without fine-tuning. We find that pre-training for longer improves performance. This is surprising, as it implies that fitting more to ImageNet leads to better performance when moving to other datasets. %The other interesting thing we note is that within 50K iterations of pre-training, the performance is almost 90\% of the final performance achieved after nearly 300K iterations.
+There is no single image dataset that fully captures the variation in natural images. This means that all datasets, including ImageNet, are biased in some way. Thus, there is a possibility that pre-training may eventually cause the CNN to overfit and consequently hurt generalization performance \cite{torralba2011unbiased}. To understand if this happens, in the specific case of ImageNet pre-training, we investigated the effect of pre-training time on generalization performance both with and without fine-tuning. We find that pre-training for longer improves performance. This is surprising, as it shows that fitting more to ImageNet leads to better performance when moving to the other datasets that we evaluated.
+%The other interesting thing we note is that within 50K iterations of pre-training, the performance is almost 90\% of the final performance achieved after nearly 300K iterations.
 
 \setlength{\tabcolsep}{4pt}
 \begin{table}[t!]
@@ -24,6 +25,20 @@ fc-7   & 30.9 & 61.3 & 64.1 & 65.1 & 65.9 & 67.8 & 71.8 & 73.4 & $74.0$  & $74.3
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
+We report performance on PASCAL-CLS as a function of pre-training time, without fine-tuning, in Table \ref{table:det-traj-classify}. Notice that more pre-training leads to better performance. By 15k and 50k iterations all layers are close to 80\% and  90\% of their final performance (5k iterations is only $\sim$1 epoch). This indicates that training required for generalization takes place quite quickly. Figure \ref{fig:conv1} shows conv-1 filters after 5k, 15k and 305k iterations and reinforces this observation. Further, notice from Table \ref{table:det-traj-classify} that conv-1 trains first and the higher the layer is the more time it takes to converge. This suggests that a CNN, trained with backpropagation, converges in a layer-by-layer fashion.   
+
+\begin{figure}[t!]
+\centering
+\subfloat[5k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter5000.png}} \hspace{2mm}
+\subfloat[15k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter15000.png}} \hspace{2mm}
+\subfloat[305k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter225000.png}}
+%\caption{(a), (b), and (c) show conv-1 filters after 5k, 15k and 305k iterations of training, respectively. Notice that after just 15k iterations these filters closely resemble their final state.}
+\caption{Evolution of conv-1 filters with time. Just after 15k iterations, these filters closely resemble their converged state.}
+\begin{comment} Note: I have labeled 305k as 225k - I cannot get the same shape as of the 5k, 15k for 305k. The filters look very similar and visually indistiguishable from 305k. If I have time later, I will make them all uniform.
+\end{comment}
+\label{fig:conv1}
+\end{figure}
+
 \setlength{\tabcolsep}{4pt}
 \begin{table}[t!]
 \begin{center}
@@ -42,22 +57,5 @@ fc-7   & 30.9 & 61.3 & 64.1 & 65.1 & 65.9 & 67.8 & 71.8 & 73.4 & $74.0$  & $74.3
 \setlength{\tabcolsep}{1.4pt}
 \footnotetext{A network pre-trained from scratch, which was different from the one used in section \ref{sub:fine-performance}, was used to obtain these results. The difference in performance is not significant.} 
 
-\begin{figure}[t!]
-\centering
-\subfloat[5k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter5000.png}} \hspace{2mm}
-\subfloat[15k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter15000.png}} \hspace{2mm}
-\subfloat[305k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter225000.png}}
-%\caption{(a), (b), and (c) show conv-1 filters after 5k, 15k and 305k iterations of training, respectively. Notice that after just 15k iterations these filters closely resemble their final state.}
-\caption{Evolution of conv-1 filters with time. Just after 15k iterations, these filters closely resemble their converged state.}
-\begin{comment} Note: I have labeled 305k as 225k - I cannot get the same shape as of the 5k, 15k for 305k. The filters look very similar and visually indistiguishable from 305k. If I have time later, I will make them all uniform.
-\end{comment}
-\label{fig:conv1}
-\end{figure}
-
-Performance on PASCAL-CLS as a function of pre-training time, without fine-tuning, is reported in Table \ref{table:det-traj-classify}. Notice, that more pre-training leads to better performance. It is noteworthy that by 15k and 50k iterations all layers are close to 80\% and  90\% of there final performance (5k iterations is only $\sim$1 epoch). This indicates that training required for generalization takes place quite quickly. Figure \ref{fig:conv1} shows conv-1 filters after 5k, 15k and 305k iterations and reinforces this observation. Further, notice from Table \ref{table:det-traj-classify} that conv-1 trains first and the higher the layer is the more time it takes to converge. This suggests that a CNN by itself trains in layer-by-layer fashion.   
-
-Table \ref{table:det-trajectory} reports results on SUN-CLS and PASCAL-DET and indicates that more pre-training prior to fine-tuning also leads to better performance.  
-
-
-%The above analysis reinforces our belief that indeed majority of training required for generalization happens quite quickly as compared to the full training time of the network. This observation suggest that there may exist clever ways which can help us speed up the training.
-
+Table \ref{table:det-trajectory} shows the interaction between varied amounts of pre-training time and fine-tuning on SUN-CLS and PASCAL-DET.
+Here we also see that more pre-training prior to fine-tuning leads to better performance.  
