@@ -1,0 +1,4 @@
+Agrawal, Pulkit,  pulkitag@eecs.berkeley.edu
+Agrawal, Pulkit,  pulkitag@eecs.berkeley.edu, University of California Berkeley
+Girshick, Ross,   rbg@eecs.berkeley.edu, University of California Berkeley
+Malik, Jitendra,  malik@eecs.berkeley.edu, University of California Berkeley

@@ -18,7 +18,7 @@ In this sense, mid-level patch discovery is the search for a set of GMC template
 The low-level BoW representation, in contrast, is a \emph{distributed code} in the sense that a single feature by itself is not discriminative, but a group of features taken together is.
 This makes it interesting to investigate the nature of mid-level CNN features such as conv-5. 
 
-First, we address the question of finding GMC filters by computing the AP of individual filters (section \ref{sub:class-specific-unit}). Next, we objectively estimate how distributed are the feature representations (section \ref{sub:how-many}). For both experiments we use features from layer conv-5, which consists of response of 256 filters in a $6\times 6$ spatial grid. Using max-pooling we collapse the spatial grid into a 256-D vector, so that for each filter, we have a single response per image.
+First, we address the question of finding GMC filters by computing the AP of individual filters (section \ref{sub:class-specific-unit}). Next, we objectively estimate how distributed are the feature representations (section \ref{sub:how-many}). For both experiments we use features from layer conv-5, which consists of response of 256 filters in a $6\times 6$ spatial grid. Using max-pooling we collapse the spatial grid into a 256-D vector, so that for each filter, we have a single response per image \footnote{Section \ref{sub:imp-mag} shows that this transformation causes only a small drop in performance.}.
 
 %The output of conv-5 is the response of 256 filters in a $6\times 6$ spatial grid which we collapse into a 256-D vector using max-pooling (see section \ref{sub:imp-loc} for more details)
 
@@ -31,11 +31,17 @@ For each filter, its AP value is calculated for classifying images using class l
 
 %For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
 %From figure \ref{fig:ap} it is clear that for some classes such persons and bicycles there are indeed some very high precision filters, but for a lot of classes like sofa and horses no such filters exist. 
-
+\setlength{\unitlength}{\linewidth}
 \begin{figure}[t!]
 \centering
 %\subfloat{\includegraphics[scale=0.20]{images/gtbbox_pascal_prerec_pool5units.png}}
-\subfloat{\includegraphics[width=1.0\linewidth]{images/pool5_ap_filters.pdf}}
+\begin{picture}(0.04,0.3)(0,0)
+\put(0.0,0.20){\rotatebox{90}{\scriptsize{\textbf{Precision}}}}
+\end{picture}
+\subfloat{\includegraphics[width=0.93\linewidth]{images/pool5_ap_filters.pdf}} \vspace{0.4mm}
+\begin{picture}(1.0,0.01)(0,0)
+\put(0.50,0.0){{\scriptsize{\textbf{Recall}}}}
+\end{picture}
 \caption{The precision-recall curves for the top five (based on AP) conv-5 filter responses on PASCAL-DET-GT. Curves in red and blue indicate AP for fine-tuned and pre-trained networks, respectively. The dashed black line is the performance of a random filter. For most classes, precision drops significantly even at modest recall values. There are GMC filters for classes such as bicycle, person, car, cat.}
 \label{fig:ap}
 \end{figure}
@@ -66,11 +72,17 @@ Feature selection was performed to construct nested subsets \footnote{Filter sub
 For a given class, each of the 256 dimensions of the learnt weight vector ($w$) was in direct correspondence to 256 conv-5 filters. The magnitude of $i^{th}$ dimension of $w$ was used to determine the importance of $i^{th}$ filter for discriminating instances of this class. 
 Next, all filters were sorted using these magnitude values. Each subset of filter was constructed by taking top-k filters from this list. For each such set, linear SVM was trained using only the responses of filters in this set for classifying instances of the class under consideration.
 
-
+\setlength{\unitlength}{\linewidth}
 \begin{figure}[t!]
 \centering
 %\includegraphics[height=6.5cm]{images/svm_seldims.png}
-\includegraphics[height=6.5cm]{images/pool5_spmax_num_svm_filters.pdf}
+\begin{picture}(0.04,0.3)(0,0)
+\put(0.0,0.06){\rotatebox{90}{\scriptsize{\textbf{Fraction of complete performance}}}}
+\end{picture}
+\includegraphics[width=0.93\linewidth]{images/pool5_spmax_num_svm_filters.pdf}
+\begin{picture}(1.0,0.01)(0,0)
+\put(0.40,0.0){{\scriptsize{\textbf{Number of conv-5 filters}}}}
+\end{picture}
 \caption{ The fraction of complete performance (Y-Axis) on PASCAL-DET-GT achieved by conv-5 filter subsets of different sizes (X-axis). Complete performance is the AP computed by considering responses of all the filters. Notice, that for a few classes such as ``person'' and ``bicycle'' only a few filters are required, but for most classes substantially more number of filters are needed.}
 \label{fig:svm-sel-dims}
 \end{figure}  
@@ -104,7 +116,8 @@ We also find that after fine-tuning, slightly fewer filters are required to achi
 \begin{figure}[t!]
 \centering
 %\includegraphics[width=1.0\linewidth]{images/ftNet_commonfilters.png}
-\includegraphics[width=1.0\linewidth]{images/FTNet_overlap.pdf}
+%\includegraphics[width=1.0\linewidth]{images/FTNet_overlap.pdf}
+\includegraphics[width=1.0\linewidth]{images/ftNet.png}
 \caption{The extent of overlap between the 50 most discriminative filters of conv-5 for each class determined using PASCAL-DET-GT.
 Entry $(i, j)$ of the matrix is the fraction of top-50 filters class $i$ has in common with class $j$ (Section \ref{sub:how-many}). It can be seen, that there is little overlap between filters used for different classes.}
 \label{fig:overlap}

@@ -6,7 +6,7 @@ The $6 \times 6$ spatial grid in conv-5 encodes the input in a feature map that 
 This feature map is also sparse due to the $\max(x, 0)$ non-linearities used in the network (conv-5 is roughly 27\% non-zero; sparsity statistics for all layers are given in Table \ref{table:sparse}).
 
 The network's convolutional layers encode information in terms of (1) which filters have non-zero responses, (2) the magnitudes of those responses, and (3) the spatial locations of the responses.
-We will investigate how different filters encode information in Section \ref{sec:grand-mother} (i.e., Is the representation distributed or does it consist of ``grandmother cells''?).
+%We will investigate how different filters encode information in Section \ref{sec:grand-mother} (i.e., Is the representation distributed or does it consist of ``grandmother cells''?).
 In this section, we experimentally analyze the role of filter response magnitude and spatial location by looking at lesion studies on classification and detection tasks.
 
 \begin{figure}[t!]
@@ -51,8 +51,8 @@ The first method (``sp-max'') simply collapses the $p \times p$ spatial map into
 
 For image classification, damaging spatial information leads to a large difference in performance between original and spatially-ablated conv-1 features, but with a gradually decreasing difference for higher layers (Table \ref{table:class-ablation}). 
 In fact, the performance of conv-5 after sp-max is close to the original performance. 
-This indicates, that a lot of information important for classification is encoded in the activation of the filters and not necessarily in the spatial pattern of their activations. (\todo{Discuss about spatial overlap}).
-Note, this observation is not due to small number of classes in PASCAL-CLS. On ImageNet validation data, conv-5 features and conv-5 after sp-max result into accuracy of 43.2 and 41.5 respectively. 
+This indicates, that a lot of information important for classification is encoded in the activation of the filters and not necessarily in the spatial pattern of their activations. %(\todo{Discuss about spatial overlap}).
+Note, this observation is not an artefact of small number of classes in PASCAL-CLS. On ImageNet validation data, conv-5 features and conv-5 after sp-max result into accuracy of 43.2 and 41.5 respectively. 
 However, for detection sp-max (Tables \ref{table:det-ablation}) leads to a large drop in performance. 
 This may not be surprising as in contrast to classification, detection requires spatial information precise localization.
 

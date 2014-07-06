@@ -1,4 +1,4 @@
-\section*{Appendix}
+\section*{Appendix - Estimating discriminative capacity of filter}
 \label{sub:app-entropy}
 To measure the discriminative capacity of a filter, we start by collecting filter responses from a set of $N$ images.
 Each image, when passed through the CNN produces a $p \times p$ heat map of scores for each filter in a given layer (e.g., $p = 6$ for a conv-5 filter and $p = 1$ for an fc-6 filter).
@@ -12,7 +12,7 @@ A low class entropy means that at scores above $\tau$, the filter is very class 
 As this threshold changes, the class entropy traces out a curve which we call the \emph{entropy curve}.
 The \emph{area under the entropy curve} (AuE), summarizes the class entropy at all thresholds and is used as a measure of discriminative capacity of the filter. 
 The lower the AuE value, the more class selective the filter is.
-The AuE valus is used to sort filters in Section \ref{sub:fine-entropy}.
+The AuE values are used to sort filters in Section \ref{sub:fine-entropy}.
 
 %We can also characterize the distribution of discriminative ability of all filters of a layer.
 %To do this, we sort the filter according to their AuE.

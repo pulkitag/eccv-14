@@ -53,8 +53,8 @@ We have provided additional evidence that fine-tuning a discriminatively pre-tra
 Now we look inside the network to see how fine-tuning changes its parameters.
 
 To do this, we define a way to measure the class selectivity of a set of filters.
-The precise definition of this measure is given in the supplementary material.
-Intuitively, we use the class-label entropy of a filter given its activations on a set of images.
+%The precise definition of this measure is given in the supplementary material.
+Intuitively, we use the class-label entropy of a filter given its activations on a set of images (see appendix for more details).
 Since this measure is entropy-based, a low value indicates that the filter is highly class selective while a large value indicates that the filter fires regardless of class.
 
 In order to summarize the class selectivity for a \emph{set} of filters, we sort them from the most selective to least selective and plot the average selectivity of the first $k$ filters while sweeping $k$ down the sorted list.
