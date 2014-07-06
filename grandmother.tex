@@ -1,9 +1,20 @@
 \section{Are there grandmother cells in CNNs?}
 \label{sec:grand-mother}
 Neuroscientists have conjectured that cells in the human brain which only respond to very specific and complex visual stimuli (such as the face of one's grandmother) are involved in object recognition.
-These neurons are often referred to as \emph{grandmother cells} (GMC) \cite{Barlow,Grandmother}. Proponents of artificial neural networks have shown great interest in reporting the presence of GMC-like filters for specific object classes in their networks (see, for example, the cat filter reported in \cite{GoogleCat}). More recently, for understanding feature representations in CNNs, \cite{Simonyan,DeConv} presented methods for finding locally optimal visual inputs for individual filters.
+These neurons are often referred to as \emph{grandmother cells} (GMC) \cite{Barlow,Grandmother}. 
+Proponents of artificial neural networks have shown great interest in reporting the presence of GMC-like filters for specific object classes in their networks (see, for example, the cat filter reported in \cite{GoogleCat}). 
+The notion of GMC like features is also related to standard feature encodings for image classification.
+Prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (BoW), such as SIFT (e.g., \cite{lazebnik2006beyond}), or by first finding a set of mid-level patches \cite{Blocks,Mid1} and then encoding images in terms of them. 
+The problem of finding good mid-level patches is often posed as a search for a set of high-recall discriminative templates. 
+In this sense, mid-level patch discovery is the search for a set of GMC templates. 
+The low-level BoW representation, in contrast, is a \emph{distributed code} in the sense that a single feature by itself is not discriminative, but a group of features taken together is.
+This makes it interesting to investigate the nature of mid-level CNN features such as conv-5. 
+
+%Recently, proponents of artificial neural networks have shown great interest in reporting the presence of GMC-like filters for specific object classes in their networks (see, for example, the cat filter reported in \cite{GoogleCat}). 
+For understanding these feature representations in CNNs, \cite{Simonyan,DeConv} recently presented methods for finding locally optimal visual inputs for individual filters.
 %These methods isolate individual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. \todo{make this argument clearer}.
-These methods only find the best, or in some cases top-$k$, visual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. For example, if it is found that the top-10 visual inputs for a particular filter are cats, it remains unclear what is the response of the filter to other images of cats.
+However, these methods only find the best, or in some cases top-$k$, visual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. For example, if it is found that the top-10 visual inputs for a particular filter are cats, it remains unclear what is the response of the filter to other images of cats.
+Thus, it is not possible to make claims about presence of GMC like filters for cat based on such analysis. 
 A GMC filter for the cat class, is one that fires strongly on \emph{all} cats and nothing else.
 %If, for example, we wish to see if the network contains a GMC filter for the \emph{cat} class, then we should look for a particular filter that fires strongly on all cats and nothing else.
 This criteria can be expressed as a filter that has high \emph{precision} and high \emph{recall}.
@@ -11,12 +22,12 @@ That is, a GMC filter for class $C$ is a filter that has a high average precisio
 
 %Mathematically, this computation is expressed as finding the set of images $\mathcal{I}$ which maximally activate a single feature (i.e. find $i \in \mathcal{I}$ s.t. Feature-score(i) $\geq th$ $\forall i $, where $th$ is a threshold value). The distribution of class labels associated with this set of images ($\mathcal{I}$), defines the \textit{precision} of the feature. However, this distribution does not account for the \textit{recall}.  The presence/absence of GMC is a scientifically interesting question to pursue, but for recognition, we require features with both high precision and high recall. Consequently, we argue that if the goal is object recognition, then GMC for a particular object class should be interpreted as features with high AP and not just high precision. 
  
-Further, the notion of GMC-like features is related to standard feature encodings for image classification.
-Prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (BoW), such as SIFT (e.g., \cite{lazebnik2006beyond}), or by first finding a set of mid-level patches \cite{Blocks,Mid1} and then encoding images in terms of them. 
-The problem of finding good mid-level patches is often posed as a search for a set of high-recall discriminative templates. 
-In this sense, mid-level patch discovery is the search for a set of GMC templates. 
-The low-level BoW representation, in contrast, is a \emph{distributed code} in the sense that a single feature by itself is not discriminative, but a group of features taken together is.
-This makes it interesting to investigate the nature of mid-level CNN features such as conv-5. 
+%Further, the notion of GMC-like features is related to standard feature encodings for image classification.
+%Prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (BoW), such as SIFT (e.g., \cite{lazebnik2006beyond}), or by first finding a set of mid-level patches \cite{Blocks,Mid1} and then encoding images in terms of them. 
+%The problem of finding good mid-level patches is often posed as a search for a set of high-recall discriminative templates. 
+%In this sense, mid-level patch discovery is the search for a set of GMC templates. 
+%The low-level BoW representation, in contrast, is a \emph{distributed code} in the sense that a single feature by itself is not discriminative, but a group of features taken together is.
+%This makes it interesting to investigate the nature of mid-level CNN features such as conv-5. 
 
 First, we address the question of finding GMC filters by computing the AP of individual filters (Section \ref{sub:class-specific-unit}). Next, we measure how distributed are the feature representations (Section \ref{sub:how-many}). For both experiments we use features from layer conv-5, which consists of responses of 256 filters in a $6\times 6$ spatial grid. Using max pooling, we collapse the spatial grid into a 256-D vector, so that for each filter we have a single response per image (in Section \ref{sub:imp-mag} we show that this transformation causes only a small drop in task performance).
 

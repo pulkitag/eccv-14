@@ -55,7 +55,7 @@ Training a large CNN on a small dataset often leads to catastrophic overfitting.
 The idea of supervised \emph{pre-training} is to use a data-rich auxiliary dataset and task, such as ImageNet classification, to initialize the CNN parameters. 
 The CNN can then be used on the small dataset, directly, as a feature extractor (as in \cite{Decaf}).
 Or, the network can be updated by continued training on the small dataset, a process called \emph{fine-tuning}.
-The R-CNN object detection work in \cite{Rcnn} demonstrated that fine-tuning is an effective strategy for training object detectors.
+%The R-CNN object detection work in \cite{Rcnn} demonstrated that fine-tuning is an effective strategy for training object detectors.
 %\cite{Decaf} also demonstrated that such pre-training, even without fine-tuning, can lead to state-of-the-art results on various image classification tasks. 
 
 %We employ the supervised pre-training, domain-specific fine-tuning paradigm used by R-CNN \cite{Rcnn} in many experiments.
@@ -67,7 +67,9 @@ For fine-tuning, we follow the procedure described in \cite{Rcnn}.
 First, we remove the CNN's classification layer, which was specific to the pre-training task and is not reusable.
 Next, we append a new randomly initialized classification layer with the desired number of output units for the target task.
 Finally, we run stochastic gradient descent (SGD) on the target loss function, starting from a learning rate set to $0.001$ ($1/10$-th the initial learning rate used for training the network for ImageNet classification). 
-This choice was made to prevent clobbering the CNN's initialization.
+%This choice was made to prevent clobbering the CNN's initialization.
+This choice was made to prevent clobbering the CNN's initialization to control overfitting. 
+%This choice was made to ensure that the network parameters don't overfit CNN's initialization.
 At every 20,000 iterations of fine-tuning we reduce the learning rate by a factor of 10.
 
 %\subsection{Method of Entropy Computation}
