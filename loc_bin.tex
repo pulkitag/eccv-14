@@ -40,8 +40,8 @@ $87.5 \pm 4.4$ & $44.5 \pm 4.4$ & $31.8 \pm 2.4$ & $32.0 \pm 2.7$ & $27.7 \pm 5.
 We can asses the importance of magnitude by setting each filter response $x$ to 1 if $x > 0$ and to $0$ otherwise. This binarization is performed prior to using the responses as features in a linear classifier and leads to loss of information contained in the magnitude of response while still retaining information about which filters fired and where they fired. 
 In Tables \ref{table:class-ablation} and \ref{table:det-ablation} we show that binarization leads to a negligible decline in performance for both classification and detection. 
 
-For the fully-connected layers (fc-6 and fc-7) PASCAL image classification performance is nearly identical before and after binarization.
-This is a non-trivial property since transforming traditional computer vision features into short (or sparse) binary codes is an active research area. Such codes are important for practical applications in large-scale image retrieval and mobile image analysis \todo{add citations}. Here we observe that sparse binary codes come essentially ``for free'' when using the representations learned in the fully-connected layers.
+For the fully-connected layers (fc-6 and fc-7) PASCAL-CLS performance is nearly identical before and after binarization.
+This is a non-trivial property since transforming traditional computer vision features into short (or sparse) binary codes is an active research area. Such codes are important for practical applications in large-scale image retrieval and mobile image analysis \cite{weiss2009spectral,gong2011iterative}. Here we observe that sparse binary codes come essentially ``for free'' when using the representations learned in the fully-connected layers.
 
 \subsection{How important is response location?}
 \label{sub:imp-loc}
@@ -51,18 +51,20 @@ The first method (``sp-max'') simply collapses the $p \times p$ spatial map into
 
 For image classification, damaging spatial information leads to a large difference in performance between original and spatially-ablated conv-1 features, but with a gradually decreasing difference for higher layers (Table \ref{table:class-ablation}). 
 In fact, the performance of conv-5 after sp-max is close to the original performance. 
-This indicates, that a lot of information important for classification is encoded in the activation of the filters and not necessarily in the spatial pattern of their activations. 
+This indicates, that a lot of information important for classification is encoded in the activation of the filters and not necessarily in the spatial pattern of their activations. (\todo{Discuss about spatial overlap}).
+Note, this observation is not due to small number of classes in PASCAL-CLS. On Imagenet validation data, conv-5 features and conv-5 after sp-max result into accuracy of 43.2 and 41.5 respectively. 
 However, for detection sp-max (Tables \ref{table:det-ablation}) leads to a large drop in performance. 
 This may not be surprising as in contrast to classification, detection requires spatial information precise localization.
 
 \setlength{\tabcolsep}{4pt}
 \begin{table}[t!]
 \begin{center}
-\caption{Location and magnitude ablation study on PASCAL image classification.}
+%\caption{Location and magnitude ablation study on PASCAL-CLS.}
+\caption{Performance(mAP) changes due to location and magnitude feature ablations for PASCAL-CLS.}
 \label{table:class-ablation}
 \begin{tabular}{lccccc}
 \hline\noalign{\smallskip}
-layer & no ablation & binarize & sp-shuffle & sp-max \\
+layer & no ablation (mAP) & binarize (mAP) & sp-shuffle (mAP) & sp-max (mAP) \\
 \noalign{\smallskip}
 \hline
 \noalign{\smallskip}
@@ -79,10 +81,27 @@ fc-7   & $74.1 \pm 0.3$ & $73.7 \pm 0.4$ &  -             &  -   \\
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
+\setlength{\tabcolsep}{4pt}
+\begin{table}[t!]
+\begin{center}
+\caption{Performance(mAP) changes due to location and magnitude feature ablations for PASCAL-DET.}
+\label{table:det-ablation}
+\vspace{0.3em}
+\scalebox{1.0}{
+\begin{tabular}{l|c|c|c}
+& no ablation (mAP) & binarize (mAP) & sp-max (mAP) \\
+\hline
+conv-5 & 47.6 & 45.7 & 25.4 
+\end{tabular}}
+\end{center}
+\end{table}
+\setlength{\tabcolsep}{1.4pt}
+
+\begin{comment}
 \setlength{\tabcolsep}{1pt}
 \begin{table}[t!]
 \begin{center}
-\caption{Ablation study on PASCAL object detection using conv-5 features. Feature binarization leads to negligible drop in performance whereas as sp-max causes a large drop.}
+\caption{Ablation study on PASCAL-DET using conv-5 features. Feature binarization leads to negligible drop in performance whereas as sp-max causes a large drop.}
 \label{table:det-ablation}
 \vspace{0.3em}
 \scalebox{0.70}{
@@ -99,3 +118,4 @@ sp-max & 35.0 & 38.7 & 17.3 & 16.9 & 13.9 & 38.4 & 45.6 & 29.2 & 11.0 & 20.2 & 2
 \end{center}
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
+\end{comment}
