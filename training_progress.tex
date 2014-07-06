@@ -6,7 +6,7 @@ There is no single image dataset that fully captures the variation in natural im
 \setlength{\tabcolsep}{4pt}
 \begin{table}[t!]
 \begin{center}
-\caption{Performance variation (\% mAP) on PASCAL-CLS as a function of pre-training iterations on ImageNet.}
+\caption{Performance variation (\% mAP) on PASCAL-CLS as a function of pre-training iterations on ImageNet. The error bars  for all columns are similar to the one reported in the 305k column.}
 \label{table:det-traj-classify}
 \vspace{0.3em}
 \begin{tabular}{lcccccccccc}
@@ -31,15 +31,16 @@ fc-7   & 30.9 & 61.3 & 64.1 & 65.1 & 65.9 & 67.8 & 71.8 & 73.4 & $74.0$  & $74.3
 \label{table:det-trajectory}
 \vspace{0.3em}
 \scalebox{1.00}{
-\begin{tabular}{l|c|c|c|l}
+\begin{tabular}{l|c|c|c|c}
  & 50k & 105k & 205k & 305k \\
 \hline
-\textbf{SUN-CLS} & 52.8 & 54.7 & 56.4 & 56.6 \\
-\textbf{PASCAL-DET} & 50.2 & 52.6 & 55.3 & 55.4\footnote{This number is different than 54.1 reported in \ref{sec:fine} probably due to difference in pre-training runs.}  \\
+\textbf{SUN-CLS} & $53.0 \pm 0.2 $ & $54.6 \pm 0.1 $ & $56.3 \pm 0.2 $ & $56.6 \pm 0.2$ \\
+\textbf{PASCAL-DET} & 50.2 & 52.6 & 55.3 & 55.4\footnotemark \\
 \end{tabular}}
 \end{center}
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
+\footnotetext{A network pre-trained from scratch, which was different from the one used in section \ref{sec:fine}, was used to obtain these results. The difference in performance is not significant. } 
 
 \begin{figure}[t!]
 \centering
