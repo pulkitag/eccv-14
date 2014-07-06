@@ -66,7 +66,7 @@ In addition to visualizing the AP curves of individual filters, we measured the 
 %Feature selection was performed to construct nested subsets of filters, ranging from a single filter to all filters, using the greedy strategy described in Figure \ref{fig:sel-strategy}.\footnote{Filter subsets of size [1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256] were used.}
 Feature selection was performed to construct nested subsets of filters, ranging from a single filter to all filters, using the following greedy strategy. First, separate linear SVMs were trained to classify object bounding boxes from PASCAL-DET-GT using conv-5 responses. 
 For a given class, the 256 dimensions of the learnt weight vector ($w$) is in direct correspondence with the 256 conv-5 filters. We used the magnitude of the $i$-th dimension of $w$ to rank the importance of the $i$-th conv-5 filter for discriminating instances of this class. 
-Next, all filters were sorted using these magnitude values. Each subset of filters was constructed by taking the top-$k$ filters from this list.\footnote{We used values of $k \in \{1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256\}$.} For each subset, a separate linear SVM was trained using only the responses of filters in that subset for classifying instances of the class under consideration.
+Next, all filters were sorted using these magnitude values. Each subset of filters was constructed by taking the top-$k$ filters from this list.\footnote{We used values of $k \in \{1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256\}$.} For each subset, a linear SVM was trained using only the responses of filters in that subset for classifying the class under consideration.
 
 \setlength{\unitlength}{\linewidth}
 \begin{figure}[t!]
@@ -123,5 +123,5 @@ Entry $(i, j)$ of the matrix is the fraction of top-50 filters class $i$ has in 
 Next, we estimated the extent of overlap between the filters used for discriminating between different classes.
 For each class $i$, we selected the 50 most discriminative filters (out of 256) and stored the selected filter indices in the set $S_i$.
 The extent of overlap between class $i$ and $j$ was evaluated by $|S_i \cap S_j| / N$,
-where $N = |S_i| = |S_j| = 50$. The results are visualized in Figure \ref{fig:overlap}. It can be seen that different classes use different subsets of conv-5 filters and there is little overlap between classes. This further indicates that intermediate representations in the CNN are distributed and different sets of are used to distinguish between different classes. 
-
+where $N = |S_i| = |S_j| = 50$. The results are visualized in Figure \ref{fig:overlap}. It can be seen that different classes use different subsets of conv-5 filters and there is little overlap between classes. This further indicates that intermediate representations in the CNN are distributed.
+%and different sets of are used to distinguish between different classes. 
