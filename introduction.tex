@@ -26,17 +26,23 @@ Therefore, in this paper we study several aspects of CNNs through an empirical l
 
 \subsection{Summary of findings}
 
-\subsubsection{Effects of fine-tuning.} 
+\subsubsection{Effects of fine-tuning and pre-training.} 
 Girshick et al. \cite{Rcnn} showed that supervised pre-training and fine-tuning are effective when training data is scarce.
 However, they did not investigate what happens when training data becomes more abundant.
 We show that it's possible to get good performance when training R-CNN from a random initialization (i.e., without ImageNet supervised pre-training), provided enough detection training data.
 However, we also show that in this data regime, supervised pre-training is still beneficial and leads to a significant improvement in detection performance.
 
-\subsubsection{Effects of pre-training on generalization.}
 One concern when using supervised pre-training is that achieving a better model fit to ImageNet, for example, might lead to higher generalization error when applying the learned features to another dataset and task.
 If this is the case, then some form of regularization during pre-training, such as early stopping, would be beneficial.
 We show the suprising result that pre-training for longer yields better results, with diminishing returns, but does \emph{not} increase generalization error.
 This implies that fitting the CNN to ImageNet induces a general and portable feature representation.
+
+
+%\subsubsection{Effects of pre-training on generalization.}
+%One concern when using supervised pre-training is that achieving a better model fit to ImageNet, for example, might lead to higher generalization error when applying the learned features to another dataset and task.
+%If this is the case, then some form of regularization during pre-training, such as early stopping, would be beneficial.
+%We show the suprising result that pre-training for longer yields better results, with diminishing returns, but does \emph{not} increase generalization error.
+%This implies that fitting the CNN to ImageNet induces a general and portable feature representation.
 
 \subsubsection{Grandmother cells and distributed codes.}
 Recent work on visualizing features from deep networks (e.g., \cite{GoogleCat,DeConv}) suggests that the features might consist mainly of ``grandmother'' cells \cite{Barlow,Grandmother}.
