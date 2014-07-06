@@ -9,15 +9,15 @@ In this section, we explore these questions on object detection and image classi
 \setlength{\tabcolsep}{2pt}
 \begin{table}[t!]
 \begin{center}
-\caption{Comparing the performance of CNNs trained from scratch, pre-trained on ImageNet, and fine-tuned. PASCAL-DET+DATA includes additional data from VOC 2012 trainval.}
+\caption{Comparing the performance of CNNs trained from scratch, pre-trained on ImageNet, and fine-tuned. PASCAL-DET+DATA includes additional data from VOC 2012 trainval. (Bounding-box regression is not used for detection results.)}
 \vspace{0.3em}
 \label{table:fine-effect}
-\scalebox{1}{
+\scalebox{0.95}{
 \begin{tabular}{ccc|ccc|ccc}
 \multicolumn{3}{c|}{\textbf{SUN-CLS}} & \multicolumn{3}{c|}{\textbf{PASCAL-DET}} & \multicolumn{3}{c}{\textbf{PASCAL-DET+DATA}} \\
 scratch & pre-train & fine-tune  & scratch & pre-train & fine-tune & scratch & pre-train & fine-tune\\
 \hline
-$40.2 \pm $ & $53.1 \pm 0.2$ & $56.8 \pm 0.2$ & 40.7 & 45.5 & 54.1 & 52.3 & 45.5 & 59.2 \\ 
+$40.4 \pm 0.2$ & $53.1 \pm 0.2$ & $56.8 \pm 0.2$ & 40.7 & 45.5 & 54.1 & 52.3 & 45.5 & 59.2 \\ 
 \end{tabular}}
 \end{center}
 \end{table}
@@ -29,7 +29,7 @@ All results use features from layer fc-7.
 Somewhat surprisingly, it's possible to get reasonable results (40.7\% mAP) when training the CNN from scratch using only the training data from VOC 2007 trainval (13k bounding box annotations).
 Even more surprising is that when the VOC 2007 trainval data is augmented with VOC 2012 data (an additional 25k bounding box annotations), we are able to achieve a mAP of 52.3\% from scratch.
 This is almost as good as the performance achieved by pre-training on ImageNet and then fine-tuning on VOC 2007 trainval (54.1\% mAP).
-These results can be compared to the 30.5\% mAP obtained by DetectorNet \cite{DetectorNet}, which was trained from scratch on VOC 2012 trainval.
+These results can be compared to the 30.5\% mAP obtained by DetectorNet \cite{szegedy2013deep}, which was trained from scratch on VOC 2012 trainval.
 
 Next, we ask if ImageNet pre-training is still useful in the PASCAL-DET +DATA setting?
 Here we see that even though it's possible to get good performance when training from scratch, pre-training still helps considerably.
@@ -45,9 +45,9 @@ We have provided additional evidence that fine-tuning a discriminatively pre-tra
 Now we look inside the network to see how fine-tuning changes its parameters.
 
 To do this, we define a way to measure the class selectivity of a set of filters.
-The precise definition of this measure is given in the supplementary material.
 Intuitively, we use the class-label entropy of a filter given its activations on a set of images.
-Since this measure is entropy-based, a low value indicates that the filter is highly class selective while a large value indicates that the filter fires regardless of class.
+Since this measure is entropy-based, a low value indicates that a filter is highly class selective while a large value indicates that a filter fires regardless of class.
+The precise definition of this measure is given in the supplementary material.
 
 In order to summarize the class selectivity for a \emph{set} of filters, we sort them from the most selective to least selective and plot the average selectivity of the first $k$ filters while sweeping $k$ down the sorted list.
 Figure \ref{fig:fine-entropy} shows the class selectivity for the sets of filters in layers 1 to 7 before and after fine-tuning (on VOC 2007 trainval).
@@ -87,8 +87,8 @@ $56.8 \pm 0.2$ & $56.2 \pm 0.1$ & 54.1 & 53.3 & 59.2 & 56.0 \\
 \setlength{\tabcolsep}{1.4pt}
 
 Figure \ref{fig:fine-entropy} shows that class selectivity increases from layer 1 to 7 for both networks.
-This result is consistent with performance numbers reported in Table \ref{table:det-traj-classify}. 
-However, it is interesting to note that entropy changes due to fine-tuning are only significant for layers 6 and 7. 
+%This result is consistent with performance numbers reported in Table \ref{table:det-traj-classify}. 
+It is interesting to note that entropy changes due to fine-tuning are only significant for layers 6 and 7. 
 This observation indicates that fine-tuning only layers 6 and 7 may suffice for achieving good performance when fine-tuning data is limited. 
 We test this hypothesis on SUN-CLS and PASCAL-DET by comparing the performance of a fine-tuned network (ft) with a network which is fine-tuned by only updating weights of fc-6 and fc-7 (fc-ft network). 
 Results are summarized in Table \ref{table:fine-fc-ft}.

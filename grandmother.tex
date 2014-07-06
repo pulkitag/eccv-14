@@ -4,15 +4,15 @@ Neuroscientists have conjectured that cells in the human brain which only respon
 These neurons are often referred to as \emph{grandmother cells} (GMC) \cite{Barlow,Grandmother}. Proponents of artificial neural networks have shown a great interest in reporting the presence of GMC-like filters for specific object classes in their networks (see, for example, the cat filter reported in \cite{GoogleCat}). More recently, for understanding feature representations in CNNs, \cite{Simonyan,DeConv} presented methods for finding locally optimal visual inputs for individual filters.
 %These methods isolate individual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. \todo{make this argument clearer}.
 These methods only find the best or in some cases, top-K visual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. For example, if it is found that the top-10 visual inputs for a particular filter are cats, it remains unclear what is the response of the filter to other images of a cat.
-A GMC filter for the \emph{cat} class, is the one that fires strongly on \emph{all} cats and nothing else.
+A GMC filter for the \emph{cat} class, is one that fires strongly on \emph{all} cats and nothing else.
 %If, for example, we wish to see if the network contains a GMC filter for the \emph{cat} class, then we should look for a particular filter that fires strongly on all cats and nothing else.
-This criteria can be expressed as looking for a filter that has high \emph{precision} and high \emph{recall}.
-That is, a GMC filter for class $C$ is a filter that has a high average precision(AP) when tasked with classifying inputs from class $C$ versus inputs from all other classes.
+This criteria can be expressed as a filter that has high \emph{precision} and high \emph{recall}.
+That is, a GMC filter for class $C$ is a filter that has a high average precision (AP) when tasked with classifying inputs from class $C$ versus inputs from all other classes.
 
 %Mathematically, this computation is expressed as finding the set of images $\mathcal{I}$ which maximally activate a single feature (i.e. find $i \in \mathcal{I}$ s.t. Feature-score(i) $\geq th$ $\forall i $, where $th$ is a threshold value). The distribution of class labels associated with this set of images ($\mathcal{I}$), defines the \textit{precision} of the feature. However, this distribution does not account for the \textit{recall}.  The presence/absence of GMC is a scientifically interesting question to pursue, but for recognition, we require features with both high precision and high recall. Consequently, we argue that if the goal is object recognition, then GMC for a particular object class should be interpreted as features with high AP and not just high precision. 
  
 Further, the notion of GMC-like features is related to standard feature encodings for image classification.
-Prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (BoW), such as SIFT (e.g., \cite{lazebnik2006beyond}), or by first finding a set of mid-level patches \cite{Mid1,Blocks} and then encoding images in terms of them. 
+Prior to the work of \cite{Kriz}, the dominant approaches for image and scene classification were based on either representing images as a bag of local descriptors (BoW), such as SIFT (e.g., \cite{lazebnik2006beyond}), or by first finding a set of mid-level patches \cite{Blocks,Mid1} and then encoding images in terms of them. 
 The problem of finding good mid-level patches is often posed as a search for a set of high recall discriminative templates. 
 In this sense, mid-level patch discovery is the search for a set of GMC templates. 
 The low-level BoW representation, in contrast, is a \emph{distributed code} in the sense that a single feature by itself is not discriminative, but a group of features taken together is.
@@ -22,7 +22,7 @@ We perform our analysis in two phases using conv-5 features. In the first phase,
 
 \subsection{Finding Grandmother Cells}
 \label{sub:class-specific-unit}
-The output of conv-5 layer is the response of 256 filters in a $6\times 6$ spatial grid. For determining if a conv-5 filters behave like GMC, this spatial map is first collapsed into a single value using max-pooling and is considered to be the response of the filter to the image \footnote{section \ref{sub:imp-mag} shows that such transformation cause only a small drop in performance.}. Next, using this response, the AP value for each filter is calculated for the task of PASCAL-DET-GT. All filters are then sorted in the decreasing order of their APs. The precision-recall curves for top five conv-5 filters are shown in figure \ref{fig:ap}. Notice that for a few classes such as such as bicycle, person, cars and cats there are GMC like filters, but for most classes this is not the case.   
+The output of conv-5 is the response of 256 filters in a $6\times 6$ spatial grid. For determining if a conv-5 filter behaves like a GMC, this spatial map is first collapsed into a single value using max-pooling and is considered to be the response of the filter to the image.\footnote{Section \ref{sub:imp-mag} shows that this transformation causes only a small drop in performance.} Next, using this response, the AP value for each filter is calculated for the task of PASCAL-DET-GT. All filters are then sorted in the decreasing order of their APs. The precision-recall curves for top five conv-5 filters are shown in Figure \ref{fig:ap}. Notice that for a few classes such as such as bicycle, person, cars and cats there are GMC like filters, but for most classes this is not the case.   
 %Precision for each filter from layer 5 is computed in a way analogous to entropy computation described in \ref{sub:def-ent}. In the final step instead of computing the entropy, we compute Prob(Class $|$ Filter Activity $\geq$ threshold). We define the selectivity of a filter as the area under the precision curve. 
 
 %For this computation we use ground truth bounding boxes taken from PASCAL VOC-2007 test challenge.
@@ -32,7 +32,7 @@ The output of conv-5 layer is the response of 256 filters in a $6\times 6$ spati
 \centering
 %\subfloat{\includegraphics[scale=0.20]{images/gtbbox_pascal_prerec_pool5units.png}}
 \subfloat{\includegraphics[width=1.0\linewidth]{images/pool5_ap_filters.pdf}}
-\caption{The precision-recall curves for the top five (based on AP) conv-5 filter responses on PASCAL-DET-GT. Curves in red and blue indicate AP for fine-tuned and pre-trained network respectively. Black dashed line is the performance of a random filter. For most classes, precision drops significantly even at modest recall values. There are GMC filters for classes such as bicycle, person, car, cat.}
+\caption{The precision-recall curves for the top five (based on AP) conv-5 filter responses on PASCAL-DET-GT. Curves in red and blue indicate AP for fine-tuned and pre-trained networks, respectively. The dashed black line is the performance of a random filter. For most classes, precision drops significantly even at modest recall values. There are GMC filters for classes such as bicycle, person, car, cat.}
 \label{fig:ap}
 \end{figure}
 
@@ -54,7 +54,7 @@ The output of conv-5 layer is the response of 256 filters in a $6\times 6$ spati
 
 In addition to visualizing the AP curves of individual filters, we measured the number of filters required to recognize objects of a particular class.
 Feature selection was performed to construct nested subsets of filters, ranging from a single filter to all filters, using the greedy strategy described in Figure \ref{fig:sel-strategy}.\footnote{Filter subsets of size [1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256] were used.}
-The variation in performance with the number of filters is shown in figure \ref{fig:svm-sel-dims}. 
+The variation in performance with the number of filters is shown in Figure \ref{fig:svm-sel-dims}. 
 
 \begin{figure}[t!]
 \centering
@@ -66,23 +66,22 @@ The variation in performance with the number of filters is shown in figure \ref{
 
 \setlength{\tabcolsep}{1pt}
 \begin{table}[t!]
+\renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Number of filters required to achieve 50\% ,90\% of the complete performance on PASCAL-DET-GT using a CNN pre-trained on Imagenet and fine-tuned for PASCAL-DET using conv-5 features.}
+\caption{Number of filters required to achieve 50\%, 90\% of the complete performance on PASCAL-DET-GT using a CNN pre-trained on Imagenet and fine-tuned for PASCAL-DET using conv-5 features.}
 \label{table:num-fil}
-\tiny
+\resizebox{\linewidth}{!}{
 \begin{tabular}{lc||cccccccccccccccccccc}
-\hline\noalign{\smallskip}
-CNN & AP & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & table & dog & horse & mbike & person & plant & sheep & sofa & train & tv \\
 \noalign{\smallskip}
+CNN & AP & aero & bike & bird & boat & bottle & bus & car & cat & chair & cow & table & dog & horse & mbike & person & plant & sheep & sofa & train & tv \\
 \hline
 pre-train & 50\% & 15 & 3 & 15 & 15 & 10 & 10 & 3 & 2 & 5 & 15 & 15 & 2 & 10 & 3 & 1 & 10 & 20 & 25 & 10 & 2 \\ 
 fine-tune & 50\% & 10 & 1 & 20 & 15 & 5 & 5 & 2 & 2 & 3 & 10 & 15 & 3 & 15 & 10 & 1 & 5 & 15 & 15 & 5 & 2 \\
 \hline
-\noalign{\smallskip}
 pre-train & 90\% & 40 & 35 & 80 & 80 & 35 & 40 & 30 & 20 & 35 & 100 & 80 & 30 & 45 & 40 & 15 & 45 & 50 & 100 & 45 & 25 \\
 fine-tune & 90\% & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 30 & 40 & 10 & 35 & 40 & 80 & 40 & 20 \\
-\hline
 \end{tabular}
+}
 \end{center}
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
@@ -102,6 +101,6 @@ Entry $(i, j)$ of the matrix is the fraction of top-50 filters class $i$ has in 
 
 Next, we estimated the extent of overlap between the filters used for discriminating between different classes.
 For each class $i$, we selected the 50 most discriminative filters (out of 256) and stored the selected filter indicies in the set $S_i$.
-The extent of overlap between class $i$ and $j$ was evaluated by $(|S_i \cap S_j|) / N$,
-where $N = |S_i| = |S_j| = 50$. The results are visualized in Figure \ref{fig:overlap}. It can be seen that different classes use different subsets of conv-5 filters and there is little overlap between classes. This further indicates that intermediate representations in CNN are distributed and different sets of are used to distinguish between different classes. 
+The extent of overlap between class $i$ and $j$ was evaluated by $|S_i \cap S_j| / N$,
+where $N = |S_i| = |S_j| = 50$. The results are visualized in Figure \ref{fig:overlap}. It can be seen that different classes use different subsets of conv-5 filters and there is little overlap between classes. This further indicates that intermediate representations in the CNN are distributed and different sets of are used to distinguish between different classes. 
 
