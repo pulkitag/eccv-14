@@ -1,10 +1,10 @@
-\section{The effects of fine-tuning and pre-training and on performance and network parameters}
+\section{The effects of fine-tuning and pre-training on CNN performance and parameters}
 \label{sec:fine}
 The results in \cite{Rcnn} (R-CNN) show that supervised pre-training for ImageNet classification followed by fine-tuning for PASCAL object detection leads to large gains over directly using features from the pre-trained network (without fine-tuning).
 However, \cite{Rcnn} did not investigate three important aspects of fine-tuning: (1) What happens if we train the network ``from scratch'' (i.e., from a random initialization) on the detection data? (2) How does the amount of fine-tuning data change the picture? and (3) How does fine-tuning alter the network parameters?
 In this section, we explore these questions on object detection and image classification datasets.
 
-\subsection{Effect of fine-tuning on performance}
+\subsection{Effect of fine-tuning on CNN performance}
 \label{sub:fine-performance}
 \setlength{\tabcolsep}{2pt}
 \begin{table}[t!]
@@ -39,7 +39,7 @@ This result suggests that R-CNN performance is not data saturated and that simpl
 We also present results for SUN image classification.
 Here we observe a similar trend: reasonable performance is achievable when training from scratch, however initializing from ImageNet and then fine-tuning yields significantly better performance.
 
-\subsection{Effect of fine-tuning on network parameters}
+\subsection{Effect of fine-tuning on CNN parameters}
 \label{sub:fine-entropy}
 We have provided additional evidence that fine-tuning a discriminatively pre-trained network is very effective in terms of task performance.
 Now we look inside the network to see how fine-tuning changes its parameters.
@@ -136,6 +136,6 @@ However, when more fine-tuning data is available (PASCAL-DET+DATA), there is sti
 %
 %\todo{Side Note - may or may not include}In our experiments we also noted accuracy of image classification on PASCAL is almost untouched by finetuning. This is suggestive of the fact finetuning is a task specific operation and finetuning for detection does not necessarily leads to an increase in classification performance, even though the classes and images are shared across PASCAL classification and detection challenges.
 
-\subsection{Effect of pre-training on network parameters}
+\subsection{Effect of pre-training on CNN parameters}
 \label{sec:speed}
 \input{training_progress.tex}
