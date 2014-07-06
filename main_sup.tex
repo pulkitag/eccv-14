@@ -1,0 +1,55 @@
+% update for ECCV'14 by Michael Stark and Mario Fritz
+% updated in April 2002 by Antje Endemann
+% Based on CVPR 07 and LNCS, with modifications by DAF, AZ and elle, 2008 and AA, 2010, and CC, 2011; TT, 2014
+
+\documentclass[runningheads]{llncs}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb} % define this before the line numbering.
+\usepackage{color}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+%\usepackage{ruler}
+\usepackage{array}
+\usepackage{float}
+\usepackage{subfig,caption}
+\usepackage{lipsum}
+\usepackage{comment}
+\usepackage{epstopdf}
+%\usepackage{tablefootnote}
+\renewcommand{\arraystretch}{1.1}
+
+\newcommand{\todo}[1]{{\color{red} {\bf TODO:} \it #1}}
+\begin{document}
+% \renewcommand\thelinenumber{\color[rgb]{0.2,0.5,0.8}\normalfont\sffamily\scriptsize\arabic{linenumber}\color[rgb]{0,0,0}}
+% \renewcommand\makeLineNumber {\hss\thelinenumber\ \hspace{6mm} \rlap{\hskip\textwidth\ \hspace{6.5mm}\thelinenumber}}
+% \linenumbers
+\pagestyle{headings}
+\mainmatter
+\title{Analyzing the Performance of Multilayer Neural Networks for Object Recognition}
+% Replace with your title
+
+\titlerunning{Analyzing The Performance of Multilayer Neural Networks}
+
+
+\authorrunning{Pulkit Agrawal, Ross Girshick, Jitendra Malik}
+
+\author{Pulkit Agrawal, Ross Girshick, Jitendra Malik \\ \texttt{\{pulkitag,rbg,malik\}@eecs.berkeley.edu}}
+\institute{University of California Berkeley}
+
+
+\maketitle
+{Supplementary Material} 
+\input{entropy.tex}
+
+
+
+
+
+%\section{Conclusion}
+%\label{sec:conclusion}
+%In this paper we analysed different properties of convolutional neural networks with the aim of gaining insights required to efficiently exploit the rich feature hierarchies provided by such networks. \\
+
+
+
+\bibliographystyle{splncs03}
+\bibliography{egbib}
+\end{document}
