@@ -1,20 +1,16 @@
 \section{Untangling feature magnitude and location}
 \label{sec-where-info}
-The convolutional layers of the network (layers 1-5) preserve the coarse spatial layout of the network's input.
+The convolutional layers preserve the coarse spatial layout of the network's input.
 By layer conv-5, the original $227 \times 227$ input image has been progressively downsampled to $6 \times 6$.
-The $6 \times 6$ spatial grid in conv-5 encodes the input in a feature map that is computed by 256 filters.
 This feature map is also sparse due to the $\max(x, 0)$ non-linearities used in the network (conv-5 is roughly 27\% non-zero; sparsity statistics for all layers are given in Table \ref{table:sparse}).
-
-The network's convolutional layers encode information in terms of (1) which filters have non-zero responses, (2) the magnitudes of those responses, and (3) the spatial locations of the responses.
-%We will investigate how different filters encode information in Section \ref{sec:grand-mother} (i.e., Is the representation distributed or does it consist of ``grandmother cells''?).
+Thus, a convolutional layer encodes information in terms of (1) which filters have non-zero responses, (2) the magnitudes of those responses, and (3) their spatial layout.
 In this section, we experimentally analyze the role of filter response magnitude and spatial location by looking at lesion studies on classification and detection tasks.
 
 \begin{figure}[t!]
 \centering
 \includegraphics[height=6.5cm]{images/ablation.pdf}
 \caption{Illustrations of ablations of feature activation spatial and magnitude information.
-See \ref{sub:imp-mag} and \ref{sub:imp-loc} for details.}
-  %(a) For illustration, consider the output of a hypothetical layer of size k*k*N (k=3 for convolutional layers and k=1 for FC layers), which has N filters and their responses at k*k spatial locations. Linear SVMs were trained (one for each layer) after vectorizing (i.e. x(:) in matlab) features into a one-dimensional vector of length k*k*N to measure performance of different layers. Next, feature ablations as described below were applied before training SVMs and performance was compared against the un-ablated features. The set of k*k locations for each filter is called its feature map. (b) \textit{spatial-shuffle}(sp-shuffle) -  A random permutation is applied to the set of k*k activations associated with each feature map. Different images see different permutations. (c)\textit{spatial max}(sp-max): For each feature map, the maximum value is selected from the set of k*k activations. (d)\textit{binarization}(bin) Feature dimensions with value $>0$ are set to 1 and others to 0.}
+See Sections \ref{sub:imp-mag} and \ref{sub:imp-loc} for details.}
 \label{fig:features}
 \end{figure}
 
@@ -26,7 +22,6 @@ See \ref{sub:imp-mag} and \ref{sub:imp-loc} for details.}
 %\caption{Percentage non-zeros (sparsity) in filter responses of various layers of CNN.}
 \caption{Percentage non-zeros (sparsity) in filter responses of CNN.}
 \label{table:sparse}
-\vspace{0.3em}
 \scalebox{1}{
 \begin{tabular}{c|c|c|c|c|c|c}
 conv-1 & conv-2 & conv-3 & conv-4 & conv-5 & fc-6 & fc-7 \\
@@ -38,7 +33,7 @@ $87.5 \pm 4.4$ & $44.5 \pm 4.4$ & $31.8 \pm 2.4$ & $32.0 \pm 2.7$ & $27.7 \pm 5.
 \setlength{\tabcolsep}{1.4pt}
 
 We can asses the importance of magnitude by setting each filter response $x$ to 1 if $x > 0$ and to $0$ otherwise. This binarization is performed prior to using the responses as features in a linear classifier and leads to loss of information contained in the magnitude of response while still retaining information about which filters fired and where they fired. 
-In Tables \ref{table:class-ablation} and \ref{table:det-ablation} we show that binarization leads to a negligible decline in performance for both classification and detection. 
+In Tables \ref{table:class-ablation} and \ref{table:det-ablation} we show that binarization leads to a negligible performance drop for both classification and detection. 
 
 For the fully-connected layers (fc-6 and fc-7) PASCAL-CLS performance is nearly identical before and after binarization.
 This is a non-trivial property since transforming traditional computer vision features into short (or sparse) binary codes is an active research area. Such codes are important for practical applications in large-scale image retrieval and mobile image analysis \cite{gong2011iterative,weiss2009spectral}. Here we observe that sparse binary codes come essentially ``for free'' when using the representations learned in the fully-connected layers.
@@ -51,10 +46,10 @@ The first method (``sp-max'') simply collapses the $p \times p$ spatial map into
 
 For image classification, damaging spatial information leads to a large difference in performance between original and spatially-ablated conv-1 features, but with a gradually decreasing difference for higher layers (Table \ref{table:class-ablation}). 
 In fact, the performance of conv-5 after sp-max is close to the original performance. 
-This indicates, that a lot of information important for classification is encoded in the activation of the filters and not necessarily in the spatial pattern of their activations. %(\todo{Discuss about spatial overlap}).
-Note, this observation is not an artefact of small number of classes in PASCAL-CLS. On ImageNet validation data, conv-5 features and conv-5 after sp-max result into accuracy of 43.2 and 41.5 respectively. 
-However, for detection sp-max (Tables \ref{table:det-ablation}) leads to a large drop in performance. 
-This may not be surprising as in contrast to classification, detection requires spatial information for precise localization.
+This indicates that a lot of information important for classification is encoded in the activation of the filters and not necessarily in the spatial pattern of their activations.
+Note, this observation is not an artifact of small number of classes in PASCAL-CLS. On ImageNet validation data, conv-5 features and conv-5 after sp-max result into accuracy of 43.2 and 41.5 respectively. 
+However, for detection sp-max leads to a large drop in performance. 
+This may not be surprising since detection requires spatial information for precise localization.
 
 \setlength{\tabcolsep}{4pt}
 \begin{table}[t!]
@@ -85,7 +80,6 @@ fc-7   & $74.1 \pm 0.3$ & $73.7 \pm 0.4$ &  -             &  -   \\
 \begin{center}
 \caption{Effect of location and magnitude feature ablations on PASCAL-DET.}
 \label{table:det-ablation}
-\vspace{0.3em}
 \scalebox{1.0}{
 \begin{tabular}{l|c|c|c}
 & no ablation (mAP) & binarize (mAP) & sp-max (mAP) \\
@@ -102,7 +96,6 @@ conv-5 & 47.6 & 45.7 & 25.4
 \begin{center}
 \caption{Ablation study on PASCAL-DET using conv-5 features. Feature binarization leads to negligible drop in performance whereas as sp-max causes a large drop.}
 \label{table:det-ablation}
-\vspace{0.3em}
 \scalebox{0.70}{
 \begin{tabular}{l|cccccccccccccccccccc||c}
 \noalign{\smallskip}

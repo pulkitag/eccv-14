@@ -1,8 +1,8 @@
-\section*{Appendix - Estimating discriminative capacity of filter}
+\section*{Appendix: estimating a filter's discriminative capacity}
 \label{sub:app-entropy}
-To measure the discriminative capacity of a filter, we start by collecting filter responses from a set of $N$ images.
+To measure the discriminative capacity of a filter, we collect filter responses from a set of $N$ images.
 Each image, when passed through the CNN produces a $p \times p$ heat map of scores for each filter in a given layer (e.g., $p = 6$ for a conv-5 filter and $p = 1$ for an fc-6 filter).
-This heat map is vectorized (\texttt{x(:)} in MATLAB) into a vector of scores of length $p^2$. With each element of this vector we associate the class label of the image. 
+This heat map is vectorized into a vector of scores of length $p^2$. With each element of this vector we associate the image's class label. 
 Thus, for every image we have a score vector and a label vector of length $p^2$ each.
 Next, the score vectors from all $N$ images are concatenated into an $Np^2$-length score vector.
 The same is done for the label vectors.
