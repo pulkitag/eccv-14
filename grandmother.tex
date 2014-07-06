@@ -49,6 +49,8 @@ For each filter, its AP value is calculated for classifying images using class l
 
 \subsection{How distributed are the feature representations?}
 \label{sub:how-many}
+
+\begin{comment}
 \begin{figure}[t!]
 \centering
 \includegraphics[scale=0.35]{images/how-many.pdf}
@@ -56,10 +58,14 @@ For each filter, its AP value is calculated for classifying images using class l
 %\caption{Illustration of the greedy strategy used for selecting filters. For each class, a linear SVM is trained after ``sp-max'' feature transformation described in section \ref{sub:imp-loc} is applied. ``sp-max''  reduces conv-5 features into a 256-D vector, wherein each dimension corresponds to one of the 256 conv-5 filters. The magnitude of individual dimensions of the weight vector learned by SVM is used as a proxy for determining the importance of each dimension. For the sake of clarity, this procedure is described using a 4-D weight vector shown on the extreme left (the numbers on each bar are the dimension). Firstly, we take the absolute value for each dimension and then sort the dimensions based on this value. Then, we chose the top k filters/dimensions from this ranked list to construct a subset of size k.}
 \label{fig:sel-strategy}
 \end{figure}
+\end{comment}
 
-In addition to visualizing the AP curves of individual filters, we measured the number of filters required to recognize objects of a particular class.
-Feature selection was performed to construct nested subsets of filters, ranging from a single filter to all filters, using the greedy strategy described in Figure \ref{fig:sel-strategy}.\footnote{Filter subsets of size [1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256] were used.}
-The variation in performance with the number of filters is shown in Figure \ref{fig:svm-sel-dims}. 
+In addition to visualizing the AP curves of individual filters, we measured the number of filters required to recognize objects of a particular class. 
+%Feature selection was performed to construct nested subsets of filters, ranging from a single filter to all filters, using the greedy strategy described in Figure \ref{fig:sel-strategy}.\footnote{Filter subsets of size [1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256] were used.}
+Feature selection was performed to construct nested subsets \footnote{Filter subsets of size [1, 2, 3, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 80, 100, 128, 256] were used.} of filters, ranging from a single filter to all filters, using the following greedy strategy: First, separate linear SVMs were trained to classify object bounding boxes from PASCAL-DET-GT using conv-5 responses. 
+For a given class, each of the 256 dimensions of the learnt weight vector ($w$) was in direct correspondence to 256 conv-5 filters. The magnitude of $i^{th}$ dimension of $w$ was used to determine the importance of $i^{th}$ filter for discriminating instances of this class. 
+Next, all filters were sorted using these magnitude values. Each subset of filter was constructed by taking top-k filters from this list. For each such set, linear SVM was trained using only the responses of filters in this set for classifying instances of the class under consideration.
+
 
 \begin{figure}[t!]
 \centering
@@ -91,7 +97,7 @@ fine-tune & 90\% & 35 & 30 & 80 & 80 & 30 & 35 & 25 & 20 & 35 & 50 & 80 & 35 & 3
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
   
-Table \ref{table:num-fil} lists the number of filters required to achieve 50\% and 90\% of the complete performance. For classes such as persons, cars, and cats relatively few filters are required, but for most classes around 30 to 40 filters are required to achieve at least 90\% of the full performance. This indicates that conv-5 feature representation is distributed and only for a few classes there are GMC-like filters.
+The variation in performance with the number of filters is shown in Figure \ref{fig:svm-sel-dims} and table \ref{table:num-fil} lists the number of filters required to achieve 50\% and 90\% of the complete performance. For classes such as persons, cars, and cats relatively few filters are required, but for most classes around 30 to 40 filters are required to achieve at least 90\% of the full performance. This indicates that conv-5 feature representation is distributed and only for a few classes there are GMC-like filters.
 Results using layer fc-7 are presented in the the supplementary material.
 We also find that after fine-tuning, slightly fewer filters are required to achieve performance levels similar to a pre-trained network. 
 
