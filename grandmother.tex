@@ -1,10 +1,10 @@
 \section{Are there grandmother cells in CNNs?}
 \label{sec:grand-mother}
 Neuroscientists have conjectured that cells in the human brain which only respond to very specific and complex visual stimuli (such as the face of one's grandmother) are involved in object recognition.
-These neurons are often referred to as \emph{grandmother cells} (GMC) \cite{Barlow,Grandmother}. Proponents of artificial neural networks have shown a great interest in reporting the presence of GMC-like filters for specific object classes in their networks (see, for example, the cat filter reported in \cite{GoogleCat}). More recently, for understanding feature representations in CNNs, \cite{Simonyan,DeConv} presented methods for finding locally optimal visual inputs for individual filters.
+These neurons are often referred to as \emph{grandmother cells} (GMC) \cite{Barlow,Grandmother}. Proponents of artificial neural networks have shown great interest in reporting the presence of GMC-like filters for specific object classes in their networks (see, for example, the cat filter reported in \cite{GoogleCat}). More recently, for understanding feature representations in CNNs, \cite{Simonyan,DeConv} presented methods for finding locally optimal visual inputs for individual filters.
 %These methods isolate individual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. \todo{make this argument clearer}.
-These methods only find the best, or in some cases top-$k$, visual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. For example, if it is found that the top-10 visual inputs for a particular filter are cats, it remains unclear what is the response of the filter to other images of a cat.
-A GMC filter for the \emph{cat} class, is one that fires strongly on \emph{all} cats and nothing else.
+These methods only find the best, or in some cases top-$k$, visual inputs that activate a filter, but do not characterize the \emph{distribution} of images that cause an individual filter to fire above a certain threshold. For example, if it is found that the top-10 visual inputs for a particular filter are cats, it remains unclear what is the response of the filter to other images of cats.
+A GMC filter for the cat class, is one that fires strongly on \emph{all} cats and nothing else.
 %If, for example, we wish to see if the network contains a GMC filter for the \emph{cat} class, then we should look for a particular filter that fires strongly on all cats and nothing else.
 This criteria can be expressed as a filter that has high \emph{precision} and high \emph{recall}.
 That is, a GMC filter for class $C$ is a filter that has a high average precision (AP) when tasked with classifying inputs from class $C$ versus inputs from all other classes.
@@ -39,7 +39,7 @@ First, we address the question of finding GMC filters by computing the AP of ind
 
 \subsection{Finding Grandmother Cells}
 \label{sub:class-specific-unit}
-For each filter, its AP value is calculated for classifying images using class labels and filter response to images from PASCAL-DET-GT. Then, for each class we sorted filters in decreasing order of their APs. If GMC filters for this class exist, they should be the top ranked filters in this sorted list. The precision-recall curves for the top-five conv-5 filters are shown in Figure \ref{fig:ap}. We find that GMC-like filters exist for only for a few classes, such as bicycle, person, cars, and cats.
+For each filter, its AP value is calculated for classifying images using class labels and filter responses to object bounding boxes from PASCAL-DET-GT. Then, for each class we sorted filters in decreasing order of their APs. If GMC filters for this class exist, they should be the top ranked filters in this sorted list. The precision-recall curves for the top-five conv-5 filters are shown in Figure \ref{fig:ap}. We find that GMC-like filters exist for only for a few classes, such as bicycle, person, cars, and cats.
 
 
 %\begin{figure}[t!]
@@ -79,7 +79,7 @@ Next, all filters were sorted using these magnitude values. Each subset of filte
 \begin{picture}(1.0,0.01)(0,0)
 \put(0.40,0.0){{\scriptsize{\textbf{Number of conv-5 filters}}}}
 \end{picture}
-\caption{The fraction of complete performance on PASCAL-DET-GT achieved by conv-5 filter subsets of different sizes. Complete performance is the AP computed by considering responses of all the filters. Notice, that for a few classes such as \emph{person} and \emph{bicycle} only a few filters are required, but for most classes substantially more filters are needed, indicating a distributed code.}
+\caption{The fraction of complete performance on PASCAL-DET-GT achieved by conv-5 filter subsets of different sizes. Complete performance is the AP computed by considering responses of all the filters. Notice, that for a few classes such as person and bicycle only a few filters are required, but for most classes substantially more filters are needed, indicating a distributed code.}
 \label{fig:svm-sel-dims}
 \end{figure}  
 
@@ -87,7 +87,7 @@ Next, all filters were sorted using these magnitude values. Each subset of filte
 \begin{table}[t!]
 \renewcommand{\arraystretch}{1.2}
 \begin{center}
-\caption{Number of filters required to achieve 50\%, 90\% of the complete performance on PASCAL-DET-GT using a CNN pre-trained on ImageNet and fine-tuned for PASCAL-DET using conv-5 features.}
+\caption{Number of filters required to achieve 50\% or 90\% of the complete performance on PASCAL-DET-GT using a CNN pre-trained on ImageNet and fine-tuned for PASCAL-DET using conv-5 features.}
 \label{table:num-fil}
 \resizebox{\linewidth}{!}{
 \begin{tabular}{l|c||cccccccccccccccccccc}
@@ -116,7 +116,7 @@ We also find that after fine-tuning, slightly fewer filters are required to achi
 %\includegraphics[width=1.0\linewidth]{images/FTNet_overlap.pdf}
 \includegraphics[width=1.0\linewidth]{images/ftNet.png}
 \caption{The set overlap between the 50 most discriminative conv-5 filters for each class determined using PASCAL-DET-GT.
-Entry $(i, j)$ of the matrix is the fraction of top-50 filters class $i$ has in common with class $j$ (Section \ref{sub:how-many}). Chance is 0.195. This is little overlap, but related classes are more likely to share filters.}
+Entry $(i, j)$ of the matrix is the fraction of top-50 filters class $i$ has in common with class $j$ (Section \ref{sub:how-many}). Chance is 0.195. There is little overlap, but related classes are more likely to share filters.}
 \label{fig:overlap}
 \end{figure}
 

@@ -27,6 +27,7 @@ First, we focus on the detection experiments, which we implemented using the ope
 All results use features from layer fc-7.
 
 Somewhat surprisingly, it's possible to get reasonable results (40.7\% mAP) when training the CNN from scratch using only the training data from VOC 2007 trainval (13k bounding box annotations).
+However, this is still worse than using the pre-trained network, directly, without fine-tuning (45.5\%).
 Even more surprising is that when the VOC 2007 trainval data is augmented with VOC 2012 data (an additional 25k bounding box annotations), we are able to achieve a mAP of 52.3\% from scratch.
 This result is almost as good as the performance achieved by pre-training on ImageNet and then fine-tuning on VOC 2007 trainval (54.1\% mAP).
 These results can be compared to the 30.5\% mAP obtained by DetectorNet \cite{szegedy2013deep}, a recent detection system based on the same network architecture, which was trained from scratch on VOC 2012 trainval.
@@ -34,7 +35,7 @@ These results can be compared to the 30.5\% mAP obtained by DetectorNet \cite{sz
 Next, we ask if ImageNet pre-training is still useful in the PASCAL-DET +DATA setting?
 Here we see that even though it's possible to get good performance when training from scratch, pre-training still helps considerably.
 The final mAP when fine-tuning with the additional detection data is 59.2\%, which is 5 percentage points higher than the best result reported in \cite{Rcnn} (both without bounding-box regression).
-This result suggests that R-CNN performance is not data saturated and that simply adding more detection training data without any other changes may substantially improve existing results.
+This result suggests that R-CNN performance is not data saturated and that simply adding more detection training data without any other changes may substantially improve results.
 
 We also present results for SUN image classification.
 Here we observe a similar trend: reasonable performance is achievable when training from scratch, however initializing from ImageNet and then fine-tuning yields significantly better performance.
@@ -46,7 +47,7 @@ Now we look inside the network to see how fine-tuning changes its parameters.
 
 To do this, we define a way to measure the class selectivity of a set of filters.
 Intuitively, we use the class-label entropy of a filter given its activations, above a threshold, on a set of images.
-Since this measure is entropy-based, a low value indicates that a filter is highly class selective while a large value indicates that a filter fires regardless of class.
+Since this measure is entropy-based, a low value indicates that a filter is highly class selective, while a large value indicates that a filter fires regardless of class.
 The precise definition of this measure is given in the Appendix.
 
 In order to summarize the class selectivity for a \emph{set} of filters, we sort them from the most selective to least selective and plot the average selectivity of the first $k$ filters while sweeping $k$ down the sorted list.

@@ -4,7 +4,7 @@ The convolutional layers preserve the coarse spatial layout of the network's inp
 By layer conv-5, the original $227 \times 227$ input image has been progressively downsampled to $6 \times 6$.
 This feature map is also sparse due to the $\max(x, 0)$ non-linearities used in the network (conv-5 is roughly 27\% non-zero; sparsity statistics for all layers are given in Table \ref{table:sparse}).
 Thus, a convolutional layer encodes information in terms of (1) which filters have non-zero responses, (2) the magnitudes of those responses, and (3) their spatial layout.
-In this section, we experimentally analyze the role of filter response magnitude and spatial location by looking at lesion studies on classification and detection tasks.
+In this section, we experimentally analyze the role of filter response magnitude and spatial location by looking at ablation studies on classification and detection tasks.
 
 \begin{figure}[t!]
 \centering

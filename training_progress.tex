@@ -25,7 +25,9 @@ fc-7   & 30.9 & 61.3 & 64.1 & 65.1 & 65.9 & 67.8 & 71.8 & 73.4 & $74.0$  & $74.3
 \end{table}
 \setlength{\tabcolsep}{1.4pt}
 
-We report performance on PASCAL-CLS as a function of pre-training time, without fine-tuning, in Table \ref{table:det-traj-classify}. Notice that more pre-training leads to better performance. By 15k and 50k iterations all layers are close to 80\% and  90\% of their final performance (5k iterations is only $\sim$1 epoch). This indicates that training required for generalization takes place quite quickly. Figure \ref{fig:conv1} shows conv-1 filters after 5k, 15k and 305k iterations and reinforces this observation. Further, notice from Table \ref{table:det-traj-classify} that conv-1 trains first and the higher the layer is the more time it takes to converge. This suggests that a CNN, trained with backpropagation, converges in a layer-by-layer fashion.   
+We report performance on PASCAL-CLS as a function of pre-training time, without fine-tuning, in Table \ref{table:det-traj-classify}. Notice that more pre-training leads to better performance. By 15k and 50k iterations all layers are close to 80\% and  90\% of their final performance (5k iterations is only $\sim$1 epoch). This indicates that training required for generalization takes place quite quickly. Figure \ref{fig:conv1} shows conv-1 filters after 5k, 15k, and 305k iterations and reinforces this observation. Further, notice from Table \ref{table:det-traj-classify} that conv-1 trains first and the higher the layer is the more time it takes to converge. This suggests that a CNN, trained with backpropagation, converges in a layer-by-layer fashion.
+Table \ref{table:det-trajectory} shows the interaction between varied amounts of pre-training time and fine-tuning on SUN-CLS and PASCAL-DET.
+Here we also see that more pre-training prior to fine-tuning leads to better performance.
 
 \begin{figure}[t!]
 \centering
@@ -33,7 +35,7 @@ We report performance on PASCAL-CLS as a function of pre-training time, without 
 \subfloat[15k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter15000.png}} \hspace{2mm}
 \subfloat[305k Iterations]{\includegraphics[scale=0.10]{images/l1_filters_iter225000.png}}
 %\caption{(a), (b), and (c) show conv-1 filters after 5k, 15k and 305k iterations of training, respectively. Notice that after just 15k iterations these filters closely resemble their final state.}
-\caption{Evolution of conv-1 filters with time. Just after 15k iterations, these filters closely resemble their converged state.}
+\caption{Evolution of conv-1 filters with time. After just 15k iterations, these filters closely resemble their converged state.}
 \begin{comment} Note: I have labeled 305k as 225k - I cannot get the same shape as of the 5k, 15k for 305k. The filters look very similar and visually indistinguishable from 305k. If I have time later, I will make them all uniform.
 \end{comment}
 \label{fig:conv1}
@@ -42,7 +44,7 @@ We report performance on PASCAL-CLS as a function of pre-training time, without 
 \setlength{\tabcolsep}{4pt}
 \begin{table}[t!]
 \begin{center}
-\caption{Performance variation on SUN-CLS and PASCAL-DET using features from a CNN pre-trained for different number of iterations and fine-tuned for a fixed number of iterations (40k for SUN-CLS and 70k for PASCAL-DET)}
+\caption{Performance variation on SUN-CLS and PASCAL-DET using features from a CNN pre-trained for different numbers of iterations and fine-tuned for a fixed number of iterations (40k for SUN-CLS and 70k for PASCAL-DET)}
 \label{table:det-trajectory}
 \vspace{0.3em}
 \scalebox{1.00}{
@@ -54,8 +56,6 @@ We report performance on PASCAL-CLS as a function of pre-training time, without 
 \end{tabular}}
 \end{center}
 \end{table}
-\setlength{\tabcolsep}{1.4pt}
-\footnotetext{A network pre-trained from scratch, which was different from the one used in section \ref{sub:fine-performance}, was used to obtain these results. The difference in performance is not significant.} 
+\setlength{\tabcolsep}{1.4pt} 
 
-Table \ref{table:det-trajectory} shows the interaction between varied amounts of pre-training time and fine-tuning on SUN-CLS and PASCAL-DET.
-Here we also see that more pre-training prior to fine-tuning leads to better performance.  
+\footnotetext{A network pre-trained from scratch, which was different from the one used in Section \ref{sub:fine-performance}, was used to obtain these results. The difference in performance is not significant.} 
