@@ -1,8 +1,9 @@
-\subsection{Effect of fine-tuning on network parameters}
+%\subsection{Effect of fine-tuning on network parameters}
+\subsection{Defining the measure of discriminative capacity of a filter}
 \label{sub:fine-entropy}
-We have provided additional evidence that fine-tuning a discriminatively pre-trained network is very effective in terms of task performance.
-Now we look inside the network to see how fine-tuning changes its parameters.
-To do this, we define a way to measure the capacity of each filter in the network to discriminate between object classes.
+%We have provided additional evidence that fine-tuning a discriminatively pre-trained network is very effective in terms of task performance.
+%Now we look inside the network to see how fine-tuning changes its parameters.
+%To do this, we define a way to measure the capacity of each filter in the network to discriminate between object classes.
 
 To measure the discriminative capacity of a filter, we start by collecting filter responses from a set of $N$ images.
 Each image, when passed through the CNN produces a $p \times p$ heat map of scores for each filter in a given layer (e.g., $p = 6$ for a conv-5 filter and $p = 1$ for an fc-6 filter).
@@ -27,7 +28,7 @@ Specifically, the $i$-th entry of the CAuE list is divided by $i$.
 This normalized CAuE is called the Mean Cumulative Area Under the Entropy Curve (MCAuE).
 A lower value of MCAuE indicates that the set filters is more discriminative.
 
-Figure \ref{fig:fine-entropy} shows MCAuE computed on PASCAL-DET-GT image-label pairs using two networks: the first, was pre-trained on ImageNet only whereas the second was fine-tuned for PASCAL-DET. 
+%Figure \ref{fig:fine-entropy} shows MCAuE computed on PASCAL-DET-GT image-label pairs using two networks: the first, was pre-trained on ImageNet only whereas the second was fine-tuned for PASCAL-DET. 
 %The  $k^{th}$ threshold point for layer l corresponds to MCAuE of top $N_l(k/30)$ filters, where $N_l$ is number of filters in layer $l$. 
-PASCAL-DET-GT was used for this study instead of classification to ensure that filter responses were a direct result of presence of object categories of interest and not the background as might happen in the classification task.
+%PASCAL-DET-GT was used for this study instead of classification to ensure that filter responses were a direct result of presence of object categories of interest and not the background as might happen in the classification task.
 
