@@ -1,15 +1,14 @@
 \subsection{Defining the measure of discriminative capacity of a filter}
 \label{sub:fine-entropy}
-Entropy of a filter is calculated to measure its discriminative capacity. The use of entropy is motivated by works such as \cite{Breiman}, \cite{AmitGeman}.
+The entropy of a filter is calculated to measure its discriminative capacity. The use of entropy is motivated by works such as \cite{Breiman}, \cite{AmitGeman}.
 For computing the entropy of a filter, we start by collecting filter responses from a set of $N$ images.
 Each image, when passed through the CNN produces a $p \times p$ heat map of scores for each filter in a given layer (e.g., $p = 6$ for a conv-5 filter and $p = 1$ for an fc-6 filter).
 This heat map is vectorized (\texttt{x(:)} in MATLAB) into a vector of scores of length $p^2$. With each element of this vector we associate the class label of the image. 
 Thus, for every image we have a score vector and a label vector of length $p^2$ each.
 Next, the score vectors from all $N$ images are concatenated into an $Np^2$-length score vector.
-The same is done for the label vectors.
+The same is done for the label vectors. We define the entropy of a filter in the following three ways.
 
-We define the entropy of a filter in the following slightly different three ways:
-\subsubsection{Label Entropy}
+\subsubsection{Label Entropy.}
 \label{sub:def-label-ent}
 For a given score threshold $\tau$, we define the \emph{class entropy of a filter} to be the entropy of the normalized histogram of class labels that have an associated score $\geq \tau$.
 A low class entropy means that at scores above $\tau$, the filter is very class selective.
@@ -17,15 +16,15 @@ As this threshold changes, the class entropy traces out a curve which we call th
 The \emph{area under the entropy curve} (AuE), summarizes the class entropy at all thresholds and is used as a measure of discriminative capacity of the filter. 
 The lower the AuE value, the more class selective the filter is.
 
-\subsubsection{Weighted Label Entropy}
+\subsubsection{Weighted Label Entropy.}
 \label{sub:def-weighted-label-ent}
 While computing the class label histogram, instead of the label count we use the sum of the scores associated with the labels to construct the histogram. (Note: Since we are using outputs of the rectified linear units, all scores are $\geq 0$.)
 
-\subsubsection{Spatial-Max (spMax) Label Entropy}
+\subsubsection{Spatial-Max (spMax) Label Entropy.}
 \label{sub:def-spmax-label-ent}
 Instead of vectorizing the heatmap, the filter response obtained as a result of max pooling the $p \times p$ filter output is associated with the class label of each image. Thus, for every image we have a score vector and a class label vector of length $1$ each.
 Next, the score vectors from all $N$ images are concatenated into an $N$-length score vector.
-Then, we proceed in the same way as for the case of Label-Entropy to compute the AuE of each filter. 
+Then, we proceed in the same way as for the case of Label Entropy to compute the AuE of each filter. 
 
 \subsection{Defining the measure of discriminative capacity of a layer}
 The discriminative capacity of layer is computed as following: The filters are sorted in increasing order of their AuE.
@@ -41,13 +40,13 @@ A lower value of MCAuE indicates that the individual filters of the layer are mo
 \begin{table}
 \begin{center}
 \caption{This table lists percentage decrease in MCAuE as a result of finetuning when only 0.1, 0.25, 0.50 and 1.00 fraction of all the filters were used for computing MCAuE. A lower MCAuE indicates that filters in a layer are more selective/class specific. The 0.1 fraction includes the top 10\% most selective filters, 0.25 is top 25\% of most selective filters. Consequently, comparing MCAuE at different fraction of filters gives a better sense of how selective the ``most" selective filters have become.
-A negative value in the table below indicates increase in entropy. Note that for all the metrics maximum decrease in entropy takes place while moving from layer 5 to layer 7. Also, note that for fc-6 and fc-7 the values in Label-Entropy and spMax-Label-Entropy are same as these layers have spatial maps of size 1.}
+A negative value in the table below indicates increase in entropy. Note that for all the metrics maximum decrease in entropy takes place while moving from layer 5 to layer 7. Also, note that for fc-6 and fc-7 the values in Label Entropy and spMax Label Entropy are same as these layers have spatial maps of size 1.}
 \label{table:fine-change}
 \scalebox{0.85}{
 \newcolumntype{d}[2]{D{.}{\cdot}{#1} }
 \begin{tabular}{|c|p{1cm} p{1cm} p{1cm} p{1cm}| p{1cm} p{1cm} p{1cm} p{1cm}|p{1cm} p{1cm} p{1cm} p{1cm}|}
 \hline
-Layer & \multicolumn{4}{c|}{Label-Entropy} & \multicolumn{4}{c|}{Weighted-Label-Entropy} & \multicolumn{4}{c|}{spMax-Label-Entropy} \\
+Layer & \multicolumn{4}{c|}{Label Entropy} & \multicolumn{4}{c|}{Weighted Label Entropy} & \multicolumn{4}{c|}{spMax Label Entropy} \\
 \hline
 & 0.1 & 0.25 & 0.5 & 1.0 & 0.1 & 0.25 & 0.5 & 1 & 0.1 & 0.25 & 0.5 & 1.0 \\
 \hline
@@ -73,10 +72,10 @@ fc-7 & $5.17$  & $2.66$  & $1.33$  & $0.44$  & $20.58$  & $14.75$  & $11.12$  & 
 \end{figure}
 
 \subsection{Discussion}
-The MCAuE measure of determining layer selectivity before and after fine-tuning is shown in figure \ref{fig:fine-entropy} for Weighted Label and Spatial-Max Label entropy. Results for Label entropy method are presented in the main paper. A quantitative measure of change in entropy due to finetuning, computed as percentage change is defined as following:
+The MCAuE measure of determining layer selectivity before and after fine-tuning is shown in Figure \ref{fig:fine-entropy} for Weighted Label and Spatial-Max Label Entropy. Results for Label Entropy method are presented in the main paper. A quantitative measure of change in entropy due to finetuning, computed as percentage change is defined as following:
 \begin{eqnarray}
 \text{Percent Decrease} = 100 \times \frac{MCAuE_{pre} - MCAuE_{fine}}{MCAuE_{pre}}
 \end{eqnarray}
 where, $MCAuE_{fine}$ is for fine-tuned network and $MCAuE_{untuned}$ is for network trained on imagenet only. The results are summarized in table \ref{table:fine-change}.
  
-As measured by Label entropy layers 1 to 5, undergo negligible change in their discriminative capacity, whereas layers 6-7 become a lot more discriminative. Whereas, the measures of Weighted Label and Spatial-Max Label entropy indicate that only layers 1 to 4 undergo minimal changes and other layers become substantially more discriminative. These results confirm the intuition that lower layers of the CNN are more generic features, whereas fine-tuning mostly effects the top layers. Also, note that these results are true for fine-tuning for moderate amount of training data available as part of PASCAL-DET. It is yet to be determined how lower convolutional layers would change due to fine-tuning when more training data is available. 
+As measured by Label Entropy, layers 1 to 5 undergo negligible change in their discriminative capacity, whereas layers 6-7 become a lot more discriminative. Whereas, the measures of Weighted Label and Spatial-Max Label Entropy indicate that only layers 1 to 4 undergo minimal changes and other layers become substantially more discriminative. These results confirm the intuition that lower layers of the CNN are more generic features, whereas fine-tuning mostly effects the top layers. Also, note that these results are true for fine-tuning for moderate amount of training data available as part of PASCAL-DET. It is yet to be determined how lower convolutional layers would change due to fine-tuning when more training data is available. 
